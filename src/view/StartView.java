@@ -1,5 +1,8 @@
 package view;
 
-public class StartView {
+import org.junit.jupiter.api.Test;
 
+public class StartView {
+	
+	
 }

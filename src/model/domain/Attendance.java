@@ -24,7 +24,6 @@ import lombok.Setter;
 @Entity
 public class Attendance implements Serializable {
 	// @Id와 @JoinColumn 동시 사용 안되는듯... attendanceId 생성하는거말고 다른방법이 있을까요?ㅠ
-	
 	@Id
 	@JoinColumn(name="student_id")
 	@OneToOne
