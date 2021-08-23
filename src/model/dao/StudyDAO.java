@@ -32,8 +32,6 @@ public class StudyDAO {
 			studyListByTopic.forEach(System.out::println);
 			
 			/** 스터디 리더로 스터디 검색 */
-			Study study = (Study)em.createNamedQuery("Study.findByLeader").setParameter("leader", 1).getSingleResult();
-			System.out.println(study);
 			
 			
 			tx.commit();
