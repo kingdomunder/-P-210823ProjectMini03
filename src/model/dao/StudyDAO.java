@@ -1,11 +1,11 @@
 package model.dao;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-
-import org.junit.jupiter.api.Test;
 
 import lombok.extern.slf4j.Slf4j;
 import model.domain.Study;
@@ -14,14 +14,16 @@ import util.PublicCommon;
 @Slf4j
 public class StudyDAO {
 	/** 모든 스터디 검색 */	
-	public void getAllStudy() {   
+	public static List<Study> getAllStudy() throws SQLException{   
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
-		
 		tx.begin();
+		
+		List<Study> allStudyList = null;
+		
 		try {
-			List<Study> allStudyList = em.createNamedQuery("Study.findStudentAll").getResultList();
-			allStudyList.forEach(System.out::println);
+			allStudyList = em.createNamedQuery("Study.findStudentAll").getResultList();
+			System.out.println("DAO");
 				
 			tx.commit();
 		}catch(Exception e) {
@@ -29,10 +31,11 @@ public class StudyDAO {
 		}finally {
 			em.close();
 		}
+		return allStudyList;
 	}
 	
 	/** 스터디 id로 스터디 검색 */
-	public void getStudyById() {
+	public static void getStudyById() {
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		
@@ -50,7 +53,7 @@ public class StudyDAO {
 	}
 	
 	/** 스터디 주제 키워드로 스터디 검색 */
-	public void getStudyByTopic() {
+	public static void getStudyByTopic() {
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		
