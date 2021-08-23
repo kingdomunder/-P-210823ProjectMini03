@@ -15,7 +15,7 @@ public class StudentDAO {
 
 	
 	//수강생 1명 정보 select
-//	@Test
+	@Test
 	void getOneStudent() {
 		EntityManager em = PublicCommon.getEntityManager();
 		

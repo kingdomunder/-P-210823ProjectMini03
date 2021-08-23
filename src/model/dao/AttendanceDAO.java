@@ -29,7 +29,7 @@ public class AttendanceDAO {
 	
 	
 	//출석 정보 전부 select
-	@Test
+//	@Test
 	void getAllAttendance() {
 		EntityManager em = PublicCommon.getEntityManager();
 		
