@@ -23,7 +23,7 @@ import lombok.Setter;
 @NamedQuery(query="select e from Attendance e", name="Attendance.findStudentAll") 
 @Entity
 public class Attendance implements Serializable {
-	
+
 	@Id
 	@JoinColumn(name="student_id")
 	@OneToOne

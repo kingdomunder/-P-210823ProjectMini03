@@ -13,7 +13,7 @@ import util.PublicCommon;
 public class AttendanceDAO {
 	
 	//수강생 1명 출석정보 select
-//	@Test
+	@Test
 	void getOneAttendance() {
 		EntityManager em = PublicCommon.getEntityManager();
 		

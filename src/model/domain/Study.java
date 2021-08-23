@@ -24,12 +24,11 @@ import lombok.Setter;
 @Setter
 @Getter
 
-@NamedQuery(query="select e from Study e where e.studyId=:studyId", name="Study.findBystudyId") 
-@NamedQuery(query="select e from Study e", name="Study.findStudentAll") 
 @Entity
 @SequenceGenerator(name="study_seq", sequenceName="study_idx", initialValue=1, allocationSize=1)
-//@NamedQuery(query="select s from Study s where s.topic like :topicKeyword", name="Study.findByTopic")
-//@NamedQuery(query="select s from Study s where s.studyId :id", name="Study.findById")
+@NamedQuery(query="select e from Study e", name="Study.findStudentAll") 
+@NamedQuery(query="select e from Study e where e.studyId=:studyId", name="Study.findBystudyId") 
+@NamedQuery(query="select s from Study s where s.topic like :topicKeyword", name="Study.findByTopic")
 public class Study {
 	@Id
 	@Column(name="study_id")
@@ -42,7 +41,7 @@ public class Study {
 	private String topic;
 	
 	@OneToOne
-	@JoinColumn(name="leader")
+	@JoinColumn(name="leader_id")
 	private Student leaderId;  
 	
 	@Column(name="meeting_date")
