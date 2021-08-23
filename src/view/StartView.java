@@ -8,16 +8,14 @@ public class StartView {
 
 	public static void main(String[] args) {
 
-		controller.getAllStudent();
+		/** 모든 수강생 검색 */
+//		controller.getAllStudent();
 		
 		
 		
-		
-		
-		
+		/** 모든 스터디 검색 */	
+		controller.getAllStudy();
 
-		
-		
 	}
 
 }
