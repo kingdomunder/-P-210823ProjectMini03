@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -24,6 +25,8 @@ import lombok.Setter;
 @Getter
 @Entity
 @SequenceGenerator(name="study_seq", sequenceName="study_idx", initialValue=1, allocationSize=1)
+@NamedQuery(query="select s from Study s where s.topic like :topicKeyword", name="Study.findByTopic")
+@NamedQuery(query="select s from Study s where s.leader_id :leader", name="Study.findByLeader")
 public class Study {
 	@Id
 	@Column(name="study_id")
