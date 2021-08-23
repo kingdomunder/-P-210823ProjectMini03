@@ -8,6 +8,7 @@ import javax.persistence.EntityTransaction;
 import org.junit.jupiter.api.Test;
 
 import lombok.extern.slf4j.Slf4j;
+import model.domain.Student;
 import model.domain.Study;
 import util.PublicCommon;
 
@@ -26,17 +27,16 @@ public class StudyDAO {
 			List<Study> allStudyList = em.createQuery(jpql).getResultList();
 			allStudyList.forEach(System.out::println);
 				
+			/** 스터디 주제 키워드로 스터디 검색 */
+			List<Study> studyListByTopic = em.createNamedQuery("Study.findByTopic").setParameter("topicKeyword", "%파이썬%").getResultList();
+			studyListByTopic.forEach(System.out::println);
 			
-//			/** 스터디주제 키워드로 스터디 검색 */
-//			jpql = "select s from Study s where study_topic like '%파이썬%'";
-//			List<Study> StudyListByTopic = em.createQuery(jpql).getResultList();
-			
-			/** 스터디 정보 업데이트 - 멤버 변경 */
+			/** 스터디 리더로 스터디 검색 */
 			
 			
 			tx.commit();
 		}catch(Exception e) {
-			tx.rollback();   // 혹시나 에러가 발생하면 롤백시킴
+			tx.rollback();   
 		}finally {
 			em.close();
 		}
