@@ -1,16 +1,21 @@
 package model.domain;
 
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
 @Entity
 public class Student {
 	@Id
@@ -20,13 +25,13 @@ public class Student {
 	@Column(name="student_name")
 	private String studentName;
 	
-	private String adderess;
+	private String address;
 	
 	private String major;
 	
-	@ManyToOne
 	@JoinColumn(name="study_id")
-	private int studyId;
+	@ManyToOne
+	private Study studyId;
 	
 
 }

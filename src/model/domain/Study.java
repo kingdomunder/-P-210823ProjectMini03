@@ -7,7 +7,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -31,14 +30,12 @@ public class Study {
 	
 	private String topic;
 	
-	@JoinColumn(name="leader_id")
-	@OneToOne
-	private int leaderId;  // student_id 1번학생
+	@Column(name="leader_id")
+	private int leaderId;  
 	
 	@Column(name="meeting_date")
 	private String meetingDate;
 	
-	@JoinColumn
 	@OneToMany(mappedBy="studyId")   
 	List<Student> students = new ArrayList<Student>();
 
