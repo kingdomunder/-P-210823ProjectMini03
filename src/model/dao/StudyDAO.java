@@ -43,4 +43,35 @@ public class StudyDAO {
 			em.close();
 		}
 	}
+	
+	
+	//스터디 1개 정보 select
+//	@Test
+	void getOneStudy() {
+		EntityManager em = PublicCommon.getEntityManager();
+		
+		Study s = (Study) em.createNamedQuery("Study.findBystudyId").setParameter("studyId", 1).getSingleResult();
+		System.out.println(s);
+		
+		em.close();
+		em = null;
+	
+	}	
+		
+	
+	//스터디 정보 전부 select
+	@Test
+	void getAllStudy() {
+		EntityManager em = PublicCommon.getEntityManager();
+		
+		List<Study> all = em.createNamedQuery("Study.findStudentAll").getResultList();
+		all.forEach(v -> System.out.println(v));
+		
+		em.close();
+		em = null;
+		
+	}	
+	
+	
+	
 }

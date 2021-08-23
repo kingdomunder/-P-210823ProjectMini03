@@ -23,6 +23,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Setter
 @Getter
+
+@NamedQuery(query="select e from Study e where e.studyId=:studyId", name="Study.findBystudyId") 
+@NamedQuery(query="select e from Study e", name="Study.findStudentAll") 
 @Entity
 @SequenceGenerator(name="study_seq", sequenceName="study_idx", initialValue=1, allocationSize=1)
 @NamedQuery(query="select s from Study s where s.topic like :topicKeyword", name="Study.findByTopic")
@@ -38,8 +41,9 @@ public class Study {
 	
 	private String topic;
 	
+//	@Column(name="leader")
 	@OneToOne
-	@JoinColumn(name="leader_id")
+	@JoinColumn(name="leader")
 	private Student leaderId;  
 	
 	@Column(name="meeting_date")
@@ -50,11 +54,10 @@ public class Study {
 
 	@Override
 	public String toString() {
-		return "Study [studyId=" + studyId + ", studyName=" + studyName + ", topic=" + topic + ", leaderId=" + leaderId
-				+ ", meetingDate=" + meetingDate + "]";
+		return "스터디정보 : 스터디Id=" + studyId + ", 스터디이름=" + studyName + ", 주제=" + topic + ", 조장Id=" + leaderId
+				+ ", 요일=" + meetingDate + ", 스터디참여자=" + students + "";
 	}
 
-	
-	
+
 
 }
