@@ -10,28 +10,41 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 
-@NamedQuery(query="select e from Student e where e.studentId=:studentId", name="Student.findBystudentId") 
-//@NamedQuery(query="select e from Emp e where e.empId=:empId", name="Emp.findByEmpId") 
-//@NamedQuery(query="select e from Student e where e.deptId=:deptId", name="Student.findByDeptId")
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@NoArgsConstructor
+@AllArgsConstructor
+@Setter
+@Getter
+
+@NamedQuery(query="select e from Student e where e.studentId=:studentId", name="Student.findBystudentId") 
+@NamedQuery(query="select e from Student e", name="Student.findStudentAll") 
 @Entity
-@SequenceGenerator(name="stu_seq", sequenceName="student_id_seq", initialValue=1, allocationSize=1)
+@SequenceGenerator(name="student_seq", sequenceName="student_idx", initialValue=1, allocationSize=1)
 public class Student {
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="stu_seq")  
 	@Column(name="student_id")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="student_seq")
 	private int studentId;
 	
 	@Column(name="student_name")
 	private String studentName;
 	
-	private String adderess;
+	private String address;
 	
 	private String major;
 	
 	@ManyToOne
 	@JoinColumn(name="study_id")
-	private int studyId;
-	
+	private Study studyId;
+
+	@Override
+	public String toString() {
+		return "수강생정보 : ID=" + studentId + ", 이름=" + studentName + ", 주소=" + address + ", 전공="
+				+ major + "";
+	}
 	
 }

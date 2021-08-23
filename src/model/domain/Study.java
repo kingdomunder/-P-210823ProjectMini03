@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
@@ -23,12 +24,14 @@ import lombok.Setter;
 @Setter
 @Getter
 
+@NamedQuery(query="select e from Study e where e.studyId=:studyId", name="Study.findBystudyId") 
+@NamedQuery(query="select e from Study e", name="Study.findStudentAll") 
 @Entity
-@SequenceGenerator(name="study_seq", sequenceName="study_id_seq", initialValue=1, allocationSize=1)
+@SequenceGenerator(name="study_seq", sequenceName="study_idx", initialValue=1, allocationSize=1)
 public class Study {
 	@Id
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="study_seq")  
 	@Column(name="study_id")
+	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="study_seq")
 	private int studyId;
 	
 	@Column(name="study_name")
@@ -36,18 +39,23 @@ public class Study {
 	
 	private String topic;
 	
-//	@JoinColumn(name="leader_id")
-//	@OneToOne
-	@Column(name="leader")
-	private int leaderId;  // student_id 1번학생
+//	@Column(name="leader")
+	@OneToOne
+	@JoinColumn(name="leader")
+	private Student leaderId;  
 	
 	@Column(name="meeting_date")
 	private String meetingDate;
 	
-//	@JoinColumn
-//	@OneToMany(mappedBy="studyId")   
-//	List<Student> students = new ArrayList<Student>();
+	@OneToMany(mappedBy="studyId")   
+	List<Student> students = new ArrayList<Student>();
 
-	
+	@Override
+	public String toString() {
+		return "스터디정보 : 스터디Id=" + studyId + ", 스터디이름=" + studyName + ", 주제=" + topic + ", 조장Id=" + leaderId
+				+ ", 요일=" + meetingDate + ", 스터디참여자=" + students + "";
+	}
+
+
 
 }

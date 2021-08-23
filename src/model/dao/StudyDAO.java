@@ -3,15 +3,15 @@ package model.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
 
 import org.junit.jupiter.api.Test;
 
+import lombok.extern.slf4j.Slf4j;
 import model.domain.Study;
 import util.PublicCommon;
 
+@Slf4j
 public class StudyDAO {
 	@Test
 	public void init() {   
