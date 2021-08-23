@@ -3,7 +3,6 @@ DROP TABLE attendance cascade constraint;
 DROP TABLE study cascade constraint;
 DROP SEQUENCE student_idx;
 DROP SEQUENCE study_idx;
-DROP SEQUENCE attendance_idx;
 
 CREATE TABLE student (
 	student_id  NUMBER(10)  PRIMARY KEY,
@@ -13,8 +12,7 @@ CREATE TABLE student (
 	study_id NUMBER(10)	
 );
 CREATE TABLE attendance (
-	attendance_id number(10) PRIMARY KEY,
-	student_id NUMBER(10)  NOT NULL,
+	student_id NUMBER(10)  PRIMARY KEY,
 	present NUMBER(10),
 	late NUMBER(10),
 	absent NUMBER(10)
@@ -31,7 +29,5 @@ ALTER TABLE attendance ADD FOREIGN KEY (student_id) REFERENCES student (student_
 ALTER TABLE student ADD FOREIGN KEY (study_id) REFERENCES study (study_id) ON DELETE SET NULL;
 ALTER TABLE study ADD FOREIGN KEY (leader_id) REFERENCES student (student_id) ON DELETE SET NULL;
 
-
 CREATE SEQUENCE student_idx START WITH 1 INCREMENT BY 1 MAXVALUE 10000000 CYCLE NOCACHE;
 CREATE SEQUENCE study_idx START WITH 1 INCREMENT BY 1 MAXVALUE 10000000 CYCLE NOCACHE;
-CREATE SEQUENCE attendance_idx START WITH 1 INCREMENT BY 1 MAXVALUE 10000000 CYCLE NOCACHE;
