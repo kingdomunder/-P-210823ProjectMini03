@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -40,7 +41,6 @@ public class Study {
 	
 	private String topic;
 	
-//	@Column(name="leader")
 	@OneToOne
 	@JoinColumn(name="leader_id")
 	private Student leaderId;  
@@ -48,10 +48,10 @@ public class Study {
 	@Column(name="meeting_date")
 	private String meetingDate;
 	
-	@OneToMany(mappedBy="studyId")   
+	@OneToMany(fetch = FetchType.EAGER, mappedBy="studyId")   
 	List<Student> students = new ArrayList<Student>();
 
-	@Override
+ 	@Override
 	public String toString() {
 		return "스터디정보 : 스터디Id=" + studyId + ", 스터디이름=" + studyName + ", 주제=" + topic + ", 조장Id=" + leaderId
 				+ ", 요일=" + meetingDate + ", 스터디참여자=" + students + "";

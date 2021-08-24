@@ -40,5 +40,4 @@ public class Student {
 	@ManyToOne
 	@JoinColumn(name="study_id")
 	private Study studyId;
-
 }
