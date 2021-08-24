@@ -2,7 +2,6 @@ package model.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,9 +19,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @Setter
 @Getter
-
-@NamedQuery(query="select e from Student e where e.studentId=:studentId", name="Student.findBystudentId") 
-@NamedQuery(query="select e from Student e", name="Student.findStudentAll") 
+@NamedQuery(query="select e from Student e", name="getAllStudent") 
+@NamedQuery(query="select e from Student e where e.studentId=:studentId", name="getStudentById") 
+@NamedQuery(query="select e from Student e where e.studentName=:studentName", name="getStudentByName") 
+@NamedQuery(query="select e from Student e where e.major=:major", name="getStudentBymajor") 
+@NamedQuery(query="select e from Student e where e.studyId=:studyId", name="getStudentBystudyId") 
 @Entity
 @SequenceGenerator(name="student_seq", sequenceName="student_idx", initialValue=1, allocationSize=1)
 public class Student {
@@ -41,13 +42,12 @@ public class Student {
 	@ManyToOne
 	@JoinColumn(name="study_id")
 	private Study studyId;
-
 	
 	
-	@Override
-	public String toString() {
-		return "수강생정보 : ID=" + studentId + ", 이름=" + studentName + ", 주소=" + address + ", 전공="
-				+ major + "";
-	}
+//	@Override
+//	public String toString() {
+//		return "수강생정보 : ID=" + studentId + ", 이름=" + studentName + ", 주소=" + address + ", 전공="
+//				+ major + "";
+//	}
 	
 }

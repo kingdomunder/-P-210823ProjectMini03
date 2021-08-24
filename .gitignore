@@ -29,9 +29,12 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 
+<<<<<<< HEAD
+=======
 ### JPA ###
 src/META-INF/
 
+>>>>>>> 6c4350b2bdd3daced913c0763b4db039075f0527
 ### Maven ###
 target/
 pom.xml
@@ -54,4 +57,8 @@ buildNumber.properties
 .classpath
 
 
+<<<<<<< HEAD
 /bin/
+=======
+/bin/
+>>>>>>> 6c4350b2bdd3daced913c0763b4db039075f0527
