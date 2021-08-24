@@ -25,7 +25,7 @@ public class StudentDAO {
 			List<Student> allStudentList = null;
 			
 			try {
-			allStudentList = em.createNamedQuery("Student.findStudentAll").getResultList();
+				allStudentList = em.createNamedQuery("Student.findStudentAll").getResultList();
 			}catch(Exception e) {
 			}finally {
 				em.close();
@@ -36,7 +36,7 @@ public class StudentDAO {
 			return allStudentList;
 		}	
 		
-		/** 수강생 id로 수강생 검색 */
+		/** 수강생 하나 검색 - 스터디ID로 */
 		public static Student getOneStudent() {
 			EntityManager em = PublicCommon.getEntityManager();
 			

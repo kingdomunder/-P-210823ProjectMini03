@@ -17,11 +17,8 @@ private static StudentDAO getStudentDAO = StudentDAO.getInstance();
 private static StudyDAO getStudytDAO = StudyDAO.getInstance();
 private static AttendanceDAO getAttendanceDAO = AttendanceDAO.getInstance();
 	
-	public Service() {
-	}
-	
+	public Service() {}
 	public static Service getInstance() {
-		
 		return instance;
 	}
 	
@@ -36,7 +33,27 @@ private static AttendanceDAO getAttendanceDAO = AttendanceDAO.getInstance();
 			return  allStudentList;
 		}
 		
-		
+		/** 수강생 하나 검색 */
+		public static Student getOneStudents(int searchNo, Object student) throws SQLException{
+			if (searchNo == 1) {
+				Object serach = (int)student;
+				
+			}
+			if (searchNo == 2) {
+				Object serach = (String)student;
+				
+			}
+			if (searchNo == 3) {
+				Object serach = (Study)student;
+				
+			}
+			
+			Student oneStudent = getStudentDAO.getOneStudent();
+			if (oneStudent == null) {
+				throw new NullPointerException();
+			}
+			return oneStudent;
+		}
 		
 		
 		/** 모든 스터디 검색 */	
@@ -47,6 +64,7 @@ private static AttendanceDAO getAttendanceDAO = AttendanceDAO.getInstance();
 			}
 			return allStudyList;
 		}
+		
 	
 	
 }

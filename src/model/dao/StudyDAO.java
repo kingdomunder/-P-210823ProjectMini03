@@ -23,16 +23,16 @@ public class StudyDAO {
 		/** 모든 스터디 검색 */	
 		public List<Study> getAllStudy() throws SQLException{   
 			EntityManager em = PublicCommon.getEntityManager();
-			EntityTransaction tx = em.getTransaction();
-			tx.begin();
+//			EntityTransaction tx = em.getTransaction();
+//			tx.begin();
 			
 			List<Study> allStudyList = null;
 			
 			try {
 				allStudyList = em.createNamedQuery("Study.findStudentAll").getResultList();
-				tx.commit();
+//				tx.commit();
 			}catch(Exception e) {
-				tx.rollback();   
+//				tx.rollback();   
 			}finally {
 				em.close();
 			}
