@@ -10,8 +10,10 @@ import util.PublicCommon;
 
 public class StudentDAO {
 	public static StudentDAO instance = new StudentDAO();
-			
-	public StudentDAO(){}
+
+	public StudentDAO() {
+	}
+
 	public static StudentDAO getInstance() {
 		return instance;
 	}
@@ -36,37 +38,21 @@ public class StudentDAO {
 	public static Student getOneStudent(int studentId) {
 		EntityManager em = PublicCommon.getEntityManager();
 		
-		Student student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", 1).getSingleResult();
-		System.out.println(student);
-		
-		em.close();
-		em = null;
-		return student;
-	}	
-	
-	//수강생 정보 전부 select
-//	@Test
-//	void getAllStudent() {
-//		EntityManager em = PublicCommon.getEntityManager();
-//		
-//		List<Student> all = em.createNamedQuery("Student.findStudentAll").getResultList();
-//		all.forEach(v -> System.out.println(v));
-//		
-//		em.close();
-//		em = null;
-//	
-//			return allStudentList;
-//		}	
 
-	/** 수강생 하나 검색 - 스터디ID로 */
-	public static Student getOneStudent() {
-		EntityManager em = PublicCommon.getEntityManager();
-		
-		Student student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", 1).getSingleResult();
-		System.out.println(student);
-		
-		PublicCommon.close();
-		
-		return student;
-	}	
+		/** 수강생 하나 검색 - 스터디ID로 */
+		public static Student getOneStudent() {
+			EntityManager em = PublicCommon.getEntityManager();
+			
+			Student student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", 1).getSingleResult();
+			System.out.println(student);
+			
+
+			PublicCommon.close();
+
+		}
+		return allStudentList;
+	}
+
+  
 }
+
