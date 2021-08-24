@@ -48,7 +48,7 @@ public class StartView {
 		
 		// INSERT
 		System.out.println("\n========== 9. 새로운 수강생 정보와 출석 정보 함께 추가 ==========");
-		controller.addStudent("11", "11", "11");
+		controller.addStudent("류현진", "미국", "야구학과");
 		System.out.println("\n========== 9-1. 추가 후 조회 ==========");
 		controller.getAllStudent();  // 여기에 출석일수도 같이 나왔음 좋겠다
 		
@@ -60,21 +60,21 @@ public class StartView {
 		/** (1,수강생ID,변경할 주소), (2,수강생ID,변경할 전공), (3,수강생ID,변경할 스터디ID) */ 
 		System.out.println("========== 11-1. 주소 정보 변경 ==========");
 		controller.updateStudent(1, 1, "평양");
-		System.out.println("========== 11-1. 주소 정보 변경 ==========");
-		controller.updateStudent(1, 1, "평양");
-		System.out.println("========== 11-1. 주소 정보 변경 ==========");
-		controller.updateStudent(1, 1, "평양");
+		System.out.println("========== 11-2. 주소 정보 변경 ==========");
+		controller.updateStudent(2, 1, "물리학과");
+		System.out.println("========== 11-3. 주소 정보 변경 ==========");
+		controller.updateStudent(3, 1, 3);
 		
 
 		System.out.println("========== 출석 체크 ==========");
-		controller.addPresent(3);		
+		controller.addPresent(4);		
 		
 		/** 스터디 정보 업데이트 - 스터디 날짜 수정*/
 		controller.updateStudy(1, "일");
 		System.out.println("\n 변경 후 조회");
 		controller.getStudyById(1);
 		
-//	
+	
 		// DELETE				
 		System.out.println("\n** 스터디 삭제 **");
 		controller.deleteStudy(8);

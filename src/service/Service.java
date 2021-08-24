@@ -65,6 +65,8 @@ public class Service {
 			Study studyId = new Study();
 			studyId.setStudyId((int) info);
 			result = getStudentDAO.getStudentByStudyId(studyId);
+		} else {
+			throw new NullPointerException();
 		}
 		if (result == null || result.size() == 0) {
 			throw new NullPointerException();
@@ -73,7 +75,7 @@ public class Service {
 	}
 
 	/** 지각, 결석 없는 모범생 검색 */
-	public List<Attendance> getPerfectPresent() {
+	public List<Attendance> getPerfectPresent() throws SQLException{
 		List<Attendance> attendanceList = getAttendanceDAO.getAllAttendance();
 		List<Attendance> attendance = new ArrayList<>();
 
@@ -88,7 +90,7 @@ public class Service {
 	}
 
 	/** 결석 3번 이상인 수강생 검색 */
-	public List<Attendance> getAbsentStudent() {
+	public List<Attendance> getAbsentStudent() throws SQLException{
 		List<Attendance> attendanceList = getAttendanceDAO.getAllAttendance();
 		List<Attendance> attendance = new ArrayList<>();
 
@@ -162,8 +164,38 @@ public class Service {
 	 * 
 	 * @param name, address, major
 	 */
-	public void addStudent(String name, String address, String major) throws SQLException {
-		// 보류
+	public boolean addStudent(String name, String address, String major) throws SQLException {
+		EntityManager em = PublicCommon.getEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		
+		boolean result = false;
+
+		try {
+			Student student = new Student();
+			student.setStudentName(name);
+			student.setAddress(address);
+			student.setMajor(major);
+
+			Attendance attendance = new Attendance();
+			attendance.setStudentId(student);
+			attendance.setPresent(0);
+			attendance.setLate(0);
+			attendance.setAbsent(0);
+
+			em.persist(student);
+			em.persist(attendance);
+			tx.commit();
+			
+			result = true;
+
+		} catch (Exception e) {
+			tx.rollback();
+		} finally {
+			em.close();
+			em = null;
+		}
+		return result;
 	}
 
 	/**
@@ -185,6 +217,8 @@ public class Service {
 			result = getStudentDAO.updateStudentMajor(studentId, info);
 		} else if (searchNo == 3) {
 			result = getStudentDAO.updateStudentStudyId(studentId, info);
+		} else {
+			return result;
 		}
 		return result;
 	}
@@ -193,8 +227,8 @@ public class Service {
 	 * 출석 체크
 	 * @param studentId
 	 */
-	public void addPresent(int studentId) {
-		// 보류
+	public Student addPresent(int studentId) throws SQLException{
+		return getAttendanceDAO.addPresent(studentId);
 	}
 
 	/**

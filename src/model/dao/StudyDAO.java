@@ -113,6 +113,7 @@ public class StudyDAO {
 			study = (Study) em.createNamedQuery("Study.findBystudyId").setParameter("studyId", id).getSingleResult();
 			study.setMeetingDate(meetingDate);
 			tx.commit();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

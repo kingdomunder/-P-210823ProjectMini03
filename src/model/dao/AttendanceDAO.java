@@ -1,5 +1,6 @@
 package model.dao;
 
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -18,86 +19,69 @@ public class AttendanceDAO {
 		return instance;
 	}
 
-	// 새로운 수강생 정보와 출석 정보 함께 추가
-	public void addStudent(String name, String address, String major) {
+	// 출석 체크
+	public Student addPresent(int studentId) throws SQLException{
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 
+		int present = 0;
+		Attendance attendance = null;
+		Student student = new Student();
+
 		try {
-			Student student = new Student();
-			student.setStudentName(name);
-			student.setAddress(address);
-			student.setMajor(major);
-
-			Attendance attendance = new Attendance();
-			attendance.setStudentId(student);
-			attendance.setPresent(0);
-			attendance.setLate(0);
-			attendance.setAbsent(0);
-
-			em.persist(student);
-			em.persist(attendance);
-
+			student = (Student) em.createNamedQuery("getStudentById").setParameter("studentId", studentId).getSingleResult();
+			attendance = (Attendance) em.createNamedQuery("Attendance.findBystudentId").setParameter("studentId", student)
+					.getSingleResult();
+			present = attendance.getPresent();
+			attendance.setPresent(present + 1);
+			
 			tx.commit();
-
+			
 		} catch (Exception e) {
-			tx.rollback();
+			e.printStackTrace();
 		} finally {
 			em.close();
 			em = null;
 		}
-	}
-
-	// 출석 체크
-	public Attendance addPresent(int studentId) {
-		EntityManager em = PublicCommon.getEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		tx.begin();
-
-		Attendance attendance = null;
-		Student student = new Student();
-		int present = 0;
-
-		student.setStudentId(studentId);
-		attendance = (Attendance) em.createNamedQuery("Attendance.findBystudentId").setParameter("studentId", student)
-				.getSingleResult();
-		present = attendance.getPresent();
-		attendance.setPresent(present + 1);
-
-		tx.commit();
-		em.close();
-		em = null;
-
-		return attendance;
+		return student;
 	}
 
 	// 학생 한명의 출석정보 검색
-	public Attendance getOneAttendance(int studentId) {
+	public Attendance getOneAttendance(int studentId) throws SQLException{
 		EntityManager em = PublicCommon.getEntityManager();
+		
 		Attendance attendance = null;
-
-		Student student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", studentId)
-				.getSingleResult();
-		attendance = (Attendance) em.createNamedQuery("Attendance.findBystudentId").setParameter("studentId", student)
-				.getSingleResult();
-
-		em.close();
-		em = null;
-
+		Student student = null;
+		
+		try {
+			student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", studentId)
+					.getSingleResult();
+			attendance = (Attendance) em.createNamedQuery("Attendance.findBystudentId").setParameter("studentId", student)
+					.getSingleResult();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			em.close();
+			em = null;
+		}
 		return attendance;
 	}
 
 	// 출석 정보 전부 검색
-	public List<Attendance> getAllAttendance() {
+	public List<Attendance> getAllAttendance() throws SQLException{
 		EntityManager em = PublicCommon.getEntityManager();
+		
 		List<Attendance> allAttendanceList = null;
 
-		allAttendanceList = em.createNamedQuery("Attendance.findStudentAll").getResultList();
-
-		em.close();
-		em = null;
-
+		try {
+			allAttendanceList = em.createNamedQuery("Attendance.findStudentAll").getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			em.close();
+			em = null;
+		}
 		return allAttendanceList;
 	}
 }

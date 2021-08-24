@@ -41,6 +41,8 @@ public class EndView {
 						+ " / [지각] " + print.getLate() + "회" 
 						+ " / [결석] " + print.getAbsent() + "회"));
 			}
+		} else {
+			System.out.println("출력 실패했습니다");
 		}
 	}
 
@@ -70,6 +72,8 @@ public class EndView {
 					+ " [출석] " + print.getPresent() + "회"
 					+ " / [지각] " + print.getLate() + "회" 
 					+ " / [결석] " + print.getAbsent() + "회"));
+		} else {
+			System.out.println("출력 실패했습니다");
 		}
 	}
 

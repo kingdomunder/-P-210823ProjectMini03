@@ -7,10 +7,13 @@ import javax.persistence.NoResultException;
 
 import org.hibernate.PersistentObjectException;
 
+import lombok.extern.slf4j.Slf4j;
 import model.domain.Attendance;
+import model.domain.Student;
 import service.Service;
 import view.EndView;
 
+@Slf4j
 public class Controller {
 	private static Controller instance = new Controller();
 	private static Service service = Service.getInstance();
@@ -24,7 +27,7 @@ public class Controller {
 
 	// SELECT
 	/** 모든 수강생 검색 */
-	public static void getAllStudent(){
+	public void getAllStudent(){
 		
 		try {
 			EndView.showAllList(service.getAllStudents());
@@ -69,6 +72,7 @@ public class Controller {
 			EndView.showOne(service.getOneAttendance(studentId));
 		} catch (SQLException e) {
 			e.printStackTrace();
+			EndView.showError("잘못된 정보를 입력하셨습니다");
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 			EndView.showError("학생 아이디를 다시 확인해 주세요.");
@@ -79,8 +83,12 @@ public class Controller {
 	public void getPerfectPresent() {
 		try {
 			EndView.showAllList(service.getPerfectPresent());
+		} catch (SQLException e) {
+			e.printStackTrace();
+			EndView.showError("잘못된 정보를 입력하셨습니다");
 		} catch (NullPointerException e) {
 			e.printStackTrace();
+			EndView.showError("잘못된 정보를 입력하셨습니다");
 		}
 	}
 
@@ -88,26 +96,31 @@ public class Controller {
 	public void getAbsentStudent() {
 		try {
 			EndView.showAllList(service.getAbsentStudent());
+		} catch (SQLException e) {
+			e.printStackTrace();
+			EndView.showError("잘못된 정보를 입력하셨습니다");
 		} catch (NullPointerException e) {
 			e.printStackTrace();
+			EndView.showError("잘못된 정보를 입력하셨습니다");
 		}
 	}
 
 	/** 모든 출석 정보 검색 */
 	public void getAllAttendance() {
 		try {
-			List<Attendance> allAttendanceList = service.getAllAttendance();
-			System.out.println(service.getAllAttendance());
+			EndView.showAllList(service.getAllAttendance());
 		} catch (SQLException e) {
 			e.printStackTrace();
+			EndView.showError("잘못된 정보를 입력하셨습니다");
 		} catch (NullPointerException e) {
 			e.printStackTrace();
+			EndView.showError("잘못된 정보를 입력하셨습니다");
 		}
 
 	}
 
 	/** 모든 스터디 검색 */
-	public static void getAllStudy() {
+	public void getAllStudy() {
 		try {
 			EndView.showAllList(service.getAllStudy());
 		} catch (SQLException e) {
@@ -155,15 +168,19 @@ public class Controller {
 	 * @param name, address, major
 	 */
 	public void addStudent(String name, String address, String major) {
+		boolean result = false;
 		try {
-			service.addStudent(name, address, major);
-			EndView.showMessage("반갑습니다.");
+			result = service.addStudent(name, address, major);
+			if (result == false) {
+				EndView.showError("입력 정보를 확인해 주세요.");
+			} else {
+				EndView.showMessage("반갑습니다.");
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 			EndView.showError("입력 정보를 확인해 주세요.");
 		}
 	}
-	
 
 	/** 스터디 추가 */
 	public void addStudy(String studyName, String topic, int studentId, String meetingDate) {
@@ -204,10 +221,15 @@ public class Controller {
 	 * @param studentId
 	 */
 	public void addPresent(int studentId) {
+		Student student = null;
 		try {
-			service.addPresent(studentId);
-			EndView.showMessage("출석 체크 완료.");
-		} catch (Exception e) {
+			student = service.addPresent(studentId);
+			if (student == null) {
+				EndView.showError("출석 체크 실패?!");
+			} else {
+				log.error(student.getStudentName()+" 출석체크 완료");
+			}
+		} catch (SQLException e) {
 			e.printStackTrace();
 			EndView.showError("출석 체크 실패?!");
 		}
