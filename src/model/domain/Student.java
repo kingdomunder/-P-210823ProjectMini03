@@ -19,35 +19,28 @@ import lombok.Setter;
 @AllArgsConstructor
 @Setter
 @Getter
-@NamedQuery(query="select e from Student e order by e.studentId", name="getAllStudent") 
-@NamedQuery(query="select e from Student e where e.studentId=:studentId order by e.studentId", name="getStudentById") 
-@NamedQuery(query="select e from Student e where e.studentName=:studentName order by e.studentId", name="getStudentByName") 
-@NamedQuery(query="select e from Student e where e.major=:major order by e.studentId", name="getStudentBymajor") 
-@NamedQuery(query="select e from Student e where e.studyId=:studyId order by e.studentId", name="getStudentBystudyId") 
+@NamedQuery(query = "select e from Student e order by e.studentId", name = "getAllStudent")
+@NamedQuery(query = "select e from Student e where e.studentId=:studentId order by e.studentId", name = "getStudentById")
+@NamedQuery(query = "select e from Student e where e.studentName=:studentName order by e.studentId", name = "getStudentByName")
+@NamedQuery(query = "select e from Student e where e.major=:major order by e.studentId", name = "getStudentBymajor")
+@NamedQuery(query = "select e from Student e where e.studyId=:studyId order by e.studentId", name = "getStudentBystudyId")
 @Entity
-@SequenceGenerator(name="student_seq", sequenceName="student_idx", initialValue=1, allocationSize=1)
+@SequenceGenerator(name = "student_seq", sequenceName = "student_idx", initialValue = 1, allocationSize = 1)
 public class Student {
 	@Id
-	@Column(name="student_id")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="student_seq")
+	@Column(name = "student_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_seq")
 	private int studentId;
-	
-	@Column(name="student_name")
+
+	@Column(name = "student_name")
 	private String studentName;
-	
+
 	private String address;
-	
+
 	private String major;
-	
+
 	@ManyToOne
-	@JoinColumn(name="study_id")
+	@JoinColumn(name = "study_id")
 	private Study studyId;
-	
-	
-//	@Override
-//	public String toString() {
-//		return "수강생정보 : ID=" + studentId + ", 이름=" + studentName + ", 주소=" + address + ", 전공="
-//				+ major + "";
-//	}
-	
+
 }

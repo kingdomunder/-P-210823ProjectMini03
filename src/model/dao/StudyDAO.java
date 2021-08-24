@@ -23,7 +23,6 @@ public class StudyDAO {
 		return instance;
 	}
 
-
 	/** 모든 스터디 검색 */
 	public List<Study> getAllStudy() throws SQLException {
 		EntityManager em = PublicCommon.getEntityManager();
@@ -55,7 +54,6 @@ public class StudyDAO {
 			em.close();
 			em = null;
 		}
-
 		return study;
 	}
 
@@ -63,9 +61,10 @@ public class StudyDAO {
 	public List<Study> getStudyByTopic(String keyword) {
 		EntityManager em = PublicCommon.getEntityManager();
 		List<Study> studyList = null;
-		
+
 		try {
-			studyList = em.createNamedQuery("Study.findByTopic").setParameter("topicKeyword", "%"+keyword+"%").getResultList();
+			studyList = em.createNamedQuery("Study.findByTopic").setParameter("topicKeyword", "%" + keyword + "%")
+					.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -74,23 +73,23 @@ public class StudyDAO {
 		}
 		return studyList;
 	}
-	
+
 	/** 스터디 추가 */
 	public void insertStudy(String studyName, String topic, Student student, String meetingDate) {
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		
-		Study newStudy = new Study();		
+
+		Study newStudy = new Study();
 		try {
 			newStudy.setStudyName(studyName);
 			newStudy.setTopic(topic);
 			newStudy.setLeaderId(student);
-			newStudy.setMeetingDate(meetingDate);		
-			
-			em.persist(newStudy);			
+			newStudy.setMeetingDate(meetingDate);
+
+			em.persist(newStudy);
 			tx.commit();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -99,44 +98,45 @@ public class StudyDAO {
 		}
 	}
 
-	/** 스터디 정보 변경 
-	 * @param study */
+	/**
+	 * 스터디 정보 변경
+	 * 
+	 * @param study
+	 */
 	public void updateStudy(int id, String meetingDate) {
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		Study study = null;
-		
+
 		try {
 			study = (Study) em.createNamedQuery("Study.findBystudyId").setParameter("studyId", id).getSingleResult();
 			study.setMeetingDate(meetingDate);
 			tx.commit();
-			
-//			study.setMeetingDate(meetingDate);
-//			em.merge(study);   //?????????????????????
-//			tx.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 			em.close();
 			em = null;
 		}
-		
+
 	}
-	
-	/** 스터디 삭제
-	 * @param id */
+
+	/**
+	 * 스터디 삭제
+	 * 
+	 * @param id
+	 */
 	public void deleteStudy(int id) {
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		Study study = null;
 		try {
-//			study = getStudyById(7);
 			study = (Study) em.createNamedQuery("Study.findBystudyId").setParameter("studyId", id).getSingleResult();
 			em.remove(study);
 			tx.commit();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

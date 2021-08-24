@@ -26,28 +26,29 @@ import lombok.Setter;
 @Getter
 
 @Entity
-@SequenceGenerator(name="study_seq", sequenceName="study_idx", initialValue=1, allocationSize=1)
-@NamedQuery(query="select s from Study s order by s.studyId", name="Study.findStudentAll") 
-@NamedQuery(query="select s from Study s where s.studyId=:studyId order by s.studyId", name="Study.findBystudyId") 
-@NamedQuery(query="select s from Study s where s.topic like :topicKeyword order by s.studyId", name="Study.findByTopic")
+@SequenceGenerator(name = "study_seq", sequenceName = "study_idx", initialValue = 1, allocationSize = 1)
+@NamedQuery(query = "select s from Study s order by s.studyId", name = "Study.findStudentAll")
+@NamedQuery(query = "select s from Study s where s.studyId=:studyId order by s.studyId", name = "Study.findBystudyId")
+@NamedQuery(query = "select s from Study s where s.topic like :topicKeyword order by s.studyId", name = "Study.findByTopic")
 public class Study {
+	
 	@Id
-	@Column(name="study_id")
-	@GeneratedValue(strategy=GenerationType.SEQUENCE, generator="study_seq")
+	@Column(name = "study_id")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "study_seq")
 	private int studyId;
-	
-	@Column(name="study_name")
+
+	@Column(name = "study_name")
 	private String studyName;
-	
+
 	private String topic;
-	
+
 	@OneToOne
-	@JoinColumn(name="leader_id")
+	@JoinColumn(name = "leader_id")
 	private Student leaderId;
-	
-	@Column(name="meeting_date")
+
+	@Column(name = "meeting_date")
 	private String meetingDate;
-	
-	@OneToMany(fetch = FetchType.EAGER, mappedBy="studyId")   
+
+	@OneToMany(fetch = FetchType.EAGER, mappedBy = "studyId")
 	List<Student> students = new ArrayList<Student>();
 }
