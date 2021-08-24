@@ -29,8 +29,8 @@ import lombok.Setter;
 
 @Entity
 @SequenceGenerator(name="study_seq", sequenceName="study_idx", initialValue=1, allocationSize=1)
-@NamedQuery(query="select e from Study e", name="Study.findStudentAll") 
-@NamedQuery(query="select e from Study e where e.studyId=:studyId", name="Study.findBystudyId") 
+@NamedQuery(query="select s from Study s", name="Study.findStudentAll") 
+@NamedQuery(query="select s from Study s where s.studyId=:studyId", name="Study.findBystudyId") 
 @NamedQuery(query="select s from Study s where s.topic like :topicKeyword", name="Study.findByTopic")
 public class Study {
 	@Id
@@ -52,13 +52,5 @@ public class Study {
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy="studyId")   
 	List<Student> students = new ArrayList<Student>();
-
- 	@Override
-	public String toString() {
-		return "스터디정보 : 스터디Id=" + studyId + ", 스터디이름=" + studyName + ", 주제=" + topic + ", 조장Id=" + leaderId
-				+ ", 요일=" + meetingDate + ", 스터디참여자=" + students + "";
-	}
-
-
 
 }

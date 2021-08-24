@@ -10,13 +10,13 @@ import util.PublicCommon;
 
 public class StudentDAO {
 	public static StudentDAO instance = new StudentDAO();
-			
-	public StudentDAO(){}
+
+	public StudentDAO() {
+	}
+
 	public static StudentDAO getInstance() {
 		return instance;
 	}
-	
-	
 	
 	
 		/** 모든 수강생 검색 */	
@@ -43,12 +43,11 @@ public class StudentDAO {
 			Student student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", 1).getSingleResult();
 			System.out.println(student);
 			
+
 			PublicCommon.close();
-			
-			return student;
-		}	
-	
-	
-	
-	
+
+		}
+		return allStudentList;
+	}
+
 }
