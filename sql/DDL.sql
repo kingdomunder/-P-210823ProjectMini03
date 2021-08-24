@@ -21,7 +21,7 @@ CREATE TABLE study (
 	study_id NUMBER(10)  PRIMARY KEY,
 	study_name VARCHAR2(50) NOT NULL,
 	topic VARCHAR2(100) NOT NULL,
-	leader_id NUMBER(10) NOT NULL,
+	leader_id NUMBER(10),
 	meeting_date VARCHAR2(8) NOT NULL
 );
 

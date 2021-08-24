@@ -36,9 +36,10 @@ public class EndView {
 									+ "(지각 = "+ print.getLate() +")"
 									+ "(결석 = "+ print.getAbsent()+")"));
 				}
+			}else{
+				System.out.println("잘못된 정보를 입력하셨습니다");
 			}
 		} 
-	
 		
 		/** 1개 row 출력 */
 		public static void showOne(Object oneRow) {
@@ -57,11 +58,13 @@ public class EndView {
 								+ " (매주 " + print.getMeetingDate() + " 진행)"));
 			}else if(oneRow instanceof Attendance){
 				Attendance print = (Attendance)oneRow;
-				System.out.println(("ID = " + print.getStudentId() 
-								+ " [" + print.getStudentId() + "] "
+				System.out.println(("ID = " + print.getStudentId().getStudentId() 
+								+ " [" + print.getStudentId().getStudentName() + "] "
 								+ "(출석 = " + print.getPresent() + ")"
 								+ "(지각 = "+ print.getLate() +")"
 								+ "(결석 = "+ print.getAbsent()+")"));
+			}else{
+				System.out.println("잘못된 정보를 입력하셨습니다");
 			}
 		}
 		
