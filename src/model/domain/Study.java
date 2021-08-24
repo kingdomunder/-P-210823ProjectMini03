@@ -43,14 +43,11 @@ public class Study {
 	
 	@OneToOne
 	@JoinColumn(name="leader_id")
-	private Student leaderId;  
+	private Student leaderId;
 	
 	@Column(name="meeting_date")
 	private String meetingDate;
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy="studyId")   
 	List<Student> students = new ArrayList<Student>();
-
-
 }
-

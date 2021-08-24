@@ -19,39 +19,39 @@ public class StudentDAO {
 	}
 
 	/** 모든 수강생 검색 */	
-//	public static List<Student> getAllStudent() throws SQLException{
-//		EntityManager em = PublicCommon.getEntityManager();
-//		List<Student> allStudentList = null;
-//		
-//		try {
-//			allStudentList = em.createNamedQuery("Student.findStudentAll").getResultList();
-//		}catch(Exception e) {
-//		}finally {
-//			em.close();
-//			em = null;
-//			PublicCommon.close();
-//		}
-//	}
-
-	//수강생 1명 정보 select
-//	@Test
-	public static Student getOneStudent(int studentId) {
+	public static List<Student> getAllStudent() throws SQLException{
 		EntityManager em = PublicCommon.getEntityManager();
+		List<Student> allStudentList = null;
 		
-
-		/** 수강생 하나 검색 - 스터디ID로 */
-		public static Student getOneStudent() {
-			EntityManager em = PublicCommon.getEntityManager();
-			
-			Student student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", 1).getSingleResult();
-			System.out.println(student);
-			
-
-			PublicCommon.close();
-
+		try {
+			allStudentList = em.createNamedQuery("Student.findStudentAll").getResultList();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			em.close();
+			em = null;
 		}
 		return allStudentList;
 	}
+
+	//수강생 1명 정보 select
+//	@Test
+//	public static Student getOneStudent(int studentId) {
+//		EntityManager em = PublicCommon.getEntityManager();
+//		
+//
+//		/** 수강생 하나 검색 - 스터디ID로 */
+//		public static Student getOneStudent() {
+//			EntityManager em = PublicCommon.getEntityManager();
+//			
+//			Student student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", 1).getSingleResult();
+//			System.out.println(student);
+//			
+//
+//
+//		}
+//		return allStudentList;
+//	}
 
   
 }

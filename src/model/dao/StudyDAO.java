@@ -51,6 +51,7 @@ public class StudyDAO {
 			e.printStackTrace();
 		} finally {
 			em.close();
+			em = null;
 		}
 
 		return study;
@@ -72,8 +73,8 @@ public class StudyDAO {
 			e.printStackTrace();
 		} finally {
 			em.close();
+			em = null;
 		}
 		return studyList;
 	}
-
 }

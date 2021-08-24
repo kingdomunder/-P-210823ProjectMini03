@@ -14,36 +14,50 @@ import util.PublicCommon;
 public class AttendanceDAO {
 	public static AttendanceDAO instance = new AttendanceDAO();
 
-	// 수강생 1명 출석정보 select
-//		@Test
-	void getOneAttendance() {
-		EntityManager em = PublicCommon.getEntityManager();
-
-		Student x = new Student(2, null, null, null, null);
-
-		Attendance s = (Attendance) em.createNamedQuery("Attendance.findBystudentId").setParameter("studentId", x)
-				.getSingleResult();
-		System.out.println(s);
-
-		em.close();
-		em = null;
+	public static AttendanceDAO getInstance() {
+		return instance;
 	}
 
-	// 출석 정보 전부 select
-	// @Test
-	void getAllAttendance() {
+	// 학생 한명의 출석정보 검색
+//	@Test
+	public Attendance getOneAttendance(int studentId) {
+
 		EntityManager em = PublicCommon.getEntityManager();
+		Attendance attendance = null;
+		try {
+			Student student = (Student) em.createNamedQuery("Student.findBystudentId")
+					.setParameter("studentId", studentId).getSingleResult();
 
-		List<Attendance> all = em.createNamedQuery("Attendance.findStudentAll").getResultList();
-		all.forEach(v -> System.out.println(v));
+			attendance = (Attendance) em.createNamedQuery("Attendance.findBystudentId")
+					.setParameter("studentId", student).getSingleResult();
 
-		em.close();
-		em = null;
-
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			em.close();
+			em = null;
+		}
+		return attendance;
 	}
 
-	@Test
-	void addStudent(String name, String address, String major) {
+	// 출석 정보 전부 검색
+//	@Test
+	public List<Attendance> getAllAttendance() {
+		EntityManager em = PublicCommon.getEntityManager();
+		List<Attendance> allAttendanceList = null;
+		try {
+			allAttendanceList = em.createNamedQuery("Attendance.findStudentAll").getResultList();
+		} catch (Exception e) {
+		} finally {
+			em.close();
+			em = null;
+		}
+		return allAttendanceList;
+	}
+
+	// 새로운 수강생 정보와 출석 정보 함께 추가
+//	@Test
+	public void addStudent(String name, String address, String major) {
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -53,21 +67,17 @@ public class AttendanceDAO {
 			student.setStudentName(name);
 			student.setAddress(address);
 			student.setMajor(major);
-//			System.out.println("1");
 
 			Attendance attendance = new Attendance();
 			attendance.setStudentId(student);
 			attendance.setPresent(0);
 			attendance.setLate(0);
 			attendance.setAbsent(0);
-//			System.out.println("2");
 
 			em.persist(student);
 			em.persist(attendance);
-//			System.out.println("3");
 
 			tx.commit();
-//			System.out.println("4");
 
 		} catch (Exception e) {
 			tx.rollback();
@@ -75,5 +85,31 @@ public class AttendanceDAO {
 			em.close();
 			em = null;
 		}
+	}
+
+	// 출석 체크
+//	@Test
+	public Attendance addPresent(int studentId) {
+		EntityManager em = PublicCommon.getEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		Attendance attendance = null;
+		Student student = new Student();
+		int present = 0;
+		try {
+			student.setStudentId(studentId);
+			attendance = (Attendance) em.createNamedQuery("Attendance.findBystudentId")
+					.setParameter("studentId", student).getSingleResult();
+			present = attendance.getPresent();
+			attendance.setPresent(present + 1);
+			
+			tx.commit();
+		} catch (Exception e) {
+			tx.rollback();
+		} finally {
+			em.close();
+			em = null;
+		}
+		return attendance;
 	}
 }
