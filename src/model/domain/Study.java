@@ -56,7 +56,4 @@ public class Study {
 		return "스터디정보 : 스터디Id=" + studyId + ", 스터디이름=" + studyName + ", 주제=" + topic + ", 조장Id=" + leaderId
 				+ ", 요일=" + meetingDate + ", 스터디참여자=" + students + "";
 	}
-
-
-
 }

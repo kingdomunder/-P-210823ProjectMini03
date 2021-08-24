@@ -41,10 +41,4 @@ public class Student {
 	@JoinColumn(name="study_id")
 	private Study studyId;
 
-	@Override
-	public String toString() {
-		return "수강생정보 : ID=" + studentId + ", 이름=" + studentName + ", 주소=" + address + ", 전공="
-				+ major + "";
-	}
-	
 }

@@ -32,13 +32,13 @@ public class StudyDAO {
 	}
 	
 	/** 스터디 id로 스터디 검색 */
-	public void getStudyById() {
+	public void getStudyById(int studyId) {
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		
 		tx.begin();
 		try {
-			Study study = (Study)em.createNamedQuery("Study.findBystudyId").setParameter("studyId", 1).getSingleResult();
+			Study study = (Study)em.createNamedQuery("Study.findBystudyId").setParameter("studyId", studyId).getSingleResult();
 			System.out.println(study);
 			
 			tx.commit();
@@ -66,5 +66,4 @@ public class StudyDAO {
 			em.close();
 		}		
 	}
-	
 }

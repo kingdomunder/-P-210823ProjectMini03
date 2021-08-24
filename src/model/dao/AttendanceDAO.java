@@ -13,20 +13,19 @@ import util.PublicCommon;
 public class AttendanceDAO {
 	
 	//수강생 1명 출석정보 select
-	@Test
-	void getOneAttendance() {
+//	@Test
+	void getOneAttendance(int studentId) {
 		EntityManager em = PublicCommon.getEntityManager();
 		
-		Student x = new Student(2, null, null, null, null);
+		Student student = new Student(studentId, null, null, null, null);
 		
-		Attendance s = (Attendance) em.createNamedQuery("Attendance.findBystudentId").setParameter("studentId", x).getSingleResult();
-		System.out.println(s);
-		
+		Attendance attendance = (Attendance) em.createNamedQuery("Attendance.findBystudentId").setParameter("studentId", student).getSingleResult();
+		System.out.println(attendance);
 		
 		em.close();
 		em = null;
+//		PublicCommon.close();
 	}
-	
 	
 	//출석 정보 전부 select
 //	@Test
@@ -38,8 +37,6 @@ public class AttendanceDAO {
 		
 		em.close();
 		em = null;
-		
+//		PublicCommon.close();
 	}	
-	
-	
 }
