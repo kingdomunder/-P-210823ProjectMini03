@@ -25,8 +25,9 @@ public class AttendanceDAO {
 		void getOneAttendance() {
 			EntityManager em = PublicCommon.getEntityManager();
 			
-			Student x = new Student(2, null, null, null, null);
-			
+//			Student x = new Student(2, null, null, null, null);
+			Student x = new Student();
+			x.setStudentId(2);
 			Attendance s = (Attendance) em.createNamedQuery("Attendance.findBystudentId").setParameter("studentId", x).getSingleResult();
 			System.out.println(s);
 			
@@ -49,7 +50,7 @@ public class AttendanceDAO {
 			
 		}	
 		
-		@Test
+//		@Test
 		void addStudent() {
 			EntityManager em = PublicCommon.getEntityManager();
 			EntityTransaction tx = em.getTransaction();

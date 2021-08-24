@@ -14,7 +14,7 @@ public class Service {
 private static Service instance = new Service();
 
 private static StudentDAO getStudentDAO = StudentDAO.getInstance();
-private static StudyDAO getStudytDAO = StudyDAO.getInstance();
+private static StudyDAO getStudyDAO = StudyDAO.getInstance();
 private static AttendanceDAO getAttendanceDAO = AttendanceDAO.getInstance();
 	
 	public Service() {}
@@ -25,7 +25,7 @@ private static AttendanceDAO getAttendanceDAO = AttendanceDAO.getInstance();
 	
 	
 		/** 모든 수강생 검색 */
-		public static List<Student> getAllStudents() throws SQLException{
+		public List<Student> getAllStudents() throws SQLException{
 			List<Student> allStudentList = getStudentDAO.getAllStudent();
 			if (allStudentList == null) {
 				throw new NullPointerException();
@@ -33,37 +33,52 @@ private static AttendanceDAO getAttendanceDAO = AttendanceDAO.getInstance();
 			return  allStudentList;
 		}
 		
-		/** 수강생 하나 검색 */
-		public static Student getOneStudents(int searchNo, Object student) throws SQLException{
-			if (searchNo == 1) {
-				Object serach = (int)student;
-				
-			}
-			if (searchNo == 2) {
-				Object serach = (String)student;
-				
-			}
-			if (searchNo == 3) {
-				Object serach = (Study)student;
-				
-			}
-			
-			Student oneStudent = getStudentDAO.getOneStudent();
-			if (oneStudent == null) {
+		/** 검색조건으로 수강생 검색 - 수강생ID로 한명만 검색 */ 
+		public Object getOneStudents(Object student) {
+			int studentId = (int)student;
+			Student result = getStudentDAO.getStudentById(studentId); 
+			if(result == null) {
 				throw new NullPointerException();
 			}
-			return oneStudent;
+			return result;
 		}
 		
 		
+		
+		/** 검색조건으로 수강생 검색 - 검색조건으로 여러명 검색*/ 
+		public Student getSearchedStudents(int searchNo, Object student) throws SQLException{
+			Student result = null;
+			
+			if (searchNo == 2) {
+				String studentName = (String)student;
+				result = getStudentDAO.getStudentByName(studentName); 
+			}
+			if (searchNo == 3) {
+				String major = (String)student;
+				result = getStudentDAO.getStudentByMajor(major); 
+			}
+			if (searchNo == 4) {
+//				Study studyId = new Study();
+//				studyId.setStudyId((int)student);
+				int studyId = (int)student;
+				
+				result = getStudentDAO.getStudentByStudyId(studyId); 
+			}
+			if (result == null) {
+				throw new NullPointerException();
+			}
+			return result;
+		}
+		
 		/** 모든 스터디 검색 */	
-		public static List<Study> getAllStudy() throws SQLException{
-			List<Study> allStudyList = getStudytDAO.getAllStudy();
+		public List<Study> getAllStudy() throws SQLException{
+			List<Study> allStudyList = getStudyDAO.getAllStudy();
 			if (allStudyList == null) {
 				throw new NullPointerException();
 			}
 			return allStudyList;
 		}
+		
 		
 	
 	

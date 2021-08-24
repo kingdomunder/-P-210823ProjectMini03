@@ -18,27 +18,32 @@ public class Controller {
 	
 	
 		/** 모든 수강생 검색 */
-		public static void getAllStudent() {
+		public static void getAllStudent(){
 			
 			try {
 				EndView.showAllList(service.getAllStudents());
-			} catch (SQLException e) {
+			}catch(SQLException e){
 				e.printStackTrace();
 				EndView.showError("잘못된 정보를 입력하셨습니다");
-			} catch (NullPointerException e) {
+			}catch(NullPointerException e){
 				e.printStackTrace();
 				EndView.showError("잘못된 정보를 입력하셨습니다");
 			}
 		}
 
-		/** 수강생 하나 검색 */
-		public void getOneStudent(int searchNo, Object student) {
+		/** 검색조건으로 수강생 검색 */ 
+		public void getSearchedStudent(int searchNo, Object student){
 			try {
-				EndView.showOne(service.getOneStudents(searchNo, student));
-			} catch (SQLException e) {
+				if(searchNo == 1) {
+					EndView.showOne(service.getOneStudents(student));
+				}else{
+					System.out.println(service.getSearchedStudents(searchNo, student));
+//					EndView.showAllList(service.getSearchedStudents(searchNo, student));
+				}
+			}catch(SQLException e){
 				e.printStackTrace();
 				EndView.showError("잘못된 정보를 입력하셨습니다");
-			} catch (NullPointerException e) {
+			}catch(NullPointerException e){
 				e.printStackTrace();
 				EndView.showError("잘못된 정보를 입력하셨습니다");
 			}
@@ -60,9 +65,5 @@ public class Controller {
 					
 		}
 		
-	
-	
-	
-	
 	
 }

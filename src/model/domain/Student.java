@@ -21,8 +21,11 @@ import lombok.Setter;
 @Setter
 @Getter
 
-@NamedQuery(query="select e from Student e where e.studentId=:studentId", name="Student.findBystudentId") 
 @NamedQuery(query="select e from Student e", name="Student.findStudentAll") 
+@NamedQuery(query="select e from Student e where e.studentId=:studentId", name="getStudentById") 
+@NamedQuery(query="select e from Student e where e.studentName=:studentName", name="getStudentByName") 
+@NamedQuery(query="select e from Student e where e.major=:major", name="getStudentBymajor") 
+@NamedQuery(query="select e from Student e where e.studyId=:studyId", name="getStudentBystudyId") 
 @Entity
 @SequenceGenerator(name="student_seq", sequenceName="student_idx", initialValue=1, allocationSize=1)
 public class Student {

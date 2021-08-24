@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 
+import org.junit.jupiter.api.Test;
+
 import model.domain.Student;
 import util.PublicCommon;
 
@@ -18,9 +20,8 @@ public class StudentDAO {
 	
 	
 	
-	
 		/** 모든 수강생 검색 */	
-		public static List<Student> getAllStudent() throws SQLException{
+		public List<Student> getAllStudent() throws SQLException{
 			EntityManager em = PublicCommon.getEntityManager();
 			List<Student> allStudentList = null;
 			
@@ -30,24 +31,66 @@ public class StudentDAO {
 			}finally {
 				em.close();
 				em = null;
-				PublicCommon.close();
 
 			}
 			return allStudentList;
 		}	
 		
-		/** 수강생 하나 검색 - 스터디ID로 */
-		public static Student getOneStudent() {
+		/** 검색조건으로 수강생 검색 - 수강생ID로 */
+		public Student getStudentById(int studentId) {
 			EntityManager em = PublicCommon.getEntityManager();
 			
-			Student student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", 1).getSingleResult();
-			System.out.println(student);
+			Student result = (Student)em.createNamedQuery("getStudentById").setParameter("studentId", studentId).getSingleResult();
 			
-			PublicCommon.close();
+			em.close();
+			em = null;
 			
-			return student;
+			return result;
 		}	
-	
+		
+		/** 검색조건으로 수강생 검색 - 이름으로 */
+		public Student getStudentByName(String studentName) {
+			EntityManager em = PublicCommon.getEntityManager();
+			
+			Student result = (Student) em.createNamedQuery("getStudentByName").setParameter("studentName", studentName).getSingleResult();
+			
+			em.close();
+			em = null;
+			
+			return result;
+		}	
+		
+		/** 검색조건으로 수강생 검색 - 전공으로 */
+		public Student getStudentByMajor(String major) {
+			EntityManager em = PublicCommon.getEntityManager();
+			
+			Student result = (Student)em.createNamedQuery("getStudentBymajor").setParameter("major", major).getSingleResult();
+			
+			em.close();
+			em = null;
+			return result;
+		}
+		
+		/** 검색조건으로 수강생 검색 - 스터디ID로 */
+		public Student getStudentByStudyId(int studyId) {
+			EntityManager em = PublicCommon.getEntityManager();
+			
+			System.out.println(studyId);
+			
+			Student result = (Student)em.createNamedQuery("getStudentBystudyId").setParameter("studyId", studyId).getSingleResult();
+			
+			em.close();
+			em = null;
+			System.out.println(result);
+			return result;
+		}
+		
+			
+//		@Test
+//		void m1() {
+//			Student s = instance.getStudentByStudyId(1);
+//			System.out.println(s);
+//		}
 	
 	
 	
