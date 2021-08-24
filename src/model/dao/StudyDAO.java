@@ -20,6 +20,7 @@ public class StudyDAO {
 		return instance;
 	}
 
+
 	/** 모든 스터디 검색 */
 	public static List<Study> getAllStudy() throws SQLException {
 		EntityManager em = PublicCommon.getEntityManager();

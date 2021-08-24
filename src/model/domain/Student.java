@@ -2,7 +2,6 @@ package model.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -41,13 +40,4 @@ public class Student {
 	@ManyToOne
 	@JoinColumn(name="study_id")
 	private Study studyId;
-
-	
-	
-	@Override
-	public String toString() {
-		return "수강생정보 : ID=" + studentId + ", 이름=" + studentName + ", 주소=" + address + ", 전공="
-				+ major + "";
-	}
-	
 }

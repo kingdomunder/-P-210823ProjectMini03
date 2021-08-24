@@ -17,25 +17,28 @@ public class StudentDAO {
 	public static StudentDAO getInstance() {
 		return instance;
 	}
-	
-	
-		/** 모든 수강생 검색 */	
-		public static List<Student> getAllStudent() throws SQLException{
-			EntityManager em = PublicCommon.getEntityManager();
-			List<Student> allStudentList = null;
-			
-			try {
-				allStudentList = em.createNamedQuery("Student.findStudentAll").getResultList();
-			}catch(Exception e) {
-			}finally {
-				em.close();
-				em = null;
-				PublicCommon.close();
 
-			}
-			return allStudentList;
-		}	
+	/** 모든 수강생 검색 */	
+//	public static List<Student> getAllStudent() throws SQLException{
+//		EntityManager em = PublicCommon.getEntityManager();
+//		List<Student> allStudentList = null;
+//		
+//		try {
+//			allStudentList = em.createNamedQuery("Student.findStudentAll").getResultList();
+//		}catch(Exception e) {
+//		}finally {
+//			em.close();
+//			em = null;
+//			PublicCommon.close();
+//		}
+//	}
+
+	//수강생 1명 정보 select
+//	@Test
+	public static Student getOneStudent(int studentId) {
+		EntityManager em = PublicCommon.getEntityManager();
 		
+
 		/** 수강생 하나 검색 - 스터디ID로 */
 		public static Student getOneStudent() {
 			EntityManager em = PublicCommon.getEntityManager();
@@ -50,4 +53,6 @@ public class StudentDAO {
 		return allStudentList;
 	}
 
+  
 }
+

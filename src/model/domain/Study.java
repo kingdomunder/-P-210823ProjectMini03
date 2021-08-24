@@ -10,8 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.NamedAttributeNode;
-import javax.persistence.NamedEntityGraph;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -53,4 +51,6 @@ public class Study {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy="studyId")   
 	List<Student> students = new ArrayList<Student>();
 
+
 }
+
