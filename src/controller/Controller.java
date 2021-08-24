@@ -9,7 +9,9 @@ public class Controller {
 
 	public static void getAllStudy() {		
 		try {
+			
 			EndView.showAllList(Service.getAllStudy());
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (NullPointerException e) {

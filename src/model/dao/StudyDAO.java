@@ -7,30 +7,27 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
-import lombok.extern.slf4j.Slf4j;
 import model.domain.Study;
 import util.PublicCommon;
 
-@Slf4j
 public class StudyDAO {
+
 	/** 모든 스터디 검색 */	
 	public static List<Study> getAllStudy() throws SQLException{   
 		EntityManager em = PublicCommon.getEntityManager();
-		EntityTransaction tx = em.getTransaction();
-		tx.begin();
 		
-		List<Study> allStudyList = null;
+		ArrayList<Study> allStudyList = null;
 		
 		try {
-			allStudyList = em.createNamedQuery("Study.findStudentAll").getResultList();
-			System.out.println("DAO");
-				
-			tx.commit();
+			allStudyList = (ArrayList<Study>)em.createNamedQuery("Study.findStudentAll").getResultList();
+			
 		}catch(Exception e) {
-			tx.rollback();   
+			e.printStackTrace();
 		}finally {
 			em.close();
+			em = null;
 		}
+
 		return allStudyList;
 	}
 	
@@ -39,14 +36,12 @@ public class StudyDAO {
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		
-		tx.begin();
 		try {
 			Study study = (Study)em.createNamedQuery("Study.findBystudyId").setParameter("studyId", 1).getSingleResult();
 			System.out.println(study);
 			
-			tx.commit();
 		}catch(Exception e) {
-			tx.rollback();   
+			e.printStackTrace();
 		}finally {
 			em.close();
 		}
