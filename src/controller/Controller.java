@@ -98,7 +98,6 @@ public class Controller {
 //		}
 //	}
 
-
 	/** 스터디 추가 */
 	public void addStudy(String studyName, String topic, int studentId, String meetingDate) {
 		try {
@@ -112,9 +111,12 @@ public class Controller {
 		}
 
 	}
-	
-	/** 새로운 수강생 정보와 출석 정보 함께 추가
-	 * @param name, address, major */
+
+	/**
+	 * 새로운 수강생 정보와 출석 정보 함께 추가
+	 * 
+	 * @param name, address, major
+	 */
 	public void addStudent(String name, String address, String major) {
 		try {
 			service.addStudent(name, address, major);
@@ -123,11 +125,14 @@ public class Controller {
 			e.printStackTrace();
 			EndView.showError("입력 정보를 확인해 주세요.");
 		}
-		
+
 	}
 
-	/** 출석 체크
-	 * @param studentId */
+	/**
+	 * 출석 체크
+	 * 
+	 * @param studentId
+	 */
 	public void addPresent(int studentId) {
 		try {
 			EndView.showOne(service.addPresent(studentId));
@@ -137,7 +142,7 @@ public class Controller {
 			EndView.showError("출석 체크 실패?!");
 		}
 	}
-	
+
 	/** 지각, 결석 없는 모범생 검색 */
 	public void getPerfectPresent() {
 		try {
@@ -146,7 +151,7 @@ public class Controller {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/** 결석 3번 이상인 수강생 검색 */
 	public void getAbsentStudent() {
 		try {
@@ -156,14 +161,20 @@ public class Controller {
 		}
 	}
 
-	/** 학생 한명의 출석정보 검색
-	 * @param studentId */
-	public Attendance getOneAttendance(int studentId) {
-		Attendance attendance = service.getOneAttendance(studentId);
-		if (attendance == null) {
-			throw new NullPointerException();
+	/**
+	 * 학생 한명의 출석정보 검색
+	 * 
+	 * @param studentId
+	 */
+	public void getOneAttendance(int studentId) {
+		try {
+			EndView.showOne(service.getOneAttendance(studentId));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			EndView.showError("학생 아이디를 다시 확인해 주세요.");
 		}
-		return attendance;
 	}
 
 	/** 모든 출석 정보 검색 */

@@ -160,10 +160,10 @@ public class Service {
 		}
 		return attendance;
 	}
-
+	
 	/** 학생 한명의 출석정보 검색
 	 * @param studentId */
-	public Attendance getOneAttendance(int studentId) {
+	public Attendance getOneAttendance(int studentId) throws SQLException {
 		Attendance attendance = getAttendanceDAO.getOneAttendance(studentId);
 		if (attendance == null) {
 			throw new NullPointerException();

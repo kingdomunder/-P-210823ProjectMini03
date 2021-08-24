@@ -1,6 +1,5 @@
 package model.dao;
 
-import java.sql.SQLException;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -79,7 +78,6 @@ public class AttendanceDAO {
 //	@Test
 	public Attendance getOneAttendance(int studentId) {
 		EntityManager em = PublicCommon.getEntityManager();
-		
 		Attendance attendance = null;
 
 		Student student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", studentId)

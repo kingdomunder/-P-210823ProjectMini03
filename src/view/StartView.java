@@ -40,8 +40,14 @@ public class StartView {
 //		System.out.println("*** 새로운 수강생 정보와 출석 정보 함께 추가 ***");
 //		controller.addStudent("111", "111", "111");
 		
+//		System.out.println("*** 모범생 조회 ***");
+//		controller.getPerfectPresent();
+		
+//		System.out.println("*** 출석 정보 삭제 ***");
+//		controller.deleteAttendance(6);
+		
 //		System.out.println("*** 결석3회 이상 학생 조회 ***");
-		controller.getAbsentStudent();
+//		controller.getAbsentStudent();
 		
 //		System.out.println("*** 수강생 한명의 출석 정보 검색 ***");
 //		controller.getOneAttendance(1);
