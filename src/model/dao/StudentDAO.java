@@ -12,12 +12,13 @@ import util.PublicCommon;
 
 public class StudentDAO {
 	public static StudentDAO instance = new StudentDAO();
-			
-	public StudentDAO(){}
+
+	public StudentDAO() {
+	}
+
 	public static StudentDAO getInstance() {
 		return instance;
 	}
-	
 	
 	
 		/** 모든 수강생 검색 */	
@@ -91,7 +92,6 @@ public class StudentDAO {
 //			Student s = instance.getStudentByStudyId(1);
 //			System.out.println(s);
 //		}
-	
 	
 	
 }
