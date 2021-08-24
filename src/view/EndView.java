@@ -7,7 +7,7 @@ import model.domain.Attendance;
 import model.domain.Student;
 import model.domain.Study;
 
-public class EndView {		
+public class EndView {
 	
 		/** 모든 리스트 내역 출력 */
 		public static void showAllList(List list){
@@ -39,7 +39,6 @@ public class EndView {
 			}
 		} 
 	
-		
 		/** 1개 row 출력 */
 		public static void showOne(Object oneRow) {
 			if(oneRow instanceof Student){
@@ -63,8 +62,6 @@ public class EndView {
 								+ "(지각 = "+ print.getLate() +")"
 								+ "(결석 = "+ print.getAbsent()+")"));
 			}
-		}
-		
 	
 		/** 에러메세지 출력 */
 		public static void showError(String message) {

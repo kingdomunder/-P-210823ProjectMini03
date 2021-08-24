@@ -23,6 +23,7 @@ public class StudyDAO {
 		return instance;
 	}
 
+
 	/** 모든 스터디 검색 */
 	public List<Study> getAllStudy() throws SQLException {
 		EntityManager em = PublicCommon.getEntityManager();
@@ -73,7 +74,6 @@ public class StudyDAO {
 		}
 		return studyList;
 	}
-	
 	
 	/** 스터디 추가 */
 	public void insertStudy(String studyName, String topic, Student student, String meetingDate) {
