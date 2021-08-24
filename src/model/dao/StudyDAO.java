@@ -11,58 +11,69 @@ import model.domain.Study;
 import util.PublicCommon;
 
 public class StudyDAO {
+	public static StudyDAO instance = new StudyDAO();
 
-	/** 모든 스터디 검색 */	
-	public static List<Study> getAllStudy() throws SQLException{   
+	public StudyDAO() {
+	}
+
+	public static StudyDAO getInstance() {
+		return instance;
+	}
+
+	/** 모든 스터디 검색 */
+	public static List<Study> getAllStudy() throws SQLException {
 		EntityManager em = PublicCommon.getEntityManager();
-		
-		ArrayList<Study> allStudyList = null;
-		
+
+		List<Study> allStudyList = null;
+
 		try {
-			allStudyList = (ArrayList<Study>)em.createNamedQuery("Study.findStudentAll").getResultList();
-			
-		}catch(Exception e) {
+			allStudyList = em.createNamedQuery("Study.findStudentAll").getResultList();
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			em.close();
 			em = null;
 		}
 
 		return allStudyList;
 	}
-	
+
 	/** 스터디 id로 스터디 검색 */
-	public static void getStudyById() {
+	public static Study getStudyById(int id) {
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
-		
+
+		Study study = null;
+
 		try {
-			Study study = (Study)em.createNamedQuery("Study.findBystudyId").setParameter("studyId", 1).getSingleResult();
-			System.out.println(study);
-			
-		}catch(Exception e) {
+			study = (Study) em.createNamedQuery("Study.findBystudyId").setParameter("studyId", id).getSingleResult();
+		} catch (Exception e) {
 			e.printStackTrace();
-		}finally {
+		} finally {
 			em.close();
 		}
+
+		return study;
 	}
-	
-	/** 스터디 주제 키워드로 스터디 검색 */
-	public static void getStudyByTopic() {
+
+	/**
+	 * 스터디 주제 키워드로 스터디 검색
+	 * 
+	 * @return
+	 */
+	public static List<Study> getStudyByTopic(String keyword) {
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
+		List<Study> studyList = null;
 		
-		tx.begin();
 		try {
-			List<Study> studyListByTopic = em.createNamedQuery("Study.findByTopic").setParameter("topicKeyword", "%파이썬%").getResultList();
-			studyListByTopic.forEach(System.out::println);
-			
-			tx.commit();
-		}catch(Exception e) {
-			tx.rollback();   
-		}finally {
+			studyList = em.createNamedQuery("Study.findByTopic").setParameter("topicKeyword", "%"+keyword+"%").getResultList();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
 			em.close();
-		}		
+		}
+		return studyList;
 	}
-	
+
 }
