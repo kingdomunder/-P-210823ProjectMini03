@@ -10,8 +10,13 @@ public class StartView {
 		/** 모든 수강생 검색 */
 //		controller.getAllStudent();
 		
+		/** 수강생 하나 검색 */
+		controller.getOneStudent(1,2);
 		
+		/** 수강생 하나 검색 - 전공으로 */
+//		controller.getOneStudent();
 		
+
 //		System.out.println("** 모든 스터디 검색 **");
 //		controller.getAllStudy();
 		

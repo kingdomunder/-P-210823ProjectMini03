@@ -34,7 +34,6 @@ public class StudyDAO {
 			em.close();
 			em = null;
 		}
-
 		return allStudyList;
 	}
 

@@ -53,5 +53,4 @@ public class Study {
 	@OneToMany(fetch = FetchType.EAGER, mappedBy="studyId")   
 	List<Student> students = new ArrayList<Student>();
 
-	
 }

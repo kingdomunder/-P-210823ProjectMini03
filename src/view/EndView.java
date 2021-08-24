@@ -2,6 +2,7 @@ package view;
 
 import java.util.List;
 
+import model.domain.Student;
 import model.domain.Study;
 
 public class EndView {
@@ -32,6 +33,11 @@ public class EndView {
 			System.out.println("해당 내역이 없습니다.");
 		}
 	} 
+	
+	/** 1개 row 출력 */
+	public static void showOne(Object oneRow) {
+		System.out.println(oneRow);
+	}
 	
 
 	/** 에러메세지 출력 */
