@@ -19,6 +19,44 @@ public class AttendanceDAO {
 		return instance;
 	}
 	
+	
+		//수강생 1명 출석정보 select
+//		@Test
+		void getOneAttendance() {
+			EntityManager em = PublicCommon.getEntityManager();
+			
+//			Student x = new Student(2, null, null, null, null);
+			Student x = new Student();
+			x.setStudentId(2);
+			Attendance s = (Attendance) em.createNamedQuery("Attendance.findBystudentId").setParameter("studentId", x).getSingleResult();
+			System.out.println(s);
+			
+			
+			em.close();
+			em = null;
+		}
+		
+		
+		//출석 정보 전부 select
+	//	@Test
+		void getAllAttendance() {
+			EntityManager em = PublicCommon.getEntityManager();
+			
+			List<Attendance> all = em.createNamedQuery("Attendance.findStudentAll").getResultList();
+			all.forEach(v -> System.out.println(v));
+			
+			em.close();
+			em = null;
+			
+		}	
+		
+//		@Test
+		void addStudent() {
+			EntityManager em = PublicCommon.getEntityManager();
+			EntityTransaction tx = em.getTransaction();
+			tx.begin();
+			
+			try {
 	// 새로운 수강생 정보와 출석 정보 함께 추가
 //	@Test
 	public void addStudent(String name, String address, String major) {
