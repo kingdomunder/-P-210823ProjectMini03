@@ -33,11 +33,11 @@ public class Attendance implements Serializable {
 	private int late;
 	private int absent;
 	
-	
-	@Override
-	public String toString() {
-		return "Attendance [studentId=" + studentId + ", present=" + present + ", late=" + late + ", absent=" + absent
-				+ "]";
-	}
+//	
+//	@Override
+//	public String toString() {
+//		return "Attendance [studentId=" + studentId + ", present=" + present + ", late=" + late + ", absent=" + absent
+//				+ "]";
+//	}
 	
 }

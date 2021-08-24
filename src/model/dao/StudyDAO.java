@@ -7,6 +7,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.junit.jupiter.api.Test;
+
+import model.domain.Student;
 import model.domain.Study;
 import util.PublicCommon;
 
@@ -21,7 +24,7 @@ public class StudyDAO {
 	}
 
 	/** 모든 스터디 검색 */
-	public static List<Study> getAllStudy() throws SQLException {
+	public List<Study> getAllStudy() throws SQLException {
 		EntityManager em = PublicCommon.getEntityManager();
 
 		List<Study> allStudyList = null;
@@ -38,9 +41,8 @@ public class StudyDAO {
 	}
 
 	/** 스터디 id로 스터디 검색 */
-	public static Study getStudyById(int id) {
+	public Study getStudyById(int id) {
 		EntityManager em = PublicCommon.getEntityManager();
-		EntityTransaction tx = em.getTransaction();
 
 		Study study = null;
 
@@ -50,19 +52,15 @@ public class StudyDAO {
 			e.printStackTrace();
 		} finally {
 			em.close();
+			em = null;
 		}
 
 		return study;
 	}
 
-	/**
-	 * 스터디 주제 키워드로 스터디 검색
-	 * 
-	 * @return
-	 */
-	public static List<Study> getStudyByTopic(String keyword) {
+	/** 스터디 주제 키워드로 스터디 검색 */
+	public List<Study> getStudyByTopic(String keyword) {
 		EntityManager em = PublicCommon.getEntityManager();
-		EntityTransaction tx = em.getTransaction();
 		List<Study> studyList = null;
 		
 		try {
@@ -71,8 +69,40 @@ public class StudyDAO {
 			e.printStackTrace();
 		} finally {
 			em.close();
+			em = null;
 		}
 		return studyList;
+	}
+	
+	
+	/** 스터디 추가 */
+	public void insertStudy(String studyName, String topic, Student student, String meetingDate) {
+		EntityManager em = PublicCommon.getEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		System.out.println(studyName);
+		System.out.println(topic);
+		System.out.println(student);
+		System.out.println(meetingDate);
+		
+		Study newStudy = new Study();		
+		
+		try {
+			newStudy.setStudyName(studyName);
+			newStudy.setTopic(topic);
+			newStudy.setLeaderId(student);
+			newStudy.setMeetingDate(meetingDate);		
+			newStudy.setStudents(null);
+			System.out.println(newStudy);
+			
+			em.persist(newStudy);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			em.close();
+			em = null;
+		}
 	}
 
 }

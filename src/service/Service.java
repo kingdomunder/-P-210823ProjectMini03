@@ -8,7 +8,6 @@ import model.dao.StudentDAO;
 import model.dao.StudyDAO;
 import model.domain.Student;
 import model.domain.Study;
-import model.domain.Study;
 
 public class Service {
 	
@@ -22,8 +21,7 @@ private static AttendanceDAO getAttendanceDAO = AttendanceDAO.getInstance();
 	public static Service getInstance() {
 		return instance;
 	}
-	
-	
+
 	
 		/** 모든 수강생 검색 */
 		public List<Student> getAllStudents() throws SQLException{
@@ -47,29 +45,25 @@ private static AttendanceDAO getAttendanceDAO = AttendanceDAO.getInstance();
 		
 		
 		/** 검색조건으로 수강생 검색 - 검색조건으로 여러명 검색*/ 
-		public Student getSearchedStudents(int searchNo, Object student) throws SQLException{
-			Student result = null;
-			
+		public List<Student> getSearchedStudents(int searchNo, Object student) throws SQLException{
+			List<Student> result = null;
+//			Student result = null;
 			if (searchNo == 2) {
 				String studentName = (String)student;
 				result = getStudentDAO.getStudentByName(studentName); 
-			}
-			if (searchNo == 3) {
+			}else if (searchNo == 3) {
 				String major = (String)student;
 				result = getStudentDAO.getStudentByMajor(major); 
-			}
-			if (searchNo == 4) {
-//				Study studyId = new Study();
-//				studyId.setStudyId((int)student);
-				int studyId = (int)student;
-				
+			}else if (searchNo == 4) {
+				Study studyId = new Study();
+				studyId.setStudyId((int)student);
 				result = getStudentDAO.getStudentByStudyId(studyId); 
-			}
-			if (result == null) {
+			}else if (result == null || result.size() == 0) {
 				throw new NullPointerException();
 			}
 			return result;
 		}
+		
 		
 		/** 모든 스터디 검색 */	
 		public List<Study> getAllStudy() throws SQLException{
@@ -79,25 +73,40 @@ private static AttendanceDAO getAttendanceDAO = AttendanceDAO.getInstance();
 			}
 			return allStudyList;
 		}
-	
-    /** 스터디 id로 검색 
-     * @param id */
-    public static Study getStudyById(int id) throws SQLException{
-      Study study = getStudyDAO.getStudyById(id);
-      if (study == null) {
-        throw new NullPointerException();
-      }
-      return study;
-    }
+		
 
-    /** 스터디 주제로 검색 
-     * @param keyword */
-    public static List<Study> getStudyByTopic(String keyword) throws SQLException{
-      List<Study> studyList = getStudyDAO.getStudyByTopic(keyword);
-      if (studyList == null) {
-        throw new NullPointerException();
-      }
-      return studyList;
-    }
+		/**
+		 * 스터디 id로 검색
+		 * @param id
+		 */
+		public static Study getStudyById(int id) throws SQLException {
+			Study study = getStudyDAO.getStudyById(id);
+			if (study == null) {
+				throw new NullPointerException();
+			}
+			return study;
+		}
+	
+		/**
+		 * 스터디 주제로 검색
+		 * @param keyword
+		 */
+		public static List<Study> getStudyByTopic(String keyword) throws SQLException {
+			List<Study> studyList = getStudyDAO.getStudyByTopic(keyword);
+			if (studyList == null) {
+				throw new NullPointerException();
+			}
+			return studyList;
+		}
+	
+		
+		/**
+		 * 스터디 추가
+		 * @param keyword
+		 */
+		public void addStudy(String studyName, String topic, int studentId, String meetingDate) throws SQLException {
+			Student student = getStudentDAO.getStudentById(studentId);
+			getStudyDAO.insertStudy(studyName, topic, student, meetingDate);
+		}
 
 }

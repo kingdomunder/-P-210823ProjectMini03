@@ -1,13 +1,13 @@
 package model.dao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 
-import org.junit.jupiter.api.Test;
-
 import model.domain.Student;
+import model.domain.Study;
 import util.PublicCommon;
 
 public class StudentDAO {
@@ -27,7 +27,7 @@ public class StudentDAO {
 			List<Student> allStudentList = null;
 			
 			try {
-				allStudentList = em.createNamedQuery("Student.findStudentAll").getResultList();
+				allStudentList = em.createNamedQuery("getAllStudent").getResultList();
 			}catch(Exception e) {
 			}finally {
 				em.close();
@@ -37,7 +37,7 @@ public class StudentDAO {
 			return allStudentList;
 		}	
 		
-		/** 검색조건으로 수강생 검색 - 수강생ID로 */
+		/** 검색조건으로 수강생 검색 - 수강생ID로 - 언제나 1명만 출력*/
 		public Student getStudentById(int studentId) {
 			EntityManager em = PublicCommon.getEntityManager();
 			
@@ -50,10 +50,11 @@ public class StudentDAO {
 		}	
 		
 		/** 검색조건으로 수강생 검색 - 이름으로 */
-		public Student getStudentByName(String studentName) {
+		public List<Student> getStudentByName(String studentName) {
 			EntityManager em = PublicCommon.getEntityManager();
+			List<Student> result = null;
 			
-			Student result = (Student) em.createNamedQuery("getStudentByName").setParameter("studentName", studentName).getSingleResult();
+			result = (List<Student>)em.createNamedQuery("getStudentByName").setParameter("studentName", studentName).getResultList();
 			
 			em.close();
 			em = null;
@@ -62,36 +63,28 @@ public class StudentDAO {
 		}	
 		
 		/** 검색조건으로 수강생 검색 - 전공으로 */
-		public Student getStudentByMajor(String major) {
+		public List<Student> getStudentByMajor(String major) {
 			EntityManager em = PublicCommon.getEntityManager();
-			
-			Student result = (Student)em.createNamedQuery("getStudentBymajor").setParameter("major", major).getSingleResult();
+			List<Student> result = new ArrayList<>();
+			result = (List<Student>)em.createNamedQuery("getStudentBymajor").setParameter("major", major).getResultList();
 			
 			em.close();
 			em = null;
+			
 			return result;
 		}
 		
 		/** 검색조건으로 수강생 검색 - 스터디ID로 */
-		public Student getStudentByStudyId(int studyId) {
+		public List<Student> getStudentByStudyId(Study studyId) {
 			EntityManager em = PublicCommon.getEntityManager();
-			
-			System.out.println(studyId);
-			
-			Student result = (Student)em.createNamedQuery("getStudentBystudyId").setParameter("studyId", studyId).getSingleResult();
+			List<Student> result = new ArrayList<>();
+			result = (List<Student>)em.createNamedQuery("getStudentBystudyId").setParameter("studyId", studyId).getResultList();
 			
 			em.close();
 			em = null;
-			System.out.println(result);
+			
 			return result;
 		}
-		
-			
-//		@Test
-//		void m1() {
-//			Student s = instance.getStudentByStudyId(1);
-//			System.out.println(s);
-//		}
-	
+
 	
 }
