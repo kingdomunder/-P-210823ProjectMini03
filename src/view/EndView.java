@@ -1,11 +1,14 @@
 package view;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import model.domain.Student;
+import org.junit.jupiter.api.Test;
+
 import model.domain.Study;
 
-public class EndView {
+public class EndView {		
+	
 	/** 모든 스터디 내역 출력 */
 	public static void showAllStudy(List<Study> list) {		
 		int length = list.size();
@@ -24,7 +27,7 @@ public class EndView {
 	}
 	
 	
-// toString 사용해야 하는 메소드 - 사용안하는게 좋을듯.. 힘듬...
+//// toString 사용해야 하는 메소드 - 사용안하는게 좋을듯.. 힘듬...
 	public static void showAllList(List list) {
 		int length = list.size();
 		if (length != 0) {
@@ -45,6 +48,9 @@ public class EndView {
 		System.out.println(message);
 	}
 
+	/** 성공 메세지 출력 */
+	public static void showMessage(String message) {
+		System.out.println(message);
+	}		
 	
-
 }
