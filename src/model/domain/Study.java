@@ -27,9 +27,9 @@ import lombok.Setter;
 
 @Entity
 @SequenceGenerator(name="study_seq", sequenceName="study_idx", initialValue=1, allocationSize=1)
-@NamedQuery(query="select s from Study s", name="Study.findStudentAll") 
-@NamedQuery(query="select s from Study s where s.studyId=:studyId", name="Study.findBystudyId") 
-@NamedQuery(query="select s from Study s where s.topic like :topicKeyword", name="Study.findByTopic")
+@NamedQuery(query="select s from Study s order by s.studyId", name="Study.findStudentAll") 
+@NamedQuery(query="select s from Study s where s.studyId=:studyId order by s.studyId", name="Study.findBystudyId") 
+@NamedQuery(query="select s from Study s where s.topic like :topicKeyword order by s.studyId", name="Study.findByTopic")
 public class Study {
 	@Id
 	@Column(name="study_id")
