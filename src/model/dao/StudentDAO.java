@@ -61,6 +61,8 @@ public class StudentDAO {
 			
 			return result;
 		}	
+
+		
 		
 		/** 검색조건으로 수강생 검색 - 전공으로 */
 		public List<Student> getStudentByMajor(String major) {

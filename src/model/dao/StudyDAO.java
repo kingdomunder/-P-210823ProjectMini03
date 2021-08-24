@@ -80,22 +80,16 @@ public class StudyDAO {
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
-		System.out.println(studyName);
-		System.out.println(topic);
-		System.out.println(student);
-		System.out.println(meetingDate);
 		
 		Study newStudy = new Study();		
-		
 		try {
 			newStudy.setStudyName(studyName);
 			newStudy.setTopic(topic);
 			newStudy.setLeaderId(student);
 			newStudy.setMeetingDate(meetingDate);		
-			newStudy.setStudents(null);
-			System.out.println(newStudy);
 			
-			em.persist(newStudy);
+			em.persist(newStudy);			
+			tx.commit();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -103,5 +97,53 @@ public class StudyDAO {
 			em.close();
 			em = null;
 		}
+	}
+
+	/** 스터디 정보 변경 
+	 * @param study */
+	public void updateStudy(int id, String meetingDate) {
+		EntityManager em = PublicCommon.getEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		Study study = null;
+		
+		try {
+			study = (Study) em.createNamedQuery("Study.findBystudyId").setParameter("studyId", id).getSingleResult();
+			study.setMeetingDate(meetingDate);
+			tx.commit();
+			
+//			study.setMeetingDate(meetingDate);
+//			em.merge(study);   //?????????????????????
+//			tx.commit();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			em.close();
+			em = null;
+		}
+		
+	}
+	
+	/** 스터디 삭제
+	 * @param id */
+	public void deleteStudy(int id) {
+		EntityManager em = PublicCommon.getEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		Study study = null;
+		try {
+//			study = getStudyById(7);
+			study = (Study) em.createNamedQuery("Study.findBystudyId").setParameter("studyId", id).getSingleResult();
+			em.remove(study);
+			tx.commit();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			em.close();
+			em = null;
+		}
+		
 	}
 }

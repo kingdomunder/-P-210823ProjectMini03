@@ -31,6 +31,7 @@ public class Service {
 		return instance;
 	}
 
+  // SELECT
 	/** 모든 수강생 검색 */
 	public List<Student> getAllStudents() throws SQLException {
 		List<Student> allStudentList = getStudentDAO.getAllStudent();
@@ -68,6 +69,59 @@ public class Service {
 		}
 		return result;
 	}
+  
+  /** 지각, 결석 없는 모범생 검색 */
+	@Test
+	public List<Attendance> getPerfectPresent() {
+		List<Attendance> attendanceList = getAttendanceDAO.getAllAttendance();
+		List<Attendance> attendance = new ArrayList<>();
+
+		if (attendanceList != null) {
+			for (Attendance a : attendanceList) {
+				if (a.getLate() == 0 && a.getAbsent() == 0) {
+					attendance.add(a);
+				}
+			}
+		}
+		return attendance;
+	}
+
+	/** 결석 3번 이상인 수강생 검색 */
+// 	@Test
+	public List<Attendance> getAbsentStudent() {
+
+		List<Attendance> attendanceList = getAttendanceDAO.getAllAttendance();
+		List<Attendance> attendance = new ArrayList<>();
+
+		if (attendanceList != null) {
+			for (Attendance a : attendanceList) {
+				if (a.getAbsent() >= 3) {
+					attendance.add(a);
+				}
+			}
+		}
+		return attendance;
+	}
+  /** 학생 한명의 출석정보 검색
+	 * @param studentId */
+	public Attendance getOneAttendance(int studentId) throws SQLException {
+		Attendance attendance = getAttendanceDAO.getOneAttendance(studentId);
+		if (attendance == null) {
+			throw new NullPointerException();
+		}
+		return attendance;
+	}
+  
+  /** 모든 출석 정보 검색 */
+	public List<Attendance> getAllAttendance() throws SQLException {
+		List<Attendance> allAttendanceList = getAttendanceDAO.getAllAttendance();
+		if (allAttendanceList == null) {
+			throw new NullPointerException();
+		}
+		return allAttendanceList;
+	}
+}
+    
 
 	/** 모든 스터디 검색 */
 	public List<Study> getAllStudy() throws SQLException {
@@ -104,6 +158,24 @@ public class Service {
 		return studyList;
 	}
 
+
+  // INSERT
+	/**
+	 * 새로운 수강생 정보와 출석 정보 함께 추가
+	 * 
+	 * @param name, address, major
+	 */
+	public void addStudent(String name, String address, String major) {
+		try {
+			service.addStudent(name, address, major);
+			EndView.showMessage("반갑습니다.");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			EndView.showError("입력 정보를 확인해 주세요.");
+		}
+
+	}
+   
 	/**
 	 * 스터디 추가
 	 * 
@@ -114,69 +186,49 @@ public class Service {
 		getStudyDAO.insertStudy(studyName, topic, student, meetingDate);
 	}
 
-	/**
-	 * 새로운 수강생 정보와 출석 정보 함께 추가
-	 * 
-	 * @param name, address, major
+	
+  // UPDATE
+  /** 출석 체크
+	 * @param studentId */
+	public void addPresent(int studentId) {
+		try {
+			EndView.showOne(service.addPresent(studentId));
+			EndView.showMessage("출석 체크 완료.");
+		} catch (Exception e) {
+			e.printStackTrace();
+			EndView.showError("출석 체크 실패?!");
+		}
+	}
+
+   /**
+	 * 스터디 정보 업데이트
+	 * @param keyword
 	 */
-	public void addStudent(String name, String address, String major) throws SQLException {
-		getAttendanceDAO.addStudent(name, address, major);
+	public void updateStudy(int id, String meetingDate) throws SQLException {
+		getStudyDAO.updateStudy(id, meetingDate);
 	}
-
-	/** 출석 체크 */
-	public Attendance addPresent(int studentId) {
-		return getAttendanceDAO.addPresent(studentId);
-	}
-
-	/** 지각, 결석 없는 모범생 검색 */
-	@Test
-	public List<Attendance> getPerfectPresent() {
-		List<Attendance> attendanceList = getAttendanceDAO.getAllAttendance();
-		List<Attendance> attendance = new ArrayList<>();
-
-		if (attendanceList != null) {
-			for (Attendance a : attendanceList) {
-				if (a.getLate() == 0 && a.getAbsent() == 0) {
-					attendance.add(a);
-				}
-			}
-		}
-		return attendance;
-	}
-
-	/** 결석 3번 이상인 수강생 검색 */
-// 	@Test
-	public List<Attendance> getAbsentStudent() {
-
-		List<Attendance> attendanceList = getAttendanceDAO.getAllAttendance();
-		List<Attendance> attendance = new ArrayList<>();
-
-		if (attendanceList != null) {
-			for (Attendance a : attendanceList) {
-				if (a.getAbsent() >= 3) {
-					attendance.add(a);
-				}
-			}
-		}
-		return attendance;
+    
+	// DELETE
+	/**
+	 * 스터디 삭제
+	 * @param id
+	 */
+	public void deleteStudy(int id) throws SQLException {
+		getStudyDAO.deleteStudy(id);
 	}
 	
-	/** 학생 한명의 출석정보 검색
-	 * @param studentId */
-	public Attendance getOneAttendance(int studentId) throws SQLException {
-		Attendance attendance = getAttendanceDAO.getOneAttendance(studentId);
-		if (attendance == null) {
-			throw new NullPointerException();
-		}
-		return attendance;
-	}
-
-	/** 모든 출석 정보 검색 */
-	public List<Attendance> getAllAttendance() throws SQLException {
-		List<Attendance> allAttendanceList = getAttendanceDAO.getAllAttendance();
-		if (allAttendanceList == null) {
-			throw new NullPointerException();
-		}
-		return allAttendanceList;
-	}
 }
+	
+
+	
+	
+	
+	
+	
+	
+	
+
+	
+	
+    
+	

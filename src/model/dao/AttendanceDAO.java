@@ -18,8 +18,8 @@ public class AttendanceDAO {
 		return instance;
 	}
 
-	// 새로운 수강생 정보와 출석 정보 함께 추가
-//	@Test
+  // 새로운 수강생 정보와 출석 정보 함께 추가
+  //	@Test
 	public void addStudent(String name, String address, String major) {
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -51,7 +51,7 @@ public class AttendanceDAO {
 	}
 
 	// 출석 체크
-//	@Test
+  //	@Test
 	public Attendance addPresent(int studentId) {
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
@@ -75,7 +75,7 @@ public class AttendanceDAO {
 	}
 
 	// 학생 한명의 출석정보 검색
-//	@Test
+  //	@Test
 	public Attendance getOneAttendance(int studentId) {
 		EntityManager em = PublicCommon.getEntityManager();
 		Attendance attendance = null;
@@ -92,7 +92,7 @@ public class AttendanceDAO {
 	}
 
 	// 출석 정보 전부 검색
-//	@Test
+  //	@Test
 	public List<Attendance> getAllAttendance() {
 		EntityManager em = PublicCommon.getEntityManager();
 		List<Attendance> allAttendanceList = null;
