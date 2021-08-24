@@ -19,46 +19,45 @@ public class Controller {
 	public static Controller getInstance() {
 		return instance;
 	}
-
-	// SELECT
-	/** 모든 수강생 검색 */
-	public void getAllStudent() {
-		try {
-			EndView.showAllList(service.getAllStudents());
-		} catch (SQLException e) {
-			e.printStackTrace();
-			EndView.showError("잘못된 정보를 입력하셨습니다");
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			EndView.showError("잘못된 정보를 입력하셨습니다");
-		} catch (NoResultException e) {
-			e.printStackTrace();
-			EndView.showError("잘못된 정보를 입력하셨습니다");
-
-		}
-	}
-  
-	/** 검색조건으로 수강생 검색 */
-	public void getSearchedStudent(int searchNo, Object student) {
-		try {
-			if (searchNo == 1) {
-				EndView.showOne(service.getOneStudents(student));
-			} else {
-				EndView.showAllList(service.getSearchedStudents(searchNo, student));
+	
+	  // SELECT
+		/** 모든 수강생 검색 */
+		public static void getAllStudent(){
+			
+			try {
+				EndView.showAllList(service.getAllStudents());
+			}catch(SQLException e){
+				e.printStackTrace();
+				EndView.showError("잘못된 정보를 입력하셨습니다");
+			}catch(NullPointerException e){
+				e.printStackTrace();
+				EndView.showError("잘못된 정보를 입력하셨습니다");
+			}catch(NoResultException e){
+				e.printStackTrace();
+				EndView.showError("잘못된 정보를 입력하셨습니다");
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-			EndView.showError("잘못된 정보를 입력하셨습니다");
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			EndView.showError("잘못된 정보를 입력하셨습니다");
-		} catch (NoResultException e) {
-			e.printStackTrace();
-			EndView.showError("잘못된 정보를 입력하셨습니다");
+
+		/** 검색조건으로 수강생 검색 */ 
+		public void getSearchedStudent(int searchNo, Object info){
+			try {
+				if(searchNo == 1) {
+					EndView.showOne(service.getOneStudents(info));
+				}else{
+					EndView.showAllList(service.getSearchedStudents(searchNo, info));
+				}
+			}catch(SQLException e){
+				e.printStackTrace();
+				EndView.showError("잘못된 정보를 입력하셨습니다");
+			}catch(NullPointerException e){
+				e.printStackTrace();
+				EndView.showError("잘못된 정보를 입력하셨습니다");
+			}catch(NoResultException e){
+				e.printStackTrace();
+				EndView.showError("잘못된 정보를 입력하셨습니다");
+			}
 		}
-	}
-   
-  /**
+      
+    /**
 	 * 학생 한명의 출석정보 검색
 	 * 
 	 * @param studentId
@@ -148,7 +147,8 @@ public class Controller {
 			EndView.showError("잘못된 정보를 입력하셨습니다");
 		}
 	}
-  
+      
+  // INSERT
   // INSERT
 	/**
 	 * 새로운 수강생 정보와 출석 정보 함께 추가
@@ -180,6 +180,25 @@ public class Controller {
  
       
   // UPDATE   
+  /** 수강생정보 업데이트 */ 
+		public void updateStudent(int searchNo, int studentId, Object info) {
+			boolean result = false;
+			try {
+				result = service.updateStudent(searchNo, studentId, info);
+				if(result == false) {
+					EndView.showError("잘못된 정보를 입력하셨습니다");
+				}else {
+					EndView.showMessage("변경에 성공했습니다.");
+				}
+			}catch(SQLException e){
+				e.printStackTrace();
+				EndView.showError("잘못된 정보를 입력하셨습니다");
+			}catch(PersistentObjectException e){
+				e.printStackTrace();
+				EndView.showError("잘못된 정보를 입력하셨습니다");
+			}
+		}
+      
   /**
 	 * 출석 체크
 	 * 
@@ -222,3 +241,31 @@ public class Controller {
 		}
 	}
 }
+		
+  /** 수강생ID로 수강생정보+출석정보 삭제 */ 
+  public void deleteStudent(int studentId) {
+    boolean result = false;
+    try {
+      result = service.deleteStudent(studentId);
+      if(result == false) {
+        EndView.showError("잘못된 정보를 입력하셨습니다");
+      }else {
+        EndView.showMessage("삭제 성공했습니다.");
+      }
+    }catch(SQLException e){
+      e.printStackTrace();
+      EndView.showError("잘못된 정보를 입력하셨습니다");
+    }catch(PersistentObjectException e){
+      e.printStackTrace();
+      EndView.showError("잘못된 정보를 입력하셨습니다");
+    }
+  }
+ }	
+			
+      
+   
+  
+  
+  
+      
+  

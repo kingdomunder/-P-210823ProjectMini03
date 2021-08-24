@@ -115,7 +115,6 @@ public class StudyDAO {
 //			study.setMeetingDate(meetingDate);
 //			em.merge(study);   //?????????????????????
 //			tx.commit();
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -144,6 +143,5 @@ public class StudyDAO {
 			em.close();
 			em = null;
 		}
-		
 	}
 }

@@ -23,8 +23,9 @@ public class EndView {
 				} else {
 					System.out.println(" / 스터디 : " + print.getStudyId() + ")");
 				}
+			}else{
+				System.out.println("잘못된 정보를 입력하셨습니다");
 			}
-
 		} else if (list.get(0) instanceof Study) {
 			for (Object study : list) {
 				Study print = (Study) study;
