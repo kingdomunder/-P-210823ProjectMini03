@@ -10,13 +10,14 @@ import view.EndView;
 public class Controller {
 	private static Controller instance = new Controller();
 	private static Service service = Service.getInstance();
-			
-	public Controller() {}
+
+	public Controller() {
+	}
+
 	public static Controller getInstance() {
 		return instance;
 	}
-	
-	
+
 //	/** 모든 수강생 검색 */
 //	public static void getAllStudent() {		
 //		try {
@@ -84,50 +85,56 @@ public class Controller {
 //			EndView.showError("잘못된 정보를 입력하셨습니다");
 //		}
 //	}
-	
-	/** 학생 한명의 출석정보 검색
-     * @param studentId */
-//    public Attendance getOneAttendance(int studentId) {
-//    	Attendance attendance = service.getOneAttendance(studentId);
-//    	if(attendance == null) {
-//    		throw new NullPointerException();
-//    	}
-////    	return attendance;
-//    	System.out.println(attendance);
-//    	}
-    
-    /** 모든 출석 정보 검색*/
-    public void getAllAttendance() {
-    	try {
-    		List<Attendance> allAttendanceList = service.getAllAttendance();
-//			EndView.showAllList(service.getAllStudents());
-    		System.out.println(service.getAllAttendance());
-		} catch (SQLException e) {
-			e.printStackTrace();
-//			EndView.showError("잘못된 정보를 입력하셨습니다");
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-//			EndView.showError("잘못된 정보를 입력하셨습니다");
-		}
-    }
-    
-    /** 새로운 수강생 정보와 출석 정보 함께 추가
-     * @param name, address, major */
-    public void addStudent(String name, String address, String major) {
-    	try {
+
+	/** 새로운 수강생 정보와 출석 정보 함께 추가
+	 * @param name, address, major */
+	public void addStudent(String name, String address, String major) {
+		try {
 			service.addStudent(name, address, major);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-    }
-    
-    /** 출석 체크
-     * @param studentId */
-    public void addPresent(int studentId) {
-    	try {
-    	System.out.println(service.addPresent(studentId));
-    	} catch(Exception e) {
-    		e.printStackTrace();
-    	}
-    }
+	}
+
+	/** 출석 체크
+	 * @param studentId */
+	public void addPresent(int studentId) {
+		try {
+			System.out.println(service.addPresent(studentId));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/** 학생 한명의 출석정보 검색
+	 * @param studentId */
+	public Attendance getOneAttendance(int studentId) {
+		Attendance attendance = service.getOneAttendance(studentId);
+		if (attendance == null) {
+			throw new NullPointerException();
+		}
+		return attendance;
+	}
+	
+	/** 결석 3번 이상인 수강생 검색 */
+	public void getAbsentStudent() {
+		try {
+		service.getAbsentStudent();
+		}catch(NullPointerException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/** 모든 출석 정보 검색 */
+	public void getAllAttendance() {
+		try {
+			List<Attendance> allAttendanceList = service.getAllAttendance();
+			System.out.println(service.getAllAttendance());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		}
+	}
+
 }
