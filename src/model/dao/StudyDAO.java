@@ -87,7 +87,6 @@ public class StudyDAO {
 			newStudy.setTopic(topic);
 			newStudy.setLeaderId(student);
 			newStudy.setMeetingDate(meetingDate);		
-			System.out.println(newStudy);
 			
 			em.persist(newStudy);			
 			tx.commit();
@@ -102,19 +101,15 @@ public class StudyDAO {
 
 	/** 스터디 정보 변경 
 	 * @param study */
-	public void updateStudy(Study oldStudy, String meetingDate) {
+	public void updateStudy(Study study, String meetingDate) {
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		
-		Study study = oldStudy;
-		System.out.println(study.getStudyName());
-		
 		try {
-//			System.out.println(study.getMeetingDate());
 			study.setMeetingDate(meetingDate);
+			em.merge(study);   //?????????????????????
 			tx.commit();
-			System.out.println(study.getMeetingDate());
 			
 		} catch (Exception e) {
 			e.printStackTrace();
