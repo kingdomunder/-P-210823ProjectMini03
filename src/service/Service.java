@@ -108,8 +108,15 @@ public class Service {
 	 * @param keyword
 	 */
 	public void updateStudy(int id, String meetingDate) throws SQLException {
-		Study study = getStudyDAO.getStudyById(id);
-		getStudyDAO.updateStudy(study, meetingDate);
+		getStudyDAO.updateStudy(id, meetingDate);
+	}
+
+	/**
+	 * 스터디 정보 업데이트
+	 * @param id
+	 */
+	public void deleteStudy(int id) throws SQLException {
+		getStudyDAO.deleteStudy(id);
 	}
 
 }

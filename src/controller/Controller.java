@@ -110,6 +110,19 @@ public class Controller {
 		} catch (NullPointerException e) {
 			EndView.showError("변경에 실패했습니다.");
 		}
-	}	
+	}
+	
+	/** 스터디 삭제 */
+	public void deleteStudy(int id) {
+		try {
+			service.deleteStudy(id);
+			EndView.showMessage("삭제에 성공했습니다.");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			EndView.showError("변경에 실패했습니다.");
+		} catch (NullPointerException e) {
+			EndView.showError("변경에 실패했습니다.");
+		}	
+	} 
 	
 }

@@ -101,14 +101,41 @@ public class StudyDAO {
 
 	/** 스터디 정보 변경 
 	 * @param study */
-	public void updateStudy(Study study, String meetingDate) {
+	public void updateStudy(int id, String meetingDate) {
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
+		Study study = null;
 		
 		try {
+			study = (Study) em.createNamedQuery("Study.findBystudyId").setParameter("studyId", id).getSingleResult();
 			study.setMeetingDate(meetingDate);
-			em.merge(study);   //?????????????????????
+			tx.commit();
+			
+//			study.setMeetingDate(meetingDate);
+//			em.merge(study);   //?????????????????????
+//			tx.commit();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			em.close();
+			em = null;
+		}
+		
+	}
+	
+	/** 스터디 삭제
+	 * @param id */
+	public void deleteStudy(int id) {
+		EntityManager em = PublicCommon.getEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		Study study = null;
+		try {
+//			study = getStudyById(7);
+			study = (Study) em.createNamedQuery("Study.findBystudyId").setParameter("studyId", id).getSingleResult();
+			em.remove(study);
 			tx.commit();
 			
 		} catch (Exception e) {

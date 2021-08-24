@@ -30,13 +30,13 @@ public class StartView {
 //		System.out.println("\n** 스터디 추가 **");
 //		controller.addStudy("SQLD 대비", "꼭 따고 만다 SQLD 자격증!", 3, "목");
 //		
-//		System.out.println("\n 변경 전 조회");
-//		controller.getStudyById(1);
 		System.out.println("\n** 스터디 정보 업데이트 - 스터디 날짜 수정**");
-		controller.updateStudy(1, "토");
+		controller.updateStudy(1, "일");
 		System.out.println("\n 변경 후 조회");
 		controller.getStudyById(1);
-//				
+				
+		System.out.println("\n** 스터디 삭제 **");
+		controller.deleteStudy(8);
 	}
 
 }
