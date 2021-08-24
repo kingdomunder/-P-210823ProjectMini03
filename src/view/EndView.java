@@ -7,7 +7,7 @@ import model.domain.Attendance;
 import model.domain.Student;
 import model.domain.Study;
 
-public class EndView {		
+public class EndView {
 	
 		/** 모든 리스트 내역 출력 */
 		public static void showAllList(List list){
@@ -40,7 +40,7 @@ public class EndView {
 				System.out.println("잘못된 정보를 입력하셨습니다");
 			}
 		} 
-		
+
 		/** 1개 row 출력 */
 		public static void showOne(Object oneRow) {
 			if(oneRow instanceof Student){
@@ -66,8 +66,6 @@ public class EndView {
 			}else{
 				System.out.println("잘못된 정보를 입력하셨습니다");
 			}
-		}
-		
 	
 		/** 에러메세지 출력 */
 		public static void showError(String message) {

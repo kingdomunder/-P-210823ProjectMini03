@@ -10,8 +10,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.NamedAttributeNode;
-import javax.persistence.NamedEntityGraph;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
@@ -45,12 +43,11 @@ public class Study {
 	
 	@OneToOne
 	@JoinColumn(name="leader_id")
-	private Student leaderId;  
+	private Student leaderId;
 	
 	@Column(name="meeting_date")
 	private String meetingDate;
 	
 	@OneToMany(fetch = FetchType.EAGER, mappedBy="studyId")   
 	List<Student> students = new ArrayList<Student>();
-
 }
