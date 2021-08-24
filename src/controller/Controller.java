@@ -23,7 +23,6 @@ public class Controller {
 	// SELECT
 	/** 모든 수강생 검색 */
 	public void getAllStudent() {
-
 		try {
 			EndView.showAllList(service.getAllStudents());
 		} catch (SQLException e) {
@@ -35,9 +34,10 @@ public class Controller {
 		} catch (NoResultException e) {
 			e.printStackTrace();
 			EndView.showError("잘못된 정보를 입력하셨습니다");
+
 		}
 	}
-
+  
 	/** 검색조건으로 수강생 검색 */
 	public void getSearchedStudent(int searchNo, Object student) {
 		try {
@@ -57,30 +57,42 @@ public class Controller {
 			EndView.showError("잘못된 정보를 입력하셨습니다");
 		}
 	}
-
-	/**
+   
+  /**
 	 * 학생 한명의 출석정보 검색
 	 * 
 	 * @param studentId
 	 */
-	public Attendance getOneAttendance(int studentId) {
-		Attendance attendance = service.getOneAttendance(studentId);
-		if (attendance == null) {
-			throw new NullPointerException();
+	public void getOneAttendance(int studentId) {
+		try {
+			EndView.showOne(service.getOneAttendance(studentId));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			EndView.showError("학생 아이디를 다시 확인해 주세요.");
 		}
-		return attendance;
 	}
-
-	/** 결석 3번 이상인 수강생 검색 */
+  
+  /** 지각, 결석 없는 모범생 검색 */
+	public void getPerfectPresent() {
+		try {
+			EndView.showAllList(service.getPerfectPresent());
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+    }
+  }
+  
+  /** 결석 3번 이상인 수강생 검색 */
 	public void getAbsentStudent() {
 		try {
-			service.getAbsentStudent();
+			EndView.showAllList(service.getAbsentStudent());
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 		}
-	}
-
-	/** 모든 출석 정보 검색 */
+	} 
+ 
+  /** 모든 출석 정보 검색 */
 	public void getAllAttendance() {
 		try {
 			List<Attendance> allAttendanceList = service.getAllAttendance();
@@ -92,8 +104,8 @@ public class Controller {
 		}
 
 	}
-
-	/** 모든 스터디 검색 */
+  
+  /** 모든 스터디 검색 */
 	public static void getAllStudy() {
 		try {
 			EndView.showAllList(service.getAllStudy());
@@ -136,8 +148,8 @@ public class Controller {
 			EndView.showError("잘못된 정보를 입력하셨습니다");
 		}
 	}
-
-	// INSERT
+  
+  // INSERT
 	/**
 	 * 새로운 수강생 정보와 출석 정보 함께 추가
 	 * 
@@ -146,11 +158,11 @@ public class Controller {
 	public void addStudent(String name, String address, String major) {
 		try {
 			service.addStudent(name, address, major);
+			EndView.showMessage("반갑습니다.");
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}
+			EndView.showError("입력 정보를 확인해 주세요.");
 
-	}
 
 	/** 스터디 추가 */
 	public void addStudy(String studyName, String topic, int studentId, String meetingDate) {
@@ -165,22 +177,25 @@ public class Controller {
 		}
 
 	}
-
-	// UPDATE
-	/**
+ 
+      
+  // UPDATE   
+  /**
 	 * 출석 체크
 	 * 
 	 * @param studentId
 	 */
 	public void addPresent(int studentId) {
 		try {
-			System.out.println(service.addPresent(studentId));
+			EndView.showOne(service.addPresent(studentId));
+			EndView.showMessage("출석 체크 완료.");
 		} catch (Exception e) {
 			e.printStackTrace();
+			EndView.showError("출석 체크 실패?!");
 		}
 	}
-
-	/** 스터디 정보 변경 - 날짜 변경 */
+      
+  /** 스터디 정보 변경 - 날짜 변경 */
 	public void updateStudy(int id, String meetingDate) {
 		try {
 			service.updateStudy(id, meetingDate);
@@ -192,7 +207,7 @@ public class Controller {
 			EndView.showError("변경에 실패했습니다.");
 		}
 	}
-
+      
 	// DELETE
 	/** 스터디 삭제 */
 	public void deleteStudy(int id) {
@@ -206,5 +221,4 @@ public class Controller {
 			EndView.showError("변경에 실패했습니다.");
 		}
 	}
-
 }

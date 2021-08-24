@@ -82,6 +82,3 @@ public class EndView {
 	/** 성공 메세지 출력 */
 	public static void showMessage(String message) {
 		System.out.println(message);
-	}
-
-}

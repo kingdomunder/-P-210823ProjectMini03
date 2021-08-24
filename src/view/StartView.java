@@ -33,7 +33,7 @@ public class StartView {
 		
 		System.out.println("\n========== 4. 수강생 한명의 출석 정보 검색 ==========");
 		controller.getOneAttendance(1);
-				
+    					
 		System.out.println("\n========== 5. 결석3회 이상 학생 조회 ==========");
 		controller.getAbsentStudent();
 		
@@ -74,6 +74,7 @@ public class StartView {
 		System.out.println("\n 변경 후 조회");
 		controller.getStudyById(1);
 		
+//	
 		// DELETE				
 		System.out.println("\n** 스터디 삭제 **");
 		controller.deleteStudy(8);
@@ -81,5 +82,3 @@ public class StartView {
 }
 			
 		
-	
-
