@@ -14,7 +14,8 @@ public class EndView {
 		int length = list.size();
 		if (length != 0) {					
 			for (Study study : list) {
-				System.out.println(study.getStudyId() + ". [" + study.getStudyName() + "] " + study.getTopic() + " (매주 " + study.getMeetingDate() + " 진행)");
+				System.out.println(study.getStudyId() + ". [" + study.getStudyName() + "] " + study.getTopic() + " / 매주 " + study.getMeetingDate() + " 진행");
+				study.getStudents().forEach(v -> System.out.print(v.getStudentName()+" "));
 			} 
 		} else {
 			System.out.println("해당 내역이 없습니다.");

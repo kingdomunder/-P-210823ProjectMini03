@@ -103,4 +103,13 @@ public class Service {
 		getStudyDAO.insertStudy(studyName, topic, student, meetingDate);
 	}
 
+	/**
+	 * 스터디 정보 업데이트
+	 * @param keyword
+	 */
+	public void updateStudy(int id, String meetingDate) throws SQLException {
+		Study study = getStudyDAO.getStudyById(id);
+		getStudyDAO.updateStudy(study, meetingDate);
+	}
+
 }

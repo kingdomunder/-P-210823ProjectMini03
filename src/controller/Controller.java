@@ -97,6 +97,19 @@ public class Controller {
 			EndView.showError("스터디 저장에 실패했습니다.");
 		}
 		
+	}
+	
+	/** 스터디 정보 변경 - 날짜 변경 */
+	public void updateStudy(int id, String meetingDate) {
+		try {
+			service.updateStudy(id, meetingDate);
+			EndView.showMessage("변경에 성공했습니다.");
+		} catch (SQLException e) {
+			e.printStackTrace();
+			EndView.showError("변경에 실패했습니다.");
+		} catch (NullPointerException e) {
+			EndView.showError("변경에 실패했습니다.");
+		}
 	}	
 	
 }

@@ -18,19 +18,25 @@ public class StartView {
 //		controller.getOneStudent();
 		
 
-//		System.out.println("** 모든 스터디 검색 **");
+//		System.out.println("\n** 모든 스터디 검색 **");
 //		controller.getAllStudy();
 		
-//		System.out.println("** 스터디 id로 스터디 검색 **");
+//		System.out.println("\n** 스터디 id로 스터디 검색 **");
 //		controller.getStudyById(2);
 
-//		System.out.println("** 스터디 주제로 스터디 검색 **");
+//		System.out.println("\n** 스터디 주제로 스터디 검색 **");
 //		controller.getStudyByTopic("알고리즘");
 //		
-		System.out.println("** 스터디 추가 **");
-		controller.addStudy("SQLD 대비", "꼭 따고 만다 SQLD 자격증!", 3, "목");
-		
-		
+//		System.out.println("\n** 스터디 추가 **");
+//		controller.addStudy("SQLD 대비", "꼭 따고 만다 SQLD 자격증!", 3, "목");
+//		
+//		System.out.println("\n 변경 전 조회");
+//		controller.getStudyById(1);
+		System.out.println("\n** 스터디 정보 업데이트 - 스터디 날짜 수정**");
+		controller.updateStudy(1, "토");
+		System.out.println("\n 변경 후 조회");
+		controller.getStudyById(1);
+//				
 	}
 
 }
