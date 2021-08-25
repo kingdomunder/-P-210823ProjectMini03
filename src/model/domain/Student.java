@@ -20,7 +20,7 @@ import lombok.Setter;
 @Setter
 @Getter
 @NamedQuery(query = "select e from Student e order by e.studentId", name = "getAllStudent")
-@NamedQuery(query = "select e from Student e where e.studentId=:studentId order by e.studentId", name = "getStudentById")
+@NamedQuery(query = "select e from Student e where e.studentId=:studentId order by e.studentId", name = "Student.findBystudentId")
 @NamedQuery(query = "select e from Student e where e.studentName=:studentName order by e.studentId", name = "getStudentByName")
 @NamedQuery(query = "select e from Student e where e.major=:major order by e.studentId", name = "getStudentBymajor")
 @NamedQuery(query = "select e from Student e where e.studyId=:studyId order by e.studentId", name = "getStudentBystudyId")

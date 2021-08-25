@@ -1,14 +1,13 @@
 package controller;
 
 import java.sql.SQLException;
-import java.util.List;
 
 import javax.persistence.NoResultException;
 
 import org.hibernate.PersistentObjectException;
 
+import exception.NotExistException;
 import lombok.extern.slf4j.Slf4j;
-import model.domain.Attendance;
 import model.domain.Student;
 import service.Service;
 import view.EndView;
@@ -98,10 +97,13 @@ public class Controller {
 			EndView.showAllList(service.getAbsentStudent());
 		} catch (SQLException e) {
 			e.printStackTrace();
-			EndView.showError("잘못된 정보를 입력하셨습니다");
+			EndView.showError("결석 3번 이상인 수강생이 없습니다.");
 		} catch (NullPointerException e) {
 			e.printStackTrace();
-			EndView.showError("잘못된 정보를 입력하셨습니다");
+			EndView.showError("결석 3번 이상인 수강생이 없습니다.");
+		} catch (NotExistException e) {
+			e.printStackTrace();
+			EndView.showError("결석 3번 이상인 수강생이 없습니다.");
 		}
 	}
 
@@ -220,10 +222,10 @@ public class Controller {
 	 * 출석 체크
 	 * @param studentId
 	 */
-	public void addPresent(int studentId) {
+	public void updatePresent(int studentId) {
 		Student student = null;
 		try {
-			student = service.addPresent(studentId);
+			student = service.updatePresent(studentId);
 			if (student == null) {
 				EndView.showError("출석 체크 실패?!");
 			} else {

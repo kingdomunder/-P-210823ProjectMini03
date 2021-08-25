@@ -44,7 +44,7 @@ public class StudentDAO {
 		Student result = null;
 		
 		try {
-			result = (Student) em.createNamedQuery("getStudentById").setParameter("studentId", studentId)
+			result = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", studentId)
 				.getSingleResult();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -94,7 +94,7 @@ public class StudentDAO {
 		List<Student> result = new ArrayList<>();
 		
 		try {
-			result = (List<Student>) em.createNamedQuery("getStudentBystudyId").setParameter("studyId", studyId)
+			result = (List<Student>) em.createNamedQuery("Student.findBystudentId").setParameter("studyId", studyId)
 				.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -116,7 +116,7 @@ public class StudentDAO {
 		Student student = null;
 		
 		try {
-			student = (Student) em.createNamedQuery("getStudentById").setParameter("studentId", studentId)
+			student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", studentId)
 					.getSingleResult();
 			student.setAddress(address);
 			
@@ -142,7 +142,7 @@ public class StudentDAO {
 		Student student = null;
 
 		try {
-			student = (Student) em.createNamedQuery("getStudentById").setParameter("studentId", studentId)
+			student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", studentId)
 					.getSingleResult();
 			student.setMajor(major);
 			
@@ -169,7 +169,7 @@ public class StudentDAO {
 		Student student = null;
 
 		try {
-			student = (Student) em.createNamedQuery("getStudentById").setParameter("studentId", studentId)
+			student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", studentId)
 					.getSingleResult();
 			student.setStudyId(study);
 			

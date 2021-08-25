@@ -36,7 +36,8 @@ public class EndView {
 		} else if (list.get(0) instanceof Attendance) {
 			for (Object attendance : list) {
 				Attendance print = (Attendance) attendance;
-				System.out.println((print.getStudentId() 
+				System.out.println((print.getStudentId().getStudentId()
+						+ "이름 : " + print.getStudentId().getStudentName()
 						+ " [출석] " + print.getPresent() + "회"
 						+ " / [지각] " + print.getLate() + "회" 
 						+ " / [결석] " + print.getAbsent() + "회"));
@@ -68,7 +69,8 @@ public class EndView {
 					+ " / 진행일: 매주 " + print.getMeetingDate() + "요일"));
 		} else if (oneRow instanceof Attendance) {
 			Attendance print = (Attendance) oneRow;
-			System.out.println((print.getStudentId() 
+			System.out.println((print.getStudentId().getStudentId()
+					+ "이름 : " + print.getStudentId().getStudentName()
 					+ " [출석] " + print.getPresent() + "회"
 					+ " / [지각] " + print.getLate() + "회" 
 					+ " / [결석] " + print.getAbsent() + "회"));
