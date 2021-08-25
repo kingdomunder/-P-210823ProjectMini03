@@ -1,8 +1,5 @@
 package view;
-<<<<<<< HEAD
 
-=======
->>>>>>> d61c49347431d151e78ae6665e7b181bb113e6c7
 import java.util.List;
 import model.domain.Attendance;
 import model.domain.Student;
@@ -26,17 +23,10 @@ public class EndView {
 		} else if (list.get(0) instanceof Study) {
 			for (Object study : list) {
 				Study print = (Study) study;
-<<<<<<< HEAD
-				System.out.print((print.getStudyId() 
-						+ " [" + print.getStudyName() + "] " 
-						+ print.getTopic()
-						+ " / 스터디장 : " + print.getLeaderId().getStudentName() 
-=======
 				System.out.print((print.getStudyId()
 						+ " [" + print.getStudyName() + "] "
 						+ print.getTopic()
 						+ " / 스터디장 : " + print.getLeaderId().getStudentName()
->>>>>>> d61c49347431d151e78ae6665e7b181bb113e6c7
 						+ " / 진행일: 매주 " + print.getMeetingDate() + "요일"
 						+ " / 구성원: "));
 				List<Student> members = print.getStudents();
@@ -75,17 +65,10 @@ public class EndView {
 			}
 		} else if (oneRow instanceof Study) {
 			Study print = (Study) oneRow;
-<<<<<<< HEAD
-			System.out.print((print.getStudyId() 
-					+ " [" + print.getStudyName() + "] " 
-					+ print.getTopic()
-					+ " / 스터디장 : " + print.getLeaderId().getStudentName() 
-=======
 			System.out.print((print.getStudyId()
 					+ " [" + print.getStudyName() + "] "
 					+ print.getTopic()
 					+ " / 스터디장 : " + print.getLeaderId().getStudentName()
->>>>>>> d61c49347431d151e78ae6665e7b181bb113e6c7
 					+ " / 진행일: 매주 " + print.getMeetingDate() + "요일"
 					+ " / 구성원: "));
 			List<Student> members = print.getStudents();
