@@ -37,7 +37,7 @@ public class EndView {
 			for (Object attendance : list) {
 				Attendance print = (Attendance) attendance;
 				System.out.println((print.getStudentId().getStudentId()
-						+ "이름 : " + print.getStudentId().getStudentName()
+						+ " 이름 : " + print.getStudentId().getStudentName()
 						+ " [출석] " + print.getPresent() + "회"
 						+ " / [지각] " + print.getLate() + "회" 
 						+ " / [결석] " + print.getAbsent() + "회"));
@@ -70,7 +70,7 @@ public class EndView {
 		} else if (oneRow instanceof Attendance) {
 			Attendance print = (Attendance) oneRow;
 			System.out.println((print.getStudentId().getStudentId()
-					+ "이름 : " + print.getStudentId().getStudentName()
+					+ " 이름 : " + print.getStudentId().getStudentName()
 					+ " [출석] " + print.getPresent() + "회"
 					+ " / [지각] " + print.getLate() + "회" 
 					+ " / [결석] " + print.getAbsent() + "회"));
