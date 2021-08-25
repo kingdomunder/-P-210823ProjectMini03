@@ -63,9 +63,9 @@ public class StartView {
 		
 		// INSERT
 		System.out.println("\n========== 10. 새로운 수강생 정보와 출석 정보 함께 추가 ==========");
-		controller.addStudent("류현진", "미국", "야구학과");
+		controller.addStudent("류현진", "미국", null);
 		System.out.println("\n========== 10-1. 추가 후 조회 ==========");
-		controller.getAllStudent();  // 여기에 출석일수도 같이 나왔음 좋겠다
+		controller.getAllStudent();  
 		
 		System.out.println("\n========== 11. 스터디 추가 ==========");
 		controller.addStudy("SQLD 대비", "꼭 따고 만다 SQLD 자격증!", 3, "목");
