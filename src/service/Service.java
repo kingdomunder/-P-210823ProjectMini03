@@ -9,7 +9,6 @@ import javax.persistence.EntityTransaction;
 
 import javax.persistence.NoResultException;
 
-import exception.DeleteException;
 import exception.InsertException;
 import exception.NotExistException;
 import model.dao.AttendanceDAO;
@@ -257,12 +256,12 @@ public class Service {
 		} else {
 			return result;
 		}
-		if (result == false) {
-			throw new NotExistException();
-		}
+//		if (result == false) {
+//			throw new NotExistException();
+//		}
 		return result;
 	}
-
+	
 	/**
 	 * 출석 체크
 	 * @param studentId
@@ -321,7 +320,7 @@ public class Service {
 		Attendance attendance = null;
 
 		try {
-			student = (Student) em.createNamedQuery("getStudentById").setParameter("studentId", studentId)
+			student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", studentId)
 					.getSingleResult();
 			attendance = (Attendance) em.createNamedQuery("Attendance.findBystudentId")
 					.setParameter("studentId", student).getSingleResult();

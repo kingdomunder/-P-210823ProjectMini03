@@ -2,10 +2,6 @@ package controller;
 
 import java.sql.SQLException;
 
-import javax.persistence.NoResultException;
-
-import org.hibernate.PersistentObjectException;
-
 import exception.InsertException;
 import exception.NotExistException;
 import lombok.extern.slf4j.Slf4j;
@@ -64,7 +60,6 @@ public class Controller {
 
 	/**
 	 * 학생 한명의 출석정보 검색
-	 * 
 	 * @param studentId
 	 */
 	public void getOneAttendance(int studentId) {
@@ -153,7 +148,6 @@ public class Controller {
 
 	/**
 	 * 스터디 id로 스터디 검색
-	 * 
 	 * @param id
 	 */
 	public void getStudyById(int id) {
@@ -224,18 +218,14 @@ public class Controller {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			EndView.showError("수강생정보 업데이트 실패했습니다");
-		} catch (PersistentObjectException e) {
-			e.printStackTrace();
-			EndView.showError("수강생정보 업데이트 실패했습니다");
 		} catch (NotExistException e) {
 			e.printStackTrace();
-			EndView.showError("수강생정보 업데이트 실패했습니다");
+			EndView.showError("업데이트 실패했습니다. 입력값을 확인하세요.");
 		} 
 	}
-
+	
 	/**
 	 * 출석 체크
-	 * 
 	 * @param studentId
 	 */
 	public void updatePresent(int studentId) {
@@ -344,9 +334,8 @@ public class Controller {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			EndView.showError("삭제하려는 학생이 존재하지 않습니다");
-		} catch (PersistentObjectException e) {
-			e.printStackTrace();
-			EndView.showError("삭제하려는 학생이 존재하지 않습니다");
 		}
 	}
+
+	
 }

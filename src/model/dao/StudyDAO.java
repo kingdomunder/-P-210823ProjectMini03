@@ -10,7 +10,6 @@ import javax.persistence.NoResultException;
 
 import org.junit.jupiter.api.Test;
 
-import exception.DeleteException;
 import exception.InsertException;
 import exception.NotExistException;
 import model.domain.Student;

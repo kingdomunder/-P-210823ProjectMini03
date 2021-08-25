@@ -7,6 +7,9 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 
+import org.hibernate.cache.NoCacheRegionFactoryAvailableException;
+
+import exception.NotExistException;
 import model.domain.Student;
 import model.domain.Study;
 import util.PublicCommon;
@@ -157,22 +160,27 @@ public class StudentDAO {
 		return result;
 	}
 
-	/** 수강생정보 업데이트 - 스터디ID변경 */
-	public boolean updateStudentStudyId(int studentId, Object info) throws SQLException, NullPointerException {
+	/** 수강생정보 업데이트 - 스터디ID변경 
+	 * @throws NotExistException */
+	public boolean updateStudentStudyId(int studentId, Object info) throws SQLException, NullPointerException, NotExistException {
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 
 		boolean result = false;
-		Study study = new Study();
-		study.setStudyId((int) info);
 		Student student = null;
+		Study study = new Study();
+		try {			
+			study.setStudyId((int) info);
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+			throw new NotExistException();
+		} 
 
 		try {
 			student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", studentId)
 					.getSingleResult();
 			student.setStudyId(study);
-			
 			tx.commit();
 			result = true;
 		} catch (Exception e) {
