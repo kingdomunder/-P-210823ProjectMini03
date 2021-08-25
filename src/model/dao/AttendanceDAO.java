@@ -91,8 +91,8 @@ public class AttendanceDAO {
 				student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", studentId).getSingleResult();
 				attendance = (Attendance) em.createNamedQuery("Attendance.findBystudentId").setParameter("studentId", student)
 						.getSingleResult();
-				absent = attendance.getPresent();
-				attendance.setPresent(absent + 1);
+				absent = attendance.getAbsent();
+				attendance.setAbsent(absent + 1);
 				
 				tx.commit();
 				

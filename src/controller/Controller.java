@@ -93,7 +93,7 @@ public class Controller {
 	/** 지각 3번 이상인 수강생 검색 */
 	public void getLateStudent() {
 		try {
-			EndView.showAllList(service.getAbsentStudent());
+			EndView.showAllList(service.getLateStudent());
 		} catch (SQLException e) {
 			e.printStackTrace();
 			EndView.showError("지각 3번 이상인 수강생이 없습니다.");
