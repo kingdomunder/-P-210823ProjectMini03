@@ -133,7 +133,6 @@ public class Controller {
 			e.printStackTrace();
 			EndView.showError("출석 정보가 없습니다.");
 		}
-
 	}
 
 	/** 모든 스터디 검색 */

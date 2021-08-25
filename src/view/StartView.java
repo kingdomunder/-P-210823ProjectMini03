@@ -8,7 +8,7 @@ public class StartView {
 
 //		// SELECT
 //		System.out.println("========== 1. 모든 수강생 검색 ==========");
-//		controller.getAllStudent();
+		controller.getAllStudent();
 //		System.out.println("\n========== 2. 검색 조건으로 수강생 검색 ==========");
 //		/** (1,수강생ID입력-int), (2,수강생이름입력-String), (3,전공입력-String), (4,스터디ID입력-int) */
 //		System.out.println("\n========== 2-1. 수강생 id로 검색 ==========");
@@ -21,8 +21,8 @@ public class StartView {
 //		controller.getSearchedStudent(4, 1);
 //		System.out.println("\n========== 2-4-1. 없는 정보로 검색 ==========");
 //		controller.getSearchedStudent(3, "컴퓨터공학과");
-		System.out.println("\n========== 3. 모든 출석 정보 검색 ==========");
-		controller.getAllAttendance();
+//		System.out.println("\n========== 3. 모든 출석 정보 검색 ==========");
+//		controller.getAllAttendance();
 //		System.out.println("\n========== 4. 수강생 한명의 출석 정보 검색 ==========");
 //		controller.getOneAttendance(1);
 //		System.out.println("\n========== 4-1. 없는 수강생 출석 정보 검색 ==========");
