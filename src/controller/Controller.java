@@ -6,7 +6,6 @@ import javax.persistence.NoResultException;
 
 import org.hibernate.PersistentObjectException;
 
-import exception.DeleteException;
 import exception.InsertException;
 import exception.NotExistException;
 import lombok.extern.slf4j.Slf4j;
@@ -28,22 +27,21 @@ public class Controller {
 
 	// SELECT
 	/** 모든 수강생 검색 */
-	public void getAllStudent(){
-		
+	public void getAllStudent() {
 		try {
 			EndView.showAllList(service.getAllStudents());
-		}catch(SQLException e){
+		} catch (SQLException e) {
 			e.printStackTrace();
 			EndView.showError("잘못된 정보를 입력하셨습니다");
-		}catch(NullPointerException e){
+		} catch (NullPointerException e) {
 			e.printStackTrace();
 			EndView.showError("잘못된 정보를 입력하셨습니다");
-		}catch(NoResultException e){
+		} catch (NoResultException e) {
 			e.printStackTrace();
 			EndView.showError("잘못된 정보를 입력하셨습니다");
 		}
 	}
-	
+
 	/** 검색조건으로 수강생 검색 */
 	public void getSearchedStudent(int searchNo, Object info) {
 		try {
@@ -66,6 +64,7 @@ public class Controller {
 
 	/**
 	 * 학생 한명의 출석정보 검색
+	 * 
 	 * @param studentId
 	 */
 	public void getOneAttendance(int studentId) {
@@ -138,6 +137,7 @@ public class Controller {
 
 	/**
 	 * 스터디 id로 스터디 검색
+	 * 
 	 * @param id
 	 */
 	public void getStudyById(int id) {
@@ -169,6 +169,7 @@ public class Controller {
 	// INSERT
 	/**
 	 * 새로운 수강생 정보와 출석 정보 함께 추가
+	 * 
 	 * @param name, address, major
 	 */
 	public void addStudent(String name, String address, String major) {
@@ -222,6 +223,7 @@ public class Controller {
 
 	/**
 	 * 출석 체크
+	 * 
 	 * @param studentId
 	 */
 	public void updatePresent(int studentId) {
@@ -231,7 +233,7 @@ public class Controller {
 			if (student == null) {
 				EndView.showError("출석 체크 실패?!");
 			} else {
-				log.error(student.getStudentName()+" 출석체크 완료");
+				log.error(student.getStudentName() + " 출석체크 완료");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -267,7 +269,7 @@ public class Controller {
 		} catch (NotExistException e) {
 			e.printStackTrace();
 			EndView.showError("해당 스터디는 존재하지 않습니다.");
-		} 
+		}
 	}
 
 	/** 수강생ID로 수강생정보+출석정보 삭제 */
