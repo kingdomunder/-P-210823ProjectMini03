@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import org.junit.jupiter.api.Test;
 
 import exception.NotExistException;
 import model.dao.AttendanceDAO;
@@ -36,7 +35,7 @@ public class Service {
 	/** 모든 수강생 검색 */
 	public List<Student> getAllStudents() throws SQLException {
 		List<Student> allStudentList = getStudentDAO.getAllStudent();
-		if (allStudentList == null) {
+		if (allStudentList == null || allStudentList.size() == 0) {
 			throw new NullPointerException();
 		}
 		return allStudentList;
@@ -168,8 +167,9 @@ public class Service {
 	 * 새로운 수강생 정보와 출석 정보 함께 추가
 	 * 
 	 * @param name, address, major
+	 * @throws NotExistException 
 	 */
-	public boolean addStudent(String name, String address, String major) throws SQLException {
+	public boolean addStudent(String name, String address, String major) throws SQLException, NotExistException {
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -200,6 +200,9 @@ public class Service {
 			em.close();
 			em = null;
 		}
+		if (result == false) {
+			throw new NotExistException();
+		}
 		return result;
 	}
 
@@ -213,8 +216,9 @@ public class Service {
 	}
 
 	// UPDATE
-	/** 수강생정보 업데이트 */
-	public boolean updateStudent(int searchNo, int studentId, Object info) throws SQLException, NullPointerException {
+	/** 수강생정보 업데이트 
+	 * @throws UpdateErrorException */
+	public boolean updateStudent(int searchNo, int studentId, Object info) throws SQLException, NullPointerException, NotExistException {
 		boolean result = false;
 		if (searchNo == 1) {
 			result = getStudentDAO.updateStudentAddress(studentId, info);
@@ -224,6 +228,9 @@ public class Service {
 			result = getStudentDAO.updateStudentStudyId(studentId, info);
 		} else {
 			return result;
+		}
+		if (result == false) {
+			throw new NotExistException();
 		}
 		return result;
 	}
