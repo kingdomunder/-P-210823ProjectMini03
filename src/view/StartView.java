@@ -32,13 +32,13 @@ public class StartView {
 //		controller.getAllAttendance();
 ////		
 //		System.out.println("\n========== 4. 수강생 한명의 출석 정보 검색 ==========");
-		controller.getOneAttendance(1);
+//		controller.getOneAttendance(1);
 		
 //		System.out.println("\n========== 5. 모범생 검색 ==========");
 //		controller.getPerfectPresent();
 ////    					
 //		System.out.println("\n========== 6. 결석3회 이상 학생 조회 ==========");
-		controller.getAbsentStudent();
+//		controller.getAbsentStudent();
 //		
 //		System.out.println("\n========== 7. 모든 스터디 검색 ==========");
 //		controller.getAllStudy();
@@ -70,7 +70,7 @@ public class StartView {
 //		
 //
 //		System.out.println("========== 출석 체크 ==========");
-//		controller.updatePresent(4);		
+		controller.updatePresent(1);		
 //		
 //		/** 스터디 정보 업데이트 - 스터디 날짜 수정*/
 //		controller.updateStudy(1, "일");
