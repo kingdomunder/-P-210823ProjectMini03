@@ -8,6 +8,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import org.junit.jupiter.api.Test;
 
+import exception.DeleteException;
+import exception.InsertException;
 import exception.NotExistException;
 import model.dao.AttendanceDAO;
 import model.dao.StudentDAO;
@@ -130,11 +132,12 @@ public class Service {
 		return allAttendanceList;
 	}
 
-	/** 모든 스터디 검색 */
-	public List<Study> getAllStudy() throws SQLException {
+	/** 모든 스터디 검색 
+	 * @throws NotExistException */
+	public List<Study> getAllStudy() throws SQLException, NotExistException {
 		List<Study> allStudyList = getStudyDAO.getAllStudy();
-		if (allStudyList == null) {
-			throw new NullPointerException();
+		if (allStudyList.size() == 0) {
+			throw new NotExistException();
 		}
 		return allStudyList;
 	}
@@ -142,11 +145,12 @@ public class Service {
 	/**
 	 * 스터디 id로 검색
 	 * @param id
+	 * @throws NotExistException 
 	 */
-	public static Study getStudyById(int id) throws SQLException {
+	public Study getStudyById(int id) throws SQLException, NotExistException {
 		Study study = getStudyDAO.getStudyById(id);
 		if (study == null) {
-			throw new NullPointerException();
+			throw new NotExistException();
 		}
 		return study;
 	}
@@ -154,11 +158,12 @@ public class Service {
 	/**
 	 * 스터디 주제로 검색
 	 * @param keyword
+	 * @throws NotExistException 
 	 */
-	public static List<Study> getStudyByTopic(String keyword) throws SQLException {
+	public List<Study> getStudyByTopic(String keyword) throws SQLException, NotExistException {
 		List<Study> studyList = getStudyDAO.getStudyByTopic(keyword);
-		if (studyList == null) {
-			throw new NullPointerException();
+		if (studyList.size() == 0) {
+			throw new NotExistException();
 		}
 		return studyList;
 	}
@@ -166,7 +171,6 @@ public class Service {
 	// INSERT
 	/**
 	 * 새로운 수강생 정보와 출석 정보 함께 추가
-	 * 
 	 * @param name, address, major
 	 */
 	public boolean addStudent(String name, String address, String major) throws SQLException {
@@ -206,8 +210,9 @@ public class Service {
 	/**
 	 * 스터디 추가
 	 * @param keyword
+	 * @throws InsertException 
 	 */
-	public void addStudy(String studyName, String topic, int studentId, String meetingDate) throws SQLException {
+	public void addStudy(String studyName, String topic, int studentId, String meetingDate) throws SQLException, InsertException {
 		Student student = getStudentDAO.getStudentById(studentId);
 		getStudyDAO.insertStudy(studyName, topic, student, meetingDate);
 	}
@@ -239,8 +244,10 @@ public class Service {
 	/**
 	 * 스터디 정보 업데이트
 	 * @param keyword
+	 * @throws InsertException 
+	 * @throws NotExistException 
 	 */
-	public void updateStudy(int id, String meetingDate) throws SQLException {
+	public void updateStudy(int id, String meetingDate) throws SQLException, NotExistException, InsertException {
 		getStudyDAO.updateStudy(id, meetingDate);
 	}
 
@@ -278,8 +285,10 @@ public class Service {
 	/**
 	 * 스터디 삭제
 	 * @param id
+	 * @throws DeleteException 
+	 * @throws NotExistException 
 	 */
-	public void deleteStudy(int id) throws SQLException {
+	public void deleteStudy(int id) throws SQLException, NotExistException {
 		getStudyDAO.deleteStudy(id);
 	}
 
