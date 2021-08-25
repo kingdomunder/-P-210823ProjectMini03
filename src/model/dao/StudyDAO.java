@@ -6,9 +6,13 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.persistence.NoResultException;
 
 import org.junit.jupiter.api.Test;
 
+import exception.DeleteException;
+import exception.InsertException;
+import exception.NotExistException;
 import model.domain.Student;
 import model.domain.Study;
 import util.PublicCommon;
@@ -40,8 +44,9 @@ public class StudyDAO {
 		return allStudyList;
 	}
 
-	/** 스터디 id로 스터디 검색 */
-	public Study getStudyById(int id) {
+	/** 스터디 id로 스터디 검색 
+	 * @throws NotExistException */
+	public Study getStudyById(int id) throws SQLException, NotExistException {
 		EntityManager em = PublicCommon.getEntityManager();
 
 		Study study = null;
@@ -50,6 +55,7 @@ public class StudyDAO {
 			study = (Study) em.createNamedQuery("Study.findBystudyId").setParameter("studyId", id).getSingleResult();
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw new NotExistException();
 		} finally {
 			em.close();
 			em = null;
@@ -58,7 +64,7 @@ public class StudyDAO {
 	}
 
 	/** 스터디 주제 키워드로 스터디 검색 */
-	public List<Study> getStudyByTopic(String keyword) {
+	public List<Study> getStudyByTopic(String keyword) throws SQLException {
 		EntityManager em = PublicCommon.getEntityManager();
 		List<Study> studyList = null;
 
@@ -74,8 +80,9 @@ public class StudyDAO {
 		return studyList;
 	}
 
-	/** 스터디 추가 */
-	public void insertStudy(String studyName, String topic, Student student, String meetingDate) {
+	/** 스터디 추가 
+	 * @throws InsertException */
+	public void insertStudy(String studyName, String topic, Student student, String meetingDate) throws SQLException, InsertException {
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -92,6 +99,7 @@ public class StudyDAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			throw new InsertException();
 		} finally {
 			em.close();
 			em = null;
@@ -100,22 +108,25 @@ public class StudyDAO {
 
 	/**
 	 * 스터디 정보 변경
-	 * 
 	 * @param study
+	 * @throws InsertException 
 	 */
-	public void updateStudy(int id, String meetingDate) {
+	public void updateStudy(int id, String meetingDate) throws SQLException, NotExistException, InsertException {
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		Study study = null;
-
+		 
 		try {
 			study = (Study) em.createNamedQuery("Study.findBystudyId").setParameter("studyId", id).getSingleResult();
 			study.setMeetingDate(meetingDate);
 			tx.commit();
-			
-		} catch (Exception e) {
+		} catch (NoResultException e) {
 			e.printStackTrace();
+			throw new NotExistException();
+		} catch (Exception e) {
+			e.printStackTrace();			
+			throw new InsertException();	
 		} finally {
 			em.close();
 			em = null;
@@ -125,10 +136,10 @@ public class StudyDAO {
 
 	/**
 	 * 스터디 삭제
-	 * 
 	 * @param id
+	 * @throws DeleteException 
 	 */
-	public void deleteStudy(int id) {
+	public void deleteStudy(int id) throws SQLException, NotExistException {
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -137,7 +148,9 @@ public class StudyDAO {
 			study = (Study) em.createNamedQuery("Study.findBystudyId").setParameter("studyId", id).getSingleResult();
 			em.remove(study);
 			tx.commit();
-
+		} catch (NoResultException e) {
+			e.printStackTrace();
+			throw new NotExistException();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

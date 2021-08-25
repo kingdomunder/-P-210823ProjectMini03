@@ -116,7 +116,7 @@ public class StartView {
 		System.out.println("\n========== 15. 학생 정보 삭제 ==========");
 		controller.deleteStudent(1);
 		System.out.println("\n========== 15-1. 없는 학생 삭제 시도시 ==========");
-		controller.deleteStudent(100);
+    controller.deleteStudent(100);
 		
 		System.out.println("\n========== 16. 스터디 삭제 ==========");
 		controller.deleteStudy(1);

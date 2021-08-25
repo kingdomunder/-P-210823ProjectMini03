@@ -6,6 +6,8 @@ import javax.persistence.NoResultException;
 
 import org.hibernate.PersistentObjectException;
 
+import exception.DeleteException;
+import exception.InsertException;
 import exception.NotExistException;
 import lombok.extern.slf4j.Slf4j;
 import model.domain.Student;
@@ -144,7 +146,7 @@ public class Controller {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			EndView.showError("잘못된 정보를 입력하셨습니다");
-		} catch (NullPointerException e) {
+		} catch (NotExistException e) {
 			e.printStackTrace();
 			EndView.showError("잘못된 정보를 입력하셨습니다");
 		}
@@ -159,10 +161,10 @@ public class Controller {
 			EndView.showOne(service.getStudyById(id));
 		} catch (SQLException e) {
 			e.printStackTrace();
-			EndView.showError("잘못된 정보를 입력하셨습니다");
-		} catch (NullPointerException e) {
+			EndView.showError("잘못된 정보를 입력하셨습니다.");
+		} catch (NotExistException e) {
 			e.printStackTrace();
-			EndView.showError("잘못된 정보를 입력하셨습니다");
+			EndView.showError("해당 스터디가 존재하지 않습니다.");
 		}
 
 	}
@@ -174,9 +176,9 @@ public class Controller {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			EndView.showError("잘못된 정보를 입력하셨습니다");
-		} catch (NullPointerException e) {
+		} catch (NotExistException e) {
 			e.printStackTrace();
-			EndView.showError("잘못된 정보를 입력하셨습니다");
+			EndView.showError("해당 스터디가 존재하지 않습니다.");
 		}
 	}
 
@@ -206,7 +208,7 @@ public class Controller {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			EndView.showError("스터디 저장에 실패했습니다.");
-		} catch (NullPointerException e) {
+		} catch (InsertException e) {
 			EndView.showError("스터디 저장에 실패했습니다.");
 		}
 
@@ -304,8 +306,11 @@ public class Controller {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			EndView.showError("변경에 실패했습니다.");
-		} catch (NullPointerException e) {
-			EndView.showError("변경에 실패했습니다.");
+		} catch (NotExistException e) {
+			EndView.showError("해당 스터디는 존재하지 않습니다.");
+		} catch (InsertException e) {
+			e.printStackTrace();
+			EndView.showError("변경에 실패했습니다. 입력정보를 확인하세요.");
 		}
 	}
 
@@ -318,9 +323,10 @@ public class Controller {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			EndView.showError("변경에 실패했습니다.");
-		} catch (NullPointerException e) {
-			EndView.showError("변경에 실패했습니다.");
-		}
+		} catch (NotExistException e) {
+			e.printStackTrace();
+			EndView.showError("해당 스터디는 존재하지 않습니다.");
+		} 
 	}
 
 	/** 수강생ID로 수강생정보+출석정보 삭제 */
