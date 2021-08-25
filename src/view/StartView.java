@@ -14,15 +14,15 @@ public class StartView {
 //		System.out.println("\n========== 2-1. 수강생 id로 검색 ==========");
 //		controller.getSearchedStudent(1, 1);
 //		System.out.println("\n========== 2-2. 수강생 이름으로 검색 ==========");
-//		controller.getSearchedStudent(2, "장혜민");
+//		controller.getSearchedStudent(2, "류현진");
 //		System.out.println("\n========== 2-3. 전공으로 검색 ==========");
-//		controller.getSearchedStudent(3, "경찰행정학과");
+//		controller.getSearchedStudent(3, "야구학과");
 //		System.out.println("\n========== 2-4. 참여 스터디로 검색 ==========");
 //		controller.getSearchedStudent(4, 1);
 //		System.out.println("\n========== 2-4-1. 없는 정보로 검색 ==========");
-//		controller.getSearchedStudent(3, "컴퓨터공학과");
-		System.out.println("\n========== 3. 모든 출석 정보 검색 ==========");
-		controller.getAllAttendance();
+//		controller.getSearchedStudent(3, "축구학과");
+//		System.out.println("\n========== 3. 모든 출석 정보 검색 ==========");
+//		controller.getAllAttendance();
 //		System.out.println("\n========== 4. 수강생 한명의 출석 정보 검색 ==========");
 //		controller.getOneAttendance(1);
 //		System.out.println("\n========== 4-1. 없는 수강생 출석 정보 검색 ==========");
@@ -47,7 +47,7 @@ public class StartView {
 //		System.out.println("\n========== 11. 새로운 수강생 정보와 출석 정보 함께 추가 ==========");
 //		controller.addStudent("류현진", "미국", "야구학과");
 //		System.out.println("\n========== 11-1. 추가 후 조회 ==========");
-//		controller.getAllStudent();
+		controller.getAllStudent();
 //		System.out.println("\n========== 12. 스터디 추가 ==========");
 //		controller.addStudy("SQLD 대비", "꼭 따고 만다 SQLD 자격증!", 3, "목");
 //		System.out.println("\n========== 12-1. null값 입력했을 때 ==========");
@@ -91,12 +91,12 @@ public class StartView {
 //		System.out.println("\n========== 17-2. 없는 스터디 변경 시도시 ==========");
 //		controller.updateStudy(10, "일");
 //		// DELETE
-//		System.out.println("\n========== 18. 학생 정보 삭제 ==========");
-//		controller.deleteStudent(1);
-//		System.out.println("\n========== 18-1. 학생 정보 삭제시 출결정보도 함께 삭제 확인 ==========");
-//		controller.getOneAttendance(1);
-//		System.out.println("\n========== 18-2. 없는 학생 삭제 시도시 ==========");
-//		controller.deleteStudent(100);
+		System.out.println("\n========== 18. 학생 정보 삭제 ==========");
+		controller.deleteStudent(1);
+		System.out.println("\n========== 18-1. 학생 정보 삭제시 출결정보도 함께 삭제 확인 ==========");
+		controller.getOneAttendance(1);
+		System.out.println("\n========== 18-2. 없는 학생 삭제 시도시 ==========");
+		controller.deleteStudent(100);
 //		System.out.println("\n========== 19. 스터디 삭제 ==========");
 //		controller.deleteStudy(1);
 //		System.out.println("\n========== 19-1. 없는 스터디 삭제 시도시 ==========");

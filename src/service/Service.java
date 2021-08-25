@@ -26,52 +26,52 @@ public class Service {
 	private static StudyDAO getStudyDAO = StudyDAO.getInstance();
 	private static AttendanceDAO getAttendanceDAO = AttendanceDAO.getInstance();
 
-	public Service() {
+	public Service(){
 	}
 
-	public static Service getInstance() {
+	public static Service getInstance(){
 		return instance;
 	}
 
 	// SELECT
 	/** 모든 수강생 검색 */
-	public List<Student> getAllStudents() throws SQLException, NotExistException {
+	public List<Student> getAllStudents() throws SQLException, NotExistException{
 		List<Student> allStudentList = getStudentDAO.getAllStudent();
-		if (allStudentList == null || allStudentList.size() == 0) {
-			throw new NullPointerException();
+		if(allStudentList == null || allStudentList.size() == 0){
+			throw new NotExistException();
 		}
 		return allStudentList;
 	}
 
 	/** 검색조건으로 수강생 검색 - 수강생ID로 한명만 검색 */
-	public Object getOneStudents(Object info) throws SQLException, NotExistException {
+	public Object getOneStudents(Object info) throws SQLException, NotExistException{
 		int studentId = (int) info;
 
 		Student result = getStudentDAO.getStudentById(studentId);
-		if (result == null) {
-			throw new NullPointerException();
+		if(result == null){
+			throw new NotExistException();
 		}
 		return result;
 	}
 
 	/** 검색조건으로 수강생 검색 - 검색조건으로 여러명 검색 */
-	public List<Student> getSearchedStudents(int searchNo, Object info) throws SQLException, NotExistException {
+	public List<Student> getSearchedStudents(int searchNo, Object info) throws SQLException, NotExistException{
 		List<Student> result = null;
-		if (searchNo == 2) {
+		if(searchNo == 2){
 			String studentName = (String) info;
 			result = getStudentDAO.getStudentByName(studentName);
-		} else if (searchNo == 3) {
+		}else if(searchNo == 3){
 			String major = (String) info;
 			result = getStudentDAO.getStudentByMajor(major);
-		} else if (searchNo == 4) {
+		}else if(searchNo == 4){
 			Study studyId = new Study();
 			studyId.setStudyId((int) info);
 			result = getStudentDAO.getStudentByStudyId(studyId);
-		} else {
-			throw new NullPointerException();
+		}else{
+			throw new NotExistException();
 		}
-		if (result == null || result.size() == 0) {
-			throw new NullPointerException();
+		if(result == null || result.size() == 0){
+			throw new NotExistException();
 		}
 		return result;
 	}
@@ -81,13 +81,13 @@ public class Service {
 		List<Attendance> attendanceList = getAttendanceDAO.getAllAttendance();
 		List<Attendance> attendance = new ArrayList<>();
 
-		if (attendanceList != null) {
-			for (Attendance a : attendanceList) {
-				if (a.getLate() == 0 && a.getAbsent() == 0) {
+		if(attendanceList != null){
+			for (Attendance a : attendanceList){
+				if(a.getLate() == 0 && a.getAbsent() == 0){
 					attendance.add(a);
 				}
 			}
-		}if(attendance.size() == 0) {
+		}if(attendance.size() == 0){
 			throw new NotExistException();
 		}
 		return attendance;
@@ -99,14 +99,14 @@ public class Service {
 		List<Attendance> attendanceList = getAttendanceDAO.getAllAttendance();
 		List<Attendance> attendance = new ArrayList<>();
 		
-		if (attendanceList != null) {
-			for (Attendance a : attendanceList) {
-				if (a.getLate() >= 3) {
+		if(attendanceList != null){
+			for (Attendance a : attendanceList){
+				if(a.getLate() >= 3){
 					attendance.add(a);
 				}
 			}
 		}
-		if(attendance.size() == 0) {
+		if(attendance.size() == 0){
 			throw new NotExistException();
 		}
 		return attendance;
@@ -118,14 +118,14 @@ public class Service {
 		List<Attendance> attendanceList = getAttendanceDAO.getAllAttendance();
 		List<Attendance> attendance = new ArrayList<>();
 
-		if (attendanceList != null) {
-			for (Attendance a : attendanceList) {
-				if (a.getAbsent() >= 3) {
+		if(attendanceList != null){
+			for (Attendance a : attendanceList){
+				if(a.getAbsent() >= 3){
 					attendance.add(a);
 				}
 			}
 		}
-		if(attendance.size() == 0) {
+		if(attendance.size() == 0){
 			throw new NotExistException();
 		}
 		return attendance;
@@ -137,7 +137,7 @@ public class Service {
 	 */
 	public Attendance getOneAttendance(int studentId) throws SQLException, NotExistException {
 		Attendance attendance = getAttendanceDAO.getOneAttendance(studentId);
-		if (attendance == null) {
+		if(attendance == null){
 			throw new NotExistException();
 		}
 		return attendance;
@@ -146,7 +146,7 @@ public class Service {
 	/** 모든 출석 정보 검색 */
 	public List<Attendance> getAllAttendance() throws SQLException, NotExistException {
 		List<Attendance> allAttendanceList = getAttendanceDAO.getAllAttendance();
-		if (allAttendanceList == null) {
+		if(allAttendanceList == null){
 			throw new NotExistException();
 		}
 		return allAttendanceList;
@@ -156,7 +156,7 @@ public class Service {
 	 * @throws NotExistException */
 	public List<Study> getAllStudy() throws SQLException, NotExistException {
 		List<Study> allStudyList = getStudyDAO.getAllStudy();
-		if (allStudyList.size() == 0) {
+		if(allStudyList.size() == 0){
 			throw new NotExistException();
 		}
 		return allStudyList;
@@ -169,7 +169,7 @@ public class Service {
 	 */
 	public Study getStudyById(int id) throws SQLException, NotExistException {
 		Study study = getStudyDAO.getStudyById(id);
-		if (study == null) {
+		if(study == null){
 			throw new NotExistException();
 		}
 		return study;
@@ -182,7 +182,7 @@ public class Service {
 	 */
 	public List<Study> getStudyByTopic(String keyword) throws SQLException, NotExistException {
 		List<Study> studyList = getStudyDAO.getStudyByTopic(keyword);
-		if (studyList.size() == 0) {
+		if(studyList.size() == 0){
 			throw new NotExistException();
 		}
 		return studyList;
@@ -201,7 +201,7 @@ public class Service {
 		
 		boolean result = false;
 
-		try {
+		try{
 			Student student = new Student();
 			student.setStudentName(name);
 			student.setAddress(address);
@@ -219,13 +219,13 @@ public class Service {
 			
 			result = true;
 
-		} catch (Exception e) {
+		}catch(Exception e){
 			tx.rollback();
-		} finally {
+		}finally{
 			em.close();
 			em = null;
 		}
-		if (result == false) {
+		if(result == false){
 			throw new NotExistException();
 		}
 		return result;
@@ -244,18 +244,18 @@ public class Service {
 	// UPDATE
 	/** 수강생정보 업데이트 
 	 * @throws UpdateErrorException */
-	public boolean updateStudent(int searchNo, int studentId, Object info) throws SQLException, NullPointerException, NotExistException {
+	public boolean updateStudent(int searchNo, int studentId, Object info) throws SQLException, NotExistException, NotExistException {
 		boolean result = false;
-		if (searchNo == 1) {
+		if(searchNo == 1){
 			result = getStudentDAO.updateStudentAddress(studentId, info);
-		} else if (searchNo == 2) {
+		}else if(searchNo == 2){
 			result = getStudentDAO.updateStudentMajor(studentId, info);
-		} else if (searchNo == 3) {
+		}else if(searchNo == 3){
 			result = getStudentDAO.updateStudentStudyId(studentId, info);
-		} else {
+		}else{
 			return result;
 		}
-		if (result == false) {
+		if(result == false){
 			throw new NotExistException();
 		}
 		return result;
@@ -268,7 +268,7 @@ public class Service {
 	 */
 	public Student updatePresent(int studentId) throws SQLException, NoResultException, NotExistException {
 		Student student = getAttendanceDAO.updatePresent(studentId);
-		if(student == null) {
+		if(student == null){
 			throw new NotExistException();
 		}
 		return student;
@@ -280,7 +280,7 @@ public class Service {
 	 */
 	public Student updateLate(int studentId) throws SQLException, NoResultException, NotExistException {
 		Student student = getAttendanceDAO.updateLate(studentId);
-		if(student == null) {
+		if(student == null){
 			throw new NotExistException();
 		}
 		return student;
@@ -292,7 +292,7 @@ public class Service {
 	 */
 	public Student updateAbsent(int studentId) throws SQLException, NoResultException, NotExistException {
 		Student student = getAttendanceDAO.updateAbsent(studentId);
-		if(student == null) {
+		if(student == null){
 			throw new NotExistException();
 		}
 		return student;
@@ -309,7 +309,7 @@ public class Service {
 
 	// DELETE
 	/** 수강생ID로 수강생정보+출석정보 삭제 */
-	public boolean deleteStudent(int studentId) throws SQLException, NullPointerException {
+	public boolean deleteStudent(int studentId) throws SQLException, NotExistException {
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -318,7 +318,7 @@ public class Service {
 		Student student = null;
 		Attendance attendance = null;
 
-		try {
+		try{
 			student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", studentId)
 					.getSingleResult();
 			attendance = (Attendance) em.createNamedQuery("Attendance.findBystudentId")
@@ -329,9 +329,9 @@ public class Service {
 			tx.commit();
 
 			result = true;
-		} catch (Exception e) {
+		}catch(Exception e){
 			e.printStackTrace();
-		} finally {
+		}finally{
 			em.close();
 			em = null;
 		}

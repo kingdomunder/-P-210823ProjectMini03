@@ -14,13 +14,14 @@ import util.PublicCommon;
 
 public class AttendanceDAO {
 	public static AttendanceDAO instance = new AttendanceDAO();
-
-	public static AttendanceDAO getInstance() {
+	
+	public AttendanceDAO(){}
+	public static AttendanceDAO getInstance(){
 		return instance;
 	}
 
 	// 출석 체크
-	public Student updatePresent(int studentId) throws SQLException, NotExistException {
+	public Student updatePresent(int studentId) throws SQLException, NotExistException{
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -29,7 +30,7 @@ public class AttendanceDAO {
 		Attendance attendance = null;
 		Student student = new Student();
 
-		try {
+		try{
 			student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", studentId).getSingleResult();
 			attendance = (Attendance) em.createNamedQuery("Attendance.findBystudentId").setParameter("studentId", student)
 					.getSingleResult();
@@ -38,10 +39,10 @@ public class AttendanceDAO {
 			
 			tx.commit();
 			
-		} catch (NoResultException e) {
+		}catch(NoResultException e){
 			e.printStackTrace();
 			throw new NotExistException();
-		} finally {
+		}finally{
 			em.close();
 			em = null;
 		}
@@ -49,7 +50,7 @@ public class AttendanceDAO {
 	}
 	
 	// 지각 체크
-		public Student updateLate(int studentId) throws SQLException, NotExistException {
+		public Student updateLate(int studentId) throws SQLException, NotExistException{
 			EntityManager em = PublicCommon.getEntityManager();
 			EntityTransaction tx = em.getTransaction();
 			tx.begin();
@@ -58,7 +59,7 @@ public class AttendanceDAO {
 			Attendance attendance = null;
 			Student student = new Student();
 
-			try {
+			try{
 				student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", studentId).getSingleResult();
 				attendance = (Attendance) em.createNamedQuery("Attendance.findBystudentId").setParameter("studentId", student)
 						.getSingleResult();
@@ -67,10 +68,10 @@ public class AttendanceDAO {
 				
 				tx.commit();
 				
-			} catch (NoResultException e) {
+			}catch(NoResultException e){
 				e.printStackTrace();
 				throw new NotExistException();
-			} finally {
+			}finally{
 				em.close();
 				em = null;
 			}
@@ -78,7 +79,7 @@ public class AttendanceDAO {
 		}
 		
 		// 결석 체크
-		public Student updateAbsent(int studentId) throws SQLException, NotExistException {
+		public Student updateAbsent(int studentId) throws SQLException, NotExistException{
 			EntityManager em = PublicCommon.getEntityManager();
 			EntityTransaction tx = em.getTransaction();
 			tx.begin();
@@ -87,7 +88,7 @@ public class AttendanceDAO {
 			Attendance attendance = null;
 			Student student = new Student();
 
-			try {
+			try{
 				student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", studentId).getSingleResult();
 				attendance = (Attendance) em.createNamedQuery("Attendance.findBystudentId").setParameter("studentId", student)
 						.getSingleResult();
@@ -96,10 +97,10 @@ public class AttendanceDAO {
 				
 				tx.commit();
 				
-			} catch (NoResultException e) {
+			}catch(NoResultException e){
 				e.printStackTrace();
 				throw new NotExistException();
-			} finally {
+			}finally{
 				em.close();
 				em = null;
 			}
@@ -113,15 +114,15 @@ public class AttendanceDAO {
 		Attendance attendance = null;
 		Student student = null;
 		
-		try {
+		try{
 			student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", studentId)
 					.getSingleResult();
 			attendance = (Attendance) em.createNamedQuery("Attendance.findBystudentId").setParameter("studentId", student)
 					.getSingleResult();
-		} catch (NoResultException e) {
+		}catch(NoResultException e){
 			e.printStackTrace();
 			throw new NotExistException();
-		} finally {
+		}finally{
 			em.close();
 			em = null;
 		}
@@ -129,17 +130,17 @@ public class AttendanceDAO {
 	}
 
 	// 출석 정보 전부 검색
-	public List<Attendance> getAllAttendance() throws SQLException, NotExistException {
+	public List<Attendance> getAllAttendance() throws SQLException, NotExistException{
 		EntityManager em = PublicCommon.getEntityManager();
 		
 		List<Attendance> allAttendanceList = null;
 
-		try {
+		try{
 			allAttendanceList = em.createNamedQuery("Attendance.findStudentAll").getResultList();
-		} catch (NoResultException e) {
+		}catch(NoResultException e){
 			e.printStackTrace();
 			throw new NotExistException();
-		} finally {
+		}finally{
 			em.close();
 			em = null;
 		}
