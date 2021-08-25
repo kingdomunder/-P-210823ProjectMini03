@@ -21,8 +21,8 @@ public class StartView {
 //		controller.getSearchedStudent(4, 1);
 //		System.out.println("\n========== 2-4-1. 없는 정보로 검색 ==========");
 //		controller.getSearchedStudent(3, "컴퓨터공학과");
-//		System.out.println("\n========== 3. 모든 출석 정보 검색 ==========");
-//		controller.getAllAttendance();
+		System.out.println("\n========== 3. 모든 출석 정보 검색 ==========");
+		controller.getAllAttendance();
 //		System.out.println("\n========== 4. 수강생 한명의 출석 정보 검색 ==========");
 //		controller.getOneAttendance(1);
 //		System.out.println("\n========== 4-1. 없는 수강생 출석 정보 검색 ==========");
@@ -82,8 +82,8 @@ public class StartView {
 //		controller.updatePresent(10);
 //		System.out.println("\n========== 15. 지각 체크 ==========");
 //		controller.updateLate(4);
-		System.out.println("\n========== 16. 결석 체크 ==========");
-		controller.updateAbsent(2);
+//		System.out.println("\n========== 16. 결석 체크 ==========");
+//		controller.updateAbsent(2);
 //		System.out.println("\n========== 17. 스터디 정보 변경 (날짜 수정) ==========");
 //		controller.updateStudy(1, "일");
 //		System.out.println("\n========== 17-1. null값 입력해서 스터디 정보 변경 시도시 ==========");
