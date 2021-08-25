@@ -28,8 +28,8 @@ public class StartView {
 //		controller.getOneAttendance(10);
 //		System.out.println("\n========== 5. 출결 모범 수강생 검색 ==========");
 //		controller.getPerfectPresent();
-//		System.out.println("\n========== 6. 지각3회 이상 학생 조회 ==========");
-//		controller.getLateStudent();
+		System.out.println("\n========== 6. 지각3회 이상 학생 조회 ==========");
+		controller.getLateStudent();
 //		System.out.println("\n========== 7. 결석3회 이상 학생 조회 ==========");
 //		controller.getAbsentStudent();
 //		System.out.println("\n========== 8. 모든 스터디 검색 ==========");
@@ -43,8 +43,8 @@ public class StartView {
 //		System.out.println("\n========== 10-1. 일치하는 키워드 없을 때 ==========");
 //		controller.getStudyByTopic("팝핀");
 //		// INSERT
-		System.out.println("\n========== 11. 새로운 수강생 정보와 출석 정보 함께 추가 ==========");
-		controller.addStudent("류현진", "미국", "야구학과");
+//		System.out.println("\n========== 11. 새로운 수강생 정보와 출석 정보 함께 추가 ==========");
+//		controller.addStudent("류현진", "미국", "야구학과");
 //		System.out.println("\n========== 11-1. 추가 후 조회 ==========");
 //		controller.getAllStudent();
 //		System.out.println("\n========== 12. 스터디 추가 ==========");
@@ -76,7 +76,7 @@ public class StartView {
 //		controller.updateStudent(2, 2, null);
 //		
 //		System.out.println("========== 14. 출석 체크 ==========");
-//		controller.updatePresent(2);
+		controller.updatePresent(1);
 //		System.out.println("\n========== 14-1. 없는 학생 출석 체크 시도 ==========");
 //		controller.updatePresent(10);
 //		System.out.println("\n========== 15. 지각 체크 ==========");

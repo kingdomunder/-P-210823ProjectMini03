@@ -10,7 +10,7 @@ insert into study values(study_idx.NEXTVAL, '파이썬 알고리즘', '파이썬
 
 -- attendance insert
 insert into attendance values(1, 33, 0, 0);
-insert into attendance values(2, 32, 1, 0);
+insert into attendance values(2, 32, 3, 0);
 insert into attendance values(3, 31, 1, 1);
 
 commit;
