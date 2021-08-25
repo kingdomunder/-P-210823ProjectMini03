@@ -176,6 +176,9 @@ public class StudentDAO {
 		try {
 			student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", studentId)
 					.getSingleResult();
+			if(student.getStudyId() == null) {
+				return false;
+			}
 			student.setStudyId(study);
 			
 			tx.commit();
