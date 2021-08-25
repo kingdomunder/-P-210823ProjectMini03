@@ -223,7 +223,7 @@ public class Controller {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			EndView.showError("수강생정보 업데이트 실패했습니다");
-		} catch (PersistentObjectException e) {
+		} catch (NullPointerException e) {
 			e.printStackTrace();
 			EndView.showError("수강생정보 업데이트 실패했습니다");
 		} catch (NotExistException e) {

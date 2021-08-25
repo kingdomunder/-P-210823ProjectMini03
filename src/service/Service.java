@@ -321,7 +321,7 @@ public class Service {
 		Attendance attendance = null;
 
 		try {
-			student = (Student) em.createNamedQuery("getStudentById").setParameter("studentId", studentId)
+			student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", studentId)
 					.getSingleResult();
 			attendance = (Attendance) em.createNamedQuery("Attendance.findBystudentId")
 					.setParameter("studentId", student).getSingleResult();
