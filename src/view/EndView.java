@@ -1,21 +1,21 @@
 package view;
+<<<<<<< HEAD
 
+=======
+>>>>>>> d61c49347431d151e78ae6665e7b181bb113e6c7
 import java.util.List;
-
 import model.domain.Attendance;
 import model.domain.Student;
 import model.domain.Study;
-
 public class EndView {
-
 	/** 모든 리스트 내역 출력 */
 	public static void showAllList(List list) {
 		if (list.get(0) instanceof Student) {
 			for (Object student : list) {
 				Student print = (Student) student;
-				System.out.print(print.getStudentId() 
-						+ " [" + print.getStudentName() + "]" 
-						+ " 주소 : " + print.getAddress() 
+				System.out.print(print.getStudentId()
+						+ " [" + print.getStudentName() + "]"
+						+ " 주소 : " + print.getAddress()
 						+ " / 전공 : " + print.getMajor());
 				if (print.getStudyId() == null) {
 					System.out.println(" / 스터디 : 미참여");
@@ -26,10 +26,17 @@ public class EndView {
 		} else if (list.get(0) instanceof Study) {
 			for (Object study : list) {
 				Study print = (Study) study;
+<<<<<<< HEAD
 				System.out.print((print.getStudyId() 
 						+ " [" + print.getStudyName() + "] " 
 						+ print.getTopic()
 						+ " / 스터디장 : " + print.getLeaderId().getStudentName() 
+=======
+				System.out.print((print.getStudyId()
+						+ " [" + print.getStudyName() + "] "
+						+ print.getTopic()
+						+ " / 스터디장 : " + print.getLeaderId().getStudentName()
+>>>>>>> d61c49347431d151e78ae6665e7b181bb113e6c7
 						+ " / 진행일: 매주 " + print.getMeetingDate() + "요일"
 						+ " / 구성원: "));
 				List<Student> members = print.getStudents();
@@ -46,21 +53,20 @@ public class EndView {
 				System.out.println((print.getStudentId().getStudentId()
 						+ " 이름 : " + print.getStudentId().getStudentName()
 						+ " [출석] " + print.getPresent() + "회"
-						+ " / [지각] " + print.getLate() + "회" 
+						+ " / [지각] " + print.getLate() + "회"
 						+ " / [결석] " + print.getAbsent() + "회"));
 			}
 		} else {
 			System.out.println("출력 실패했습니다");
 		}
 	}
-
 	/** 1개 row 출력 */
 	public static void showOne(Object oneRow) {
 		if (oneRow instanceof Student) {
 			Student print = (Student) oneRow;
-			System.out.print(print.getStudentId() 
-					+ " [" + print.getStudentName() + "]" 
-					+ " 주소 : " + print.getAddress() 
+			System.out.print(print.getStudentId()
+					+ " [" + print.getStudentName() + "]"
+					+ " 주소 : " + print.getAddress()
 					+ " / 전공 : " + print.getMajor());
 			if (print.getStudyId() == null) {
 				System.out.println(" / 스터디 : 미참여");
@@ -69,10 +75,17 @@ public class EndView {
 			}
 		} else if (oneRow instanceof Study) {
 			Study print = (Study) oneRow;
+<<<<<<< HEAD
 			System.out.print((print.getStudyId() 
 					+ " [" + print.getStudyName() + "] " 
 					+ print.getTopic()
 					+ " / 스터디장 : " + print.getLeaderId().getStudentName() 
+=======
+			System.out.print((print.getStudyId()
+					+ " [" + print.getStudyName() + "] "
+					+ print.getTopic()
+					+ " / 스터디장 : " + print.getLeaderId().getStudentName()
+>>>>>>> d61c49347431d151e78ae6665e7b181bb113e6c7
 					+ " / 진행일: 매주 " + print.getMeetingDate() + "요일"
 					+ " / 구성원: "));
 			List<Student> members = print.getStudents();
@@ -87,18 +100,16 @@ public class EndView {
 			System.out.println((print.getStudentId().getStudentId()
 					+ " 이름 : " + print.getStudentId().getStudentName()
 					+ " [출석] " + print.getPresent() + "회"
-					+ " / [지각] " + print.getLate() + "회" 
+					+ " / [지각] " + print.getLate() + "회"
 					+ " / [결석] " + print.getAbsent() + "회"));
 		} else {
 			System.out.println("출력 실패했습니다");
 		}
 	}
-
 	/** 에러메세지 출력 */
 	public static void showError(String message) {
 		System.out.println(message);
 	}
-
 	/** 성공 메세지 출력 */
 	public static void showMessage(String message) {
 		System.out.println(message);

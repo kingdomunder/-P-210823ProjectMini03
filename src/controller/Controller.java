@@ -2,6 +2,8 @@ package controller;
 
 import java.sql.SQLException;
 
+import org.hibernate.PersistentObjectException;
+
 import exception.InsertException;
 import exception.NotExistException;
 import lombok.extern.slf4j.Slf4j;
@@ -216,6 +218,9 @@ public class Controller {
 			service.updateStudent(searchNo, studentId, info);
 			EndView.showMessage("업데이트 성공했습니다.");
 		} catch (SQLException e) {
+			e.printStackTrace();
+			EndView.showError("수강생정보 업데이트 실패했습니다");
+		} catch (NullPointerException e) {
 			e.printStackTrace();
 			EndView.showError("수강생정보 업데이트 실패했습니다");
 		} catch (NotExistException e) {

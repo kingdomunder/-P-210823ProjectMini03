@@ -64,7 +64,7 @@ public class StudentDAO {
 		List<Student> result = null;
 		
 		try {
-			result = (List<Student>) em.createNamedQuery("getStudentByName").setParameter("studentName", studentName)
+			result = (List<Student>) em.createNamedQuery("Student.findBystudentName").setParameter("studentName", studentName)
 				.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -81,7 +81,7 @@ public class StudentDAO {
 		List<Student> result = new ArrayList<>();
 		
 		try {
-			result = (List<Student>) em.createNamedQuery("getStudentBymajor").setParameter("major", major).getResultList();
+			result = (List<Student>) em.createNamedQuery("Student.findBymajor").setParameter("major", major).getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -97,7 +97,7 @@ public class StudentDAO {
 		List<Student> result = new ArrayList<>();
 		
 		try {
-			result = (List<Student>) em.createNamedQuery("Student.findBystudentId").setParameter("studyId", studyId)
+			result = (List<Student>) em.createNamedQuery("Student.findBystudyId").setParameter("studyId", studyId)
 				.getResultList();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -168,18 +168,21 @@ public class StudentDAO {
 		tx.begin();
 
 		boolean result = false;
-		Student student = null;
 		Study study = new Study();
-		try {			
+		Student student = null;
+		
+		if(info == null) {
+			study = null;
+		}else {
 			study.setStudyId((int) info);
-		} catch (NullPointerException e) {
-			e.printStackTrace();
-			throw new NotExistException();
-		} 
+		}
 
 		try {
 			student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", studentId)
 					.getSingleResult();
+			if(student.getStudyId() == null) {
+				return false;
+			}
 			student.setStudyId(study);
 			tx.commit();
 			result = true;
@@ -191,5 +194,4 @@ public class StudentDAO {
 		}
 		return result;
 	}
-
 }

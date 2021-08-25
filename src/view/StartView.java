@@ -1,13 +1,10 @@
 package view;
-
 import controller.Controller;
 import model.domain.Student;
 import model.domain.Study;
-
 public class StartView {
 
 	private static Controller controller = Controller.getInstance();
-
 	public static void main(String[] args) {
 		// SELECT
 		System.out.println("========== 1. 모든 수강생 검색 ==========");
@@ -125,6 +122,6 @@ public class StartView {
 		controller.deleteStudy(1);
 		System.out.println("\n========== 19-1. 없는 스터디 삭제 시도시 ==========");
 		controller.deleteStudy(100);
-
 	}
+	
 }
