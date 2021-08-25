@@ -32,13 +32,13 @@ public class Controller {
 			EndView.showAllList(service.getAllStudents());
 		}catch(SQLException e){
 			e.printStackTrace();
-			EndView.showError("수강생정보가 존재하지 않습니다");
+			EndView.showError("수강생 정보가 존재하지 않습니다");
 		}catch(NullPointerException e){
 			e.printStackTrace();
-			EndView.showError("수강생정보가 존재하지 않습니다");
+			EndView.showError("수강생 정보가 존재하지 않습니다");
 		}catch(NoResultException e){
 			e.printStackTrace();
-			EndView.showError("수강생정보가 존재하지 않습니다");
+			EndView.showError("수강생 정보가 존재하지 않습니다");
 		}
 	}
 	
@@ -52,13 +52,13 @@ public class Controller {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			EndView.showError("수강생정보가 존재하지 않습니다");
+			EndView.showError("수강생 정보가 존재하지 않습니다");
 		} catch (NullPointerException e) {
 			e.printStackTrace();
-			EndView.showError("수강생정보가 존재하지 않습니다");
+			EndView.showError("수강생 정보가 존재하지 않습니다");
 		} catch (NoResultException e) {
 			e.printStackTrace();
-			EndView.showError("수강생정보가 존재하지 않습니다");
+			EndView.showError("수강생 정보가 존재하지 않습니다");
 		}
 	}
 
@@ -72,9 +72,9 @@ public class Controller {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			EndView.showError("잘못된 정보를 입력하셨습니다");
-		} catch (NullPointerException e) {
+		} catch (NotExistException e) {
 			e.printStackTrace();
-			EndView.showError("학생 아이디를 다시 확인해 주세요.");
+			EndView.showError("학생 번호를 다시 확인해 주세요.");
 		}
 	}
 
@@ -84,10 +84,26 @@ public class Controller {
 			EndView.showAllList(service.getPerfectPresent());
 		} catch (SQLException e) {
 			e.printStackTrace();
-			EndView.showError("잘못된 정보를 입력하셨습니다");
+			EndView.showError("출결 모범 수강생이 없습니다.");
+		} catch (NotExistException e) {
+			e.printStackTrace();
+			EndView.showError("출결 모범 수강생이 없습니다.");
+		}
+	}
+	
+	/** 지각 3번 이상인 수강생 검색 */
+	public void getLateStudent() {
+		try {
+			EndView.showAllList(service.getAbsentStudent());
+		} catch (SQLException e) {
+			e.printStackTrace();
+			EndView.showError("지각 3번 이상인 수강생이 없습니다.");
 		} catch (NullPointerException e) {
 			e.printStackTrace();
-			EndView.showError("잘못된 정보를 입력하셨습니다");
+			EndView.showError("지각 3번 이상인 수강생이 없습니다.");
+		} catch (NotExistException e) {
+			e.printStackTrace();
+			EndView.showError("지각 3번 이상인 수강생이 없습니다.");
 		}
 	}
 
@@ -113,10 +129,10 @@ public class Controller {
 			EndView.showAllList(service.getAllAttendance());
 		} catch (SQLException e) {
 			e.printStackTrace();
-			EndView.showError("잘못된 정보를 입력하셨습니다");
-		} catch (NullPointerException e) {
+			EndView.showError("출석 정보가 없습니다.");
+		} catch (NotExistException e) {
 			e.printStackTrace();
-			EndView.showError("잘못된 정보를 입력하셨습니다");
+			EndView.showError("출석 정보가 없습니다.");
 		}
 
 	}
@@ -230,6 +246,53 @@ public class Controller {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			EndView.showError("출석 체크 실패?!");
+		} catch(NotExistException e){
+				e.printStackTrace();
+				EndView.showError("출석 체크 실패?!");
+			}
+		}
+	
+	/**
+	 * 지각 체크
+	 * @param studentId
+	 */
+	public void updateLate(int studentId) {
+		Student student = null;
+		try {
+			student = service.updateLate(studentId);
+			if (student == null) {
+				EndView.showError("지각 체크 실패?!");
+			} else {
+				log.error(student.getStudentName()+" 지각 체크 완료");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			EndView.showError("지각 체크 실패?!");
+		}catch(NotExistException e){
+			e.printStackTrace();
+			EndView.showError("지각 체크 실패?!");
+		}
+	}
+	
+	/**
+	 * 결석 체크
+	 * @param studentId
+	 */
+	public void updateAbsent(int studentId) {
+		Student student = null;
+		try {
+			student = service.updateAbsent(studentId);
+			if (student == null) {
+				EndView.showError("결석 체크 실패?!");
+			} else {
+				log.error(student.getStudentName()+" 결석 체크 완료");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			EndView.showError("결석 체크 실패?!");
+		}catch(NotExistException e){
+			e.printStackTrace();
+			EndView.showError("결석 체크 실패?!");
 		}
 	}
 

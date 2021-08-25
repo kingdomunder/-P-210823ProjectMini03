@@ -37,13 +37,16 @@ public class StartView {
 		System.out.println("\n========== 4. 수강생 한명의 출석 정보 검색 ==========");
 		controller.getOneAttendance(1);
 		
-		System.out.println("\n========== 4-1. 없는 학생 검색 ==========");
+		System.out.println("\n========== 4-1. 없는 수강생 출석 정보 검색 ==========");
 		controller.getOneAttendance(10);
-    					
-		System.out.println("\n========== 5. 출결 모범 학생 검색 ==========");
-		controller.getPerfectPresent();
-    					
-		System.out.println("\n========== 6. 결석3회 이상 학생 조회 ==========");  
+  					
+		System.out.println("\n========== 5. 출결 모범 수강생 검색 ==========");
+		controller.getPerfectPresent(); 					
+		
+    System.out.println("\n========== 6. 지각3회 이상 학생 조회 ==========");  
+		controller.getLateStudent();
+    
+		System.out.println("\n========== 6-1. 결석3회 이상 학생 조회 ==========");  
 		controller.getAbsentStudent();
 		
 		System.out.println("\n========== 7. 모든 스터디 검색 ==========");
@@ -86,16 +89,18 @@ public class StartView {
 		System.out.println("\n========== 12-5. 없는 학생 변경 시도시 ==========");
 		controller.updateStudent(1, 10, "개성");
 
-		System.out.println("========== 출석 체크 ==========");
+		System.out.println("========== 13. 출석 체크 ==========");
 		controller.updatePresent(1);		
+    
+    System.out.println("\n========== 13-1. 지각 체크 ==========");
+		controller.updateLate(4);	 
+    
+    System.out.println("\n========== 13-2. 결석 체크 ==========");
+		controller.updateAbsent(4);	 
 		
-		/** 스터디 정보 업데이트 - 스터디 날짜 수정*/
-		controller.updateStudy(1, "일");
-		System.out.println("\n 변경 후 조회");
-		controller.getStudyById(1);
 		System.out.println("\n========== 13. 출석 체크 ==========");
-		controller.updatePresent(4);	 // 지각, 결석 체크 추가?
-		System.out.println("\n========== 13-1. 지각 3회 이상 학생 재검색 ==========");  // 지각 등록 기능도 추가한다면
+		controller.updatePresent(4);	 
+		System.out.println("\n========== 13-1. 지각 3회 이상 학생 재검색 =========="); 
 		controller.getAllAttendance();
 		System.out.println("\n========== 13-2. 없는 학생 출석 체크 시도 ==========");
 		controller.updatePresent(10);
