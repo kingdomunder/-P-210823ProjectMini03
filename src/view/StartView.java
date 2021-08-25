@@ -5,6 +5,7 @@ import model.domain.Study;
 public class StartView {
 	private static Controller controller = Controller.getInstance();
 	public static void main(String[] args) {
+
 //		// SELECT
 //		System.out.println("========== 1. 모든 수강생 검색 ==========");
 //		controller.getAllStudent();
@@ -91,7 +92,7 @@ public class StartView {
 //		controller.updateStudy(10, "일");
 //		// DELETE
 //		System.out.println("\n========== 18. 학생 정보 삭제 ==========");
-//		controller.deleteStudent(1); // 안됨..
+//		controller.deleteStudent(1);
 //		System.out.println("\n========== 18-1. 학생 정보 삭제시 출결정보도 함께 삭제 확인 ==========");
 //		controller.getOneAttendance(1);
 //		System.out.println("\n========== 18-2. 없는 학생 삭제 시도시 ==========");

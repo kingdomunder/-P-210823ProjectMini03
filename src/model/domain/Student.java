@@ -19,11 +19,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @Setter
 @Getter
-@NamedQuery(query = "select e from Student e order by e.studentId", name = "getAllStudent")
+@NamedQuery(query = "select e from Student e order by e.studentId", name = "Student.findStudentAll")
 @NamedQuery(query = "select e from Student e where e.studentId=:studentId order by e.studentId", name = "Student.findBystudentId")
-@NamedQuery(query = "select e from Student e where e.studentName=:studentName order by e.studentId", name = "getStudentByName")
-@NamedQuery(query = "select e from Student e where e.major=:major order by e.studentId", name = "getStudentBymajor")
-@NamedQuery(query = "select e from Student e where e.studyId=:studyId order by e.studentId", name = "getStudentBystudyId")
+@NamedQuery(query = "select e from Student e where e.studentName=:studentName order by e.studentId", name = "Student.findBystudentName")
+@NamedQuery(query = "select e from Student e where e.major=:major order by e.studentId", name = "Student.findBymajor")
+@NamedQuery(query = "select e from Student e where e.studyId=:studyId order by e.studentId", name = "Student.findBystudyId")
 @Entity
 @SequenceGenerator(name = "student_seq", sequenceName = "student_idx", initialValue = 1, allocationSize = 1)
 public class Student {
