@@ -26,10 +26,9 @@ public class StartView {
 //		controller.getSearchedStudent(4, 1);
 //		System.out.println("\n========== 2-4-1. 없는 정보로 검색 ==========");
 //		controller.getSearchedStudent(3, "컴퓨터공학과");
-//
-//		System.out.println("\n========== 3. 모든 출석 정보 검색 ==========");
-//		controller.getAllAttendance();
-//
+		
+		System.out.println("\n========== 3. 모든 출석 정보 검색 ==========");
+		controller.getAllAttendance();
 //		System.out.println("\n========== 4. 수강생 한명의 출석 정보 검색 ==========");
 //		controller.getOneAttendance(1);
 //		System.out.println("\n========== 4-1. 없는 수강생 출석 정보 검색 ==========");
