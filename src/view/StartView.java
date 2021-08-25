@@ -8,13 +8,13 @@ public class StartView {
 	public static void main(String[] args) {
 		// SELECT
 //		System.out.println("========== 1. 모든 수강생 검색 ==========");
-//		controller.getAllStudent();
+		controller.getAllStudent();
 //
 //		System.out.println("\n========== 2. 검색 조건으로 수강생 검색 ==========");
 //		/** (1,수강생ID입력-int), (2,수강생이름입력-String), (3,전공입력-String), (4,스터디ID입력-int) */
 //
 //		System.out.println("\n========== 2-1. 수강생 id로 검색 ==========");
-		controller.getSearchedStudent(1, 1);
+//		controller.getSearchedStudent(1, 1);
 //
 //		System.out.println("\n========== 2-2. 수강생 이름으로 검색 ==========");
 //		controller.getSearchedStudent(2, "장혜민");
