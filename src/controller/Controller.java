@@ -2,11 +2,8 @@ package controller;
 
 import java.sql.SQLException;
 
-import javax.persistence.NoResultException;
-
 import org.hibernate.PersistentObjectException;
 
-import exception.DeleteException;
 import exception.InsertException;
 import exception.NotExistException;
 import lombok.extern.slf4j.Slf4j;

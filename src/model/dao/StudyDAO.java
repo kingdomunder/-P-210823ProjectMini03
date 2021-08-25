@@ -1,6 +1,7 @@
 package model.dao;
 
 import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,7 +11,6 @@ import javax.persistence.NoResultException;
 
 import org.junit.jupiter.api.Test;
 
-import exception.DeleteException;
 import exception.InsertException;
 import exception.NotExistException;
 import model.domain.Student;
