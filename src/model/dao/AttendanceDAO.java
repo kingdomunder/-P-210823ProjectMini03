@@ -20,7 +20,7 @@ public class AttendanceDAO {
 	}
 
 	// 출석 체크
-	public Student addPresent(int studentId) throws SQLException{
+	public Student updatePresent(int studentId) throws SQLException{
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -30,7 +30,7 @@ public class AttendanceDAO {
 		Student student = new Student();
 
 		try {
-			student = (Student) em.createNamedQuery("getStudentById").setParameter("studentId", studentId).getSingleResult();
+			student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", studentId).getSingleResult();
 			attendance = (Attendance) em.createNamedQuery("Attendance.findBystudentId").setParameter("studentId", student)
 					.getSingleResult();
 			present = attendance.getPresent();

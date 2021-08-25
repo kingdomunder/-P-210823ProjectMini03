@@ -29,7 +29,9 @@ public class Attendance implements Serializable {
 	private Student studentId;
 
 	private int present;
+	
 	private int late;
+	
 	private int absent;
 
 }

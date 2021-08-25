@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import org.junit.jupiter.api.Test;
 
+import exception.NotExistException;
 import model.dao.AttendanceDAO;
 import model.dao.StudentDAO;
 import model.dao.StudyDAO;
@@ -89,8 +90,9 @@ public class Service {
 		return attendance;
 	}
 
-	/** 결석 3번 이상인 수강생 검색 */
-	public List<Attendance> getAbsentStudent() throws SQLException{
+	/** 결석 3번 이상인 수강생 검색 
+	 * @throws NotExistException */
+	public List<Attendance> getAbsentStudent() throws SQLException, NotExistException{
 		List<Attendance> attendanceList = getAttendanceDAO.getAllAttendance();
 		List<Attendance> attendance = new ArrayList<>();
 
@@ -100,6 +102,9 @@ public class Service {
 					attendance.add(a);
 				}
 			}
+		}
+		if(attendance.size() == 0) {
+			throw new NotExistException();
 		}
 		return attendance;
 	}
@@ -227,8 +232,8 @@ public class Service {
 	 * 출석 체크
 	 * @param studentId
 	 */
-	public Student addPresent(int studentId) throws SQLException{
-		return getAttendanceDAO.addPresent(studentId);
+	public Student updatePresent(int studentId) throws SQLException{
+		return getAttendanceDAO.updatePresent(studentId);
 	}
 
 	/**
