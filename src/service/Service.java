@@ -6,10 +6,8 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-
 import javax.persistence.NoResultException;
 
-import exception.DeleteException;
 import exception.InsertException;
 import exception.NotExistException;
 import model.dao.AttendanceDAO;
