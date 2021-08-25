@@ -6,7 +6,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
-import org.junit.jupiter.api.Test;
+import javax.persistence.NoResultException;
 
 import exception.NotExistException;
 import model.dao.AttendanceDAO;
@@ -34,7 +34,7 @@ public class Service {
 
 	// SELECT
 	/** 모든 수강생 검색 */
-	public List<Student> getAllStudents() throws SQLException {
+	public List<Student> getAllStudents() throws SQLException, NotExistException {
 		List<Student> allStudentList = getStudentDAO.getAllStudent();
 		if (allStudentList == null) {
 			throw new NullPointerException();
@@ -43,7 +43,7 @@ public class Service {
 	}
 
 	/** 검색조건으로 수강생 검색 - 수강생ID로 한명만 검색 */
-	public Object getOneStudents(Object info) throws SQLException {
+	public Object getOneStudents(Object info) throws SQLException, NotExistException {
 		int studentId = (int) info;
 
 		Student result = getStudentDAO.getStudentById(studentId);
@@ -54,7 +54,7 @@ public class Service {
 	}
 
 	/** 검색조건으로 수강생 검색 - 검색조건으로 여러명 검색 */
-	public List<Student> getSearchedStudents(int searchNo, Object info) throws SQLException {
+	public List<Student> getSearchedStudents(int searchNo, Object info) throws SQLException, NotExistException {
 		List<Student> result = null;
 		if (searchNo == 2) {
 			String studentName = (String) info;
@@ -76,7 +76,7 @@ public class Service {
 	}
 
 	/** 지각, 결석 없는 모범생 검색 */
-	public List<Attendance> getPerfectPresent() throws SQLException{
+	public List<Attendance> getPerfectPresent() throws SQLException, NotExistException {
 		List<Attendance> attendanceList = getAttendanceDAO.getAllAttendance();
 		List<Attendance> attendance = new ArrayList<>();
 
@@ -86,13 +86,34 @@ public class Service {
 					attendance.add(a);
 				}
 			}
+		}if(attendance.size() == 0) {
+			throw new NotExistException();
 		}
 		return attendance;
 	}
 
+	/** 지각 3번 이상인 수강생 검색 
+	 * @throws NotExistException */
+	public List<Attendance> getLateStudent() throws SQLException, NotExistException {
+		List<Attendance> attendanceList = getAttendanceDAO.getAllAttendance();
+		List<Attendance> attendance = new ArrayList<>();
+		
+		if (attendanceList != null) {
+			for (Attendance a : attendanceList) {
+				if (a.getLate() >= 3) {
+					attendance.add(a);
+				}
+			}
+		}
+		if(attendance.size() == 0) {
+			throw new NotExistException();
+		}
+		return attendance;
+	}
+	
 	/** 결석 3번 이상인 수강생 검색 
 	 * @throws NotExistException */
-	public List<Attendance> getAbsentStudent() throws SQLException, NotExistException{
+	public List<Attendance> getAbsentStudent() throws SQLException, NotExistException {
 		List<Attendance> attendanceList = getAttendanceDAO.getAllAttendance();
 		List<Attendance> attendance = new ArrayList<>();
 
@@ -113,19 +134,19 @@ public class Service {
 	 * 학생 한명의 출석정보 검색
 	 * @param studentId
 	 */
-	public Attendance getOneAttendance(int studentId) throws SQLException {
+	public Attendance getOneAttendance(int studentId) throws SQLException, NotExistException {
 		Attendance attendance = getAttendanceDAO.getOneAttendance(studentId);
 		if (attendance == null) {
-			throw new NullPointerException();
+			throw new NotExistException();
 		}
 		return attendance;
 	}
 
 	/** 모든 출석 정보 검색 */
-	public List<Attendance> getAllAttendance() throws SQLException {
+	public List<Attendance> getAllAttendance() throws SQLException, NotExistException {
 		List<Attendance> allAttendanceList = getAttendanceDAO.getAllAttendance();
 		if (allAttendanceList == null) {
-			throw new NullPointerException();
+			throw new NotExistException();
 		}
 		return allAttendanceList;
 	}
@@ -231,11 +252,39 @@ public class Service {
 	/**
 	 * 출석 체크
 	 * @param studentId
+	 * @throws NotExistException 
 	 */
-	public Student updatePresent(int studentId) throws SQLException{
-		return getAttendanceDAO.updatePresent(studentId);
+	public Student updatePresent(int studentId) throws SQLException, NoResultException, NotExistException {
+		Student student = getAttendanceDAO.updatePresent(studentId);
+		if(student == null) {
+			throw new NotExistException();
+		}
+		return student;
 	}
-
+	
+	/**
+	 * 지각 체크
+	 * @param studentId
+	 */
+	public Student updateLate(int studentId) throws SQLException, NoResultException, NotExistException {
+		Student student = getAttendanceDAO.updateLate(studentId);
+		if(student == null) {
+			throw new NotExistException();
+		}
+		return student;
+	}
+	
+	/**
+	 * 결석 체크
+	 * @param studentId
+	 */
+	public Student updateAbsent(int studentId) throws SQLException, NoResultException, NotExistException {
+		Student student = getAttendanceDAO.updateAbsent(studentId);
+		if(student == null) {
+			throw new NotExistException();
+		}
+		return student;
+	}
 	/**
 	 * 스터디 정보 업데이트
 	 * @param keyword
