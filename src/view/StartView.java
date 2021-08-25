@@ -31,17 +31,17 @@ public class StartView {
 //		System.out.println("\n========== 2-5. 없는 정보로 검색 ==========");
 //		controller.getSearchedStudent(3, "컴퓨터공학과");
 //		
-//		System.out.println("\n========== 3. 모든 출석 정보 검색 =========="); 
-//		controller.getAllAttendance();
-////		
-//		System.out.println("\n========== 4. 수강생 한명의 출석 정보 검색 ==========");
-//		controller.getOneAttendance(1);
+		System.out.println("\n========== 3. 모든 출석 정보 검색 =========="); 
+		controller.getAllAttendance();
 		
-//		System.out.println("\n========== 4-1. 없는 수강생 출석 정보 검색 ==========");
-//		controller.getOneAttendance(10);
-//    					
-//		System.out.println("\n========== 5. 출결 모범 수강생 검색 ==========");
-//		controller.getPerfectPresent();
+		System.out.println("\n========== 4. 수강생 한명의 출석 정보 검색 ==========");
+		controller.getOneAttendance(1);
+		
+		System.out.println("\n========== 4-1. 없는 수강생 출석 정보 검색 ==========");
+		controller.getOneAttendance(10);
+  					
+		System.out.println("\n========== 5. 출결 모범 수강생 검색 ==========");
+		controller.getPerfectPresent();
 //		
 //		System.out.println("\n========== 7. 모든 스터디 검색 ==========");
 //		controller.getAllStudy();
@@ -87,17 +87,17 @@ public class StartView {
 //		controller.updateStudy(1, "일");
 //		System.out.println("\n 변경 후 조회");
 //		controller.getStudyById(1);
-//		System.out.println("\n========== 13. 출석 체크 ==========");
-//		controller.updatePresent(4);	
-//		System.out.println("\n========== 13-1. 지각 체크 ==========");
-//		controller.updateLate(4);	 
-//		System.out.println("\n========== 13-2. 지각 3회 이상 수강생 조회 =========="); 
-//		controller.getLateStudent();
-//		System.out.println("\n========== 13-3. 결석 체크 ==========");
-//		controller.updateAbsent(4);	 
-//		System.out.println("\n========== 13-4. 결석3회 이상 수강생 조회 ==========");  
-//		controller.getAbsentStudent();
-//		System.out.println("\n========== 13-5. 없는 수강생 출석 체크 시도 ==========");
+		System.out.println("\n========== 13. 출석 체크 ==========");
+		controller.updatePresent(4);	
+		System.out.println("\n========== 13-1. 지각 체크 ==========");
+		controller.updateLate(4);	 
+		System.out.println("\n========== 13-2. 지각 3회 이상 수강생 조회 =========="); 
+		controller.getLateStudent();
+		System.out.println("\n========== 13-3. 결석 체크 ==========");
+		controller.updateAbsent(4);	 
+		System.out.println("\n========== 13-4. 결석3회 이상 수강생 조회 ==========");  
+		controller.getAbsentStudent();
+		System.out.println("\n========== 13-5. 없는 수강생 출석 체크 시도 ==========");
 //		controller.updatePresent(10);
 //		
 //		System.out.println("\n========== 14. 스터디 정보 변경 (날짜 수정) ==========");
