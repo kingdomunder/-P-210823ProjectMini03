@@ -38,7 +38,7 @@ public class Controller {
 		}catch(NullPointerException e){
 			e.printStackTrace();
 			EndView.showError("수강생 정보가 존재하지 않습니다");
-		}catch(NoResultException e){
+		}catch(NotExistException e){
 			e.printStackTrace();
 			EndView.showError("수강생 정보가 존재하지 않습니다");
 		}
@@ -58,7 +58,7 @@ public class Controller {
 		} catch (NullPointerException e) {
 			e.printStackTrace();
 			EndView.showError("수강생 정보가 존재하지 않습니다");
-		} catch (NoResultException e) {
+		} catch (NotExistException e) {
 			e.printStackTrace();
 			EndView.showError("수강생 정보가 존재하지 않습니다");
 		}
