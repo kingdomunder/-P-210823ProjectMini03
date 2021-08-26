@@ -20,7 +20,7 @@
 
 # 🏰 모델링
 
-<img src="https://s3-us-west-2.amazonaws.com/secure.notion-static.com/82838a96-d67e-44da-b9f7-40769e50eae2/Untitled.png">
+https://www.notion.so/8f5a6a6702da4e2b8d82dcb0d158fd25#2dc576c1b71544008624efa547b66720
 
 
 # 🎁 주요 기능
