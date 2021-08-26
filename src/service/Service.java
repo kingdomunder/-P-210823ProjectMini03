@@ -175,56 +175,14 @@ public class Service {
 	}
 
 	// INSERT
-	/** 새로운 수강생 정보와 출석 정보 함께 추가 
-	 * @throws InsertException 
-	 * @throws NotExistException 
-	 * @throws SQLException */
+	/** 새로운 수강생 정보와 출석 정보 함께 추가  */
 	public void addStudent(String name, String address, String major) throws SQLException, NotExistException, InsertException {
 		int studentId = getStudentDAO.addStudent(name, address, major);
 		getAttendanceDAO.addPresent(studentId);
 	}
-//	public boolean addStudent(String name, String address, String major) throws SQLException, NotExistException {
-//		EntityManager em = PublicCommon.getEntityManager();
-//		EntityTransaction tx = em.getTransaction();
-//		tx.begin();
-//		
-//		boolean result = false;
-//
-//		try{
-//			Student student = new Student();
-//			student.setStudentName(name);
-//			student.setAddress(address);
-//			student.setMajor(major);
-//
-//			Attendance attendance = new Attendance();
-//			attendance.setStudentId(student);
-//			attendance.setPresent(0);
-//			attendance.setLate(0);
-//			attendance.setAbsent(0);
-//
-//			em.persist(student);
-//			em.persist(attendance);
-//			tx.commit();
-//			
-//			result = true;
-//
-//		}catch(Exception e){
-//			tx.rollback();
-//		}finally{
-//			em.close();
-//			em = null;
-//		}
-//		if(result == false){
-//			throw new NotExistException();
-//		}
-//		return result;
-//	}
 
-	/** 스터디 추가
-	 * 
-	 * @param keyword
-	 * @throws InsertException 
-	 */
+
+	/** 스터디 추가 */
 	public void addStudy(String studyName, String topic, int studentId, String meetingDate) throws SQLException, InsertException {
 		Student student = getStudentDAO.getStudentById(studentId);
 		getStudyDAO.insertStudy(studyName, topic, student, meetingDate);
