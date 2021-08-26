@@ -8,7 +8,7 @@ public class StartView {
 	public static void main(String[] args) {
 		// SELECT
 //		System.out.println("========== 1. 모든 수강생 검색 ==========");
-		controller.getAllStudent();
+//		controller.getAllStudent();
 //
 //		System.out.println("\n========== 2. 검색 조건으로 수강생 검색 ==========");
 //		/** (1,수강생ID입력-int), (2,수강생이름입력-String), (3,전공입력-String), (4,스터디ID입력-int) */
@@ -26,9 +26,10 @@ public class StartView {
 //		controller.getSearchedStudent(4, 1);
 //		System.out.println("\n========== 2-4-1. 없는 정보로 검색 ==========");
 //		controller.getSearchedStudent(3, "컴퓨터공학과");
-		
-		System.out.println("\n========== 3. 모든 출석 정보 검색 ==========");
-		controller.getAllAttendance();
+//		
+//		System.out.println("\n========== 3. 모든 출석 정보 검색 ==========");
+//		controller.getAllAttendance();
+//		
 //		System.out.println("\n========== 4. 수강생 한명의 출석 정보 검색 ==========");
 //		controller.getOneAttendance(1);
 //		System.out.println("\n========== 4-1. 없는 수강생 출석 정보 검색 ==========");
@@ -57,10 +58,13 @@ public class StartView {
 //		controller.getStudyByTopic("팝핀");
 //
 //		// INSERT
-//		System.out.println("\n========== 11. 새로운 수강생 정보와 출석 정보 함께 추가 ==========");
+		System.out.println("\n========== 11. 새로운 수강생 정보와 출석 정보 함께 추가 ==========");
+		controller.addStudent("테스트", "미국", "돼라!");
+		System.out.println("\n========== 11-1. 추가 후 조회 ==========");
+		controller.getAllStudent();
+		controller.getAllAttendance();
+//		System.out.println("\n========== 11-2. null값으로 수강생 정보 추가 시도시 ==========");
 //		controller.addStudent("류현진", "미국", null);
-//		System.out.println("\n========== 11-1. 추가 후 조회 ==========");
-//		controller.getAllStudent();
 //
 //		System.out.println("\n========== 12. 스터디 추가 ==========");
 //		controller.addStudy("SQLD 대비", "꼭 따고 만다 SQLD 자격증!", 3, "목");
@@ -97,10 +101,10 @@ public class StartView {
 //		controller.updatePresent(10);
 //
 //		System.out.println("\n========== 15. 지각 체크 ==========");
-//		controller.updateLate(4);
+//		controller.updateLate(3);
 //
 //		System.out.println("\n========== 16. 결석 체크 ==========");
-//		controller.updateAbsent(4);
+//		controller.updateAbsent(2);
 //
 //		System.out.println("\n========== 17. 스터디 정보 변경 (날짜 수정) ==========");
 //		controller.updateStudy(1, "일");

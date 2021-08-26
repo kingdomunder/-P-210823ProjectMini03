@@ -21,7 +21,7 @@ import lombok.Setter;
 @NamedQuery(query = "select e from Attendance e where e.studentId=:studentId order by e.studentId", name = "Attendance.findBystudentId")
 @NamedQuery(query = "select e from Attendance e order by e.studentId", name = "Attendance.findStudentAll")
 @Entity
-public class Attendance implements Serializable {
+public class Attendance implements Serializable{
 
 	@Id
 	@JoinColumn(name = "student_id")

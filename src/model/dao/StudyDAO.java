@@ -20,24 +20,22 @@ import util.PublicCommon;
 public class StudyDAO {
 	public static StudyDAO instance = new StudyDAO();
 
-	public StudyDAO() {
-	}
-
-	public static StudyDAO getInstance() {
+	public StudyDAO(){}
+	public static StudyDAO getInstance(){
 		return instance;
 	}
 
 	/** 모든 스터디 검색 */
-	public List<Study> getAllStudy() throws SQLException {
+	public List<Study> getAllStudy() throws SQLException{
 		EntityManager em = PublicCommon.getEntityManager();
 
 		List<Study> allStudyList = null;
 
-		try {
+		try{
 			allStudyList = em.createNamedQuery("Study.findStudentAll").getResultList();
-		} catch (Exception e) {
+		}catch(Exception e){
 			e.printStackTrace();
-		} finally {
+		}finally{
 			em.close();
 			em = null;
 		}
@@ -46,17 +44,17 @@ public class StudyDAO {
 
 	/** 스터디 id로 스터디 검색 
 	 * @throws NotExistException */
-	public Study getStudyById(int id) throws SQLException, NotExistException {
+	public Study getStudyById(int id) throws SQLException, NotExistException{
 		EntityManager em = PublicCommon.getEntityManager();
 
 		Study study = null;
 
-		try {
+		try{
 			study = (Study) em.createNamedQuery("Study.findBystudyId").setParameter("studyId", id).getSingleResult();
-		} catch (Exception e) {
+		}catch(Exception e){
 			e.printStackTrace();
 			throw new NotExistException();
-		} finally {
+		}finally{
 			em.close();
 			em = null;
 		}
@@ -64,16 +62,16 @@ public class StudyDAO {
 	}
 
 	/** 스터디 주제 키워드로 스터디 검색 */
-	public List<Study> getStudyByTopic(String keyword) throws SQLException {
+	public List<Study> getStudyByTopic(String keyword) throws SQLException{
 		EntityManager em = PublicCommon.getEntityManager();
 		List<Study> studyList = null;
 
-		try {
+		try{
 			studyList = em.createNamedQuery("Study.findByTopic").setParameter("topicKeyword", "%" + keyword + "%")
 					.getResultList();
-		} catch (Exception e) {
+		}catch(Exception e){
 			e.printStackTrace();
-		} finally {
+		}finally{
 			em.close();
 			em = null;
 		}
@@ -82,13 +80,13 @@ public class StudyDAO {
 
 	/** 스터디 추가 
 	 * @throws InsertException */
-	public void insertStudy(String studyName, String topic, Student student, String meetingDate) throws SQLException, InsertException {
+	public void insertStudy(String studyName, String topic, Student student, String meetingDate) throws SQLException, InsertException{
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 
 		Study newStudy = new Study();
-		try {
+		try{
 			newStudy.setStudyName(studyName);
 			newStudy.setTopic(topic);
 			newStudy.setLeaderId(student);
@@ -97,10 +95,10 @@ public class StudyDAO {
 			em.persist(newStudy);
 			tx.commit();
 
-		} catch (Exception e) {
+		}catch(Exception e){
 			e.printStackTrace();
 			throw new InsertException();
-		} finally {
+		}finally{
 			em.close();
 			em = null;
 		}
@@ -111,23 +109,23 @@ public class StudyDAO {
 	 * @param study
 	 * @throws InsertException 
 	 */
-	public void updateStudy(int id, String meetingDate) throws SQLException, NotExistException, InsertException {
+	public void updateStudy(int id, String meetingDate) throws SQLException, NotExistException, InsertException{
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		Study study = null;
 		 
-		try {
+		try{
 			study = (Study) em.createNamedQuery("Study.findBystudyId").setParameter("studyId", id).getSingleResult();
 			study.setMeetingDate(meetingDate);
 			tx.commit();
-		} catch (NoResultException e) {
+		}catch(NoResultException e){
 			e.printStackTrace();
 			throw new NotExistException();
-		} catch (Exception e) {
+		}catch(Exception e){
 			e.printStackTrace();			
 			throw new InsertException();	
-		} finally {
+		}finally{
 			em.close();
 			em = null;
 		}
@@ -139,21 +137,21 @@ public class StudyDAO {
 	 * @param id
 	 * @throws DeleteException 
 	 */
-	public void deleteStudy(int id) throws SQLException, NotExistException {
+	public void deleteStudy(int id) throws SQLException, NotExistException{
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		Study study = null;
-		try {
+		try{
 			study = (Study) em.createNamedQuery("Study.findBystudyId").setParameter("studyId", id).getSingleResult();
 			em.remove(study);
 			tx.commit();
-		} catch (NoResultException e) {
+		}catch(NoResultException e){
 			e.printStackTrace();
 			throw new NotExistException();
-		} catch (Exception e) {
+		}catch(Exception e){
 			e.printStackTrace();
-		} finally {
+		}finally{
 			em.close();
 			em = null;
 		}

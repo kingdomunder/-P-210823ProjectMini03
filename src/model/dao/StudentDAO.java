@@ -9,6 +9,7 @@ import javax.persistence.EntityTransaction;
 
 import org.hibernate.cache.NoCacheRegionFactoryAvailableException;
 
+import exception.InsertException;
 import exception.NotExistException;
 import model.domain.Student;
 import model.domain.Study;
@@ -17,23 +18,21 @@ import util.PublicCommon;
 public class StudentDAO {
 	public static StudentDAO instance = new StudentDAO();
 
-	public StudentDAO() {
-	}
-
-	public static StudentDAO getInstance() {
+	public StudentDAO(){}
+	public static StudentDAO getInstance(){
 		return instance;
 	}
 
 	/** 모든 수강생 검색 */
-	public List<Student> getAllStudent() throws SQLException {
+	public List<Student> getAllStudent() throws SQLException{
 		EntityManager em = PublicCommon.getEntityManager();
 		List<Student> allStudentList = null;
 
-		try {
-			allStudentList = em.createNamedQuery("getAllStudent").getResultList();
-		} catch (Exception e) {
+		try{
+			allStudentList = em.createNamedQuery("Student.findStudentAll").getResultList();
+		}catch(Exception e){
 			e.printStackTrace();
-		} finally {
+		}finally{
 			em.close();
 			em = null;
 		}
@@ -41,17 +40,17 @@ public class StudentDAO {
 	}
 
 	/** 검색조건으로 수강생 검색 - 수강생ID로 - 언제나 1명만 출력 */
-	public Student getStudentById(int studentId) throws SQLException {
+	public Student getStudentById(int studentId) throws SQLException{
 		EntityManager em = PublicCommon.getEntityManager();
 		
 		Student result = null;
 		
-		try {
+		try{
 			result = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", studentId)
 				.getSingleResult();
-		} catch (Exception e) {
+		}catch(Exception e){
 			e.printStackTrace();
-		} finally {
+		}finally{
 			em.close();
 			em = null;
 		}
@@ -59,16 +58,16 @@ public class StudentDAO {
 	}
 
 	/** 검색조건으로 수강생 검색 - 이름으로 */
-	public List<Student> getStudentByName(String studentName) throws SQLException {
+	public List<Student> getStudentByName(String studentName) throws SQLException{
 		EntityManager em = PublicCommon.getEntityManager();
 		List<Student> result = null;
 		
-		try {
+		try{
 			result = (List<Student>) em.createNamedQuery("Student.findBystudentName").setParameter("studentName", studentName)
 				.getResultList();
-		} catch (Exception e) {
+		}catch(Exception e){
 			e.printStackTrace();
-		} finally {
+		}finally{
 			em.close();
 			em = null;
 		}
@@ -76,15 +75,15 @@ public class StudentDAO {
 	}
 
 	/** 검색조건으로 수강생 검색 - 전공으로 */
-	public List<Student> getStudentByMajor(String major) throws SQLException {
+	public List<Student> getStudentByMajor(String major) throws SQLException{
 		EntityManager em = PublicCommon.getEntityManager();
 		List<Student> result = new ArrayList<>();
 		
-		try {
+		try{
 			result = (List<Student>) em.createNamedQuery("Student.findBymajor").setParameter("major", major).getResultList();
-		} catch (Exception e) {
+		}catch(Exception e){
 			e.printStackTrace();
-		} finally {
+		}finally{
 			em.close();
 			em = null;
 		}
@@ -92,24 +91,55 @@ public class StudentDAO {
 	}
 
 	/** 검색조건으로 수강생 검색 - 스터디ID로 */
-	public List<Student> getStudentByStudyId(Study studyId) throws SQLException {
+	public List<Student> getStudentByStudyId(Study studyId) throws SQLException{
 		EntityManager em = PublicCommon.getEntityManager();
 		List<Student> result = new ArrayList<>();
 		
-		try {
+		try{
 			result = (List<Student>) em.createNamedQuery("Student.findBystudyId").setParameter("studyId", studyId)
 				.getResultList();
-		} catch (Exception e) {
+		}catch(Exception e){
 			e.printStackTrace();
-		} finally {
+		}finally{
 			em.close();
 			em = null;
 		}
 		return result;
 	}
+	
+	/** 수강생 추가 
+	 * @throws InsertException */
+	public int addStudent(String name, String address, String major) throws SQLException, NotExistException, InsertException {
+		EntityManager em = PublicCommon.getEntityManager();
+		EntityTransaction tx = em.getTransaction();
+		tx.begin();
+		
+		boolean result = false;
+		Student student = new Student();
+		int studentId;
+		
+		try {
+			student.setStudentName(name);
+			student.setAddress(address);
+			student.setMajor(major);
+			em.persist(student);
+			tx.commit();
+			
+			studentId = student.getStudentId();
+			System.out.println(studentId);
+		} catch(Exception e){
+			tx.rollback();
+			e.printStackTrace();
+			throw new InsertException();
+		}finally{
+			em.close();
+			em = null;
+		}
+		return studentId;
+	}
 
 	/** 수강생정보 업데이트 - 주소변경 */
-	public boolean updateStudentAddress(int studentId, Object info) throws SQLException {
+	public boolean updateStudentAddress(int studentId, Object info) throws SQLException{
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -118,16 +148,16 @@ public class StudentDAO {
 		String address = (String) info;
 		Student student = null;
 		
-		try {
+		try{
 			student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", studentId)
 					.getSingleResult();
 			student.setAddress(address);
 			
 			tx.commit();
 			result = true;
-		} catch (Exception e) {
+		}catch(Exception e){
 			e.printStackTrace();
-		} finally {
+		}finally{
 			em.close();
 			em = null;
 		}
@@ -135,7 +165,7 @@ public class StudentDAO {
 	}
 
 	/** 수강생정보 업데이트 - 전공변경 */
-	public boolean updateStudentMajor(int studentId, Object info) throws SQLException {
+	public boolean updateStudentMajor(int studentId, Object info) throws SQLException{
 		EntityManager em = PublicCommon.getEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
@@ -144,16 +174,16 @@ public class StudentDAO {
 		String major = (String) info;
 		Student student = null;
 
-		try {
+		try{
 			student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", studentId)
 					.getSingleResult();
 			student.setMajor(major);
 			
 			tx.commit();
 			result = true;
-		} catch (Exception e) {
+		}catch(Exception e){
 			e.printStackTrace();
-		} finally {
+		}finally{
 			em.close();
 			em = null;
 		}
@@ -171,27 +201,28 @@ public class StudentDAO {
 		Study study = new Study();
 		Student student = null;
 		
-		if(info == null) {
+		if(info == null){
 			study = null;
-		}else {
+		}else{
 			study.setStudyId((int) info);
 		}
 
-		try {
+		try{
 			student = (Student) em.createNamedQuery("Student.findBystudentId").setParameter("studentId", studentId)
 					.getSingleResult();
-			if(student.getStudyId() == null) {
+			if(info == null && student.getStudyId() == null){
 				return false;
 			}
 			student.setStudyId(study);
 			tx.commit();
 			result = true;
-		} catch (Exception e) {
+		}catch(Exception e){
 			e.printStackTrace();
-		} finally {
+		}finally{
 			em.close();
 			em = null;
 		}
 		return result;
 	}
+	
 }
