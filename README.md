@@ -8,3 +8,4 @@
   - [Error] : 에러코드 - 수정필요
 
 https://little-cushion-1cc.notion.site/8f5a6a6702da4e2b8d82dcb0d158fd25
+플레이데이터 수강생 관리 시스템
