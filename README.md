@@ -35,7 +35,7 @@
     - 스터디 정보 업데이트 `updateStudy()`        
     - 스터디 삭제 `deleteStudy()`
        
-- ✏ 출석 정보 관리 (Attendance Entity**)**   
+- ✏ 출석 정보 관리 (Attendance Entity)
     - 출석 체크  `updatePresent()` (지각 체크, 결석 체크 동일) - SLF4J 라이브러리 활용     
     - 출결 모범 수강생 조회 `getPerfectPresent()`      
     - 지각 3회 수강생 조회 `getLateStudent()` (결석 3회 조회 동일)
