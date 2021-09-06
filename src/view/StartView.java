@@ -58,11 +58,11 @@ public class StartView {
 //		controller.getStudyByTopic("팝핀");
 //
 //		// INSERT
-		System.out.println("\n========== 11. 새로운 수강생 정보와 출석 정보 함께 추가 ==========");
-		controller.addStudent("테스트", "미국", "돼라!");
-		System.out.println("\n========== 11-1. 추가 후 조회 ==========");
-		controller.getAllStudent();
-		controller.getAllAttendance();
+//		System.out.println("\n========== 11. 새로운 수강생 정보와 출석 정보 함께 추가 ==========");
+//		controller.addStudent("테스트", "미국", "돼라!");
+//		System.out.println("\n========== 11-1. 추가 후 조회 ==========");
+//		controller.getAllStudent();
+//		controller.getAllAttendance();
 //		System.out.println("\n========== 11-2. null값으로 수강생 정보 추가 시도시 ==========");
 //		controller.addStudent("류현진", "미국", null);
 //
