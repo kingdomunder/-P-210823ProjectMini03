@@ -32,21 +32,21 @@
     - 수강생 삭제 - (해당 수강생의 출석정보가 같이 삭제)
       
 - ✏ 스터디 정보 관리 (Study Entity)   
-    - 모든 스터디 조회 `getAllStudy()`
-    - 스터디 ID로 특정 스터디 조회 `getStudyById()`       
-    - 스터디 주제 키워드로 특정 스터디 조회 `getStudyByTopic`      
-    - 스터디 추가  `addStudy()` 
-    - 스터디 정보 업데이트 `updateStudy()`        
-    - 스터디 삭제 `deleteStudy()`
+    - 모든 스터디 조회 
+    - 스터디 ID로 특정 스터디 조회 
+    - 스터디 주제 키워드로 특정 스터디 조회 
+    - 스터디 추가  
+    - 스터디 정보 업데이트
+    - 스터디 삭제 
        
 - ✏ 출석 정보 관리 (Attendance Entity)
-    - 출석 체크  `updatePresent()` (지각 체크, 결석 체크 동일) - SLF4J 라이브러리 활용     
-    - 출결 모범 수강생 조회 `getPerfectPresent()`      
-    - 지각 3회 수강생 조회 `getLateStudent()` (결석 3회 조회 동일)
-    - 수강생 한명의 출석 정보 조회 `getOneAttendance()`        
-    - 모든 출석 정보 조회 `getAllAttendance()`
+    - 출석 체크 / 지각 체크 / 결석 체크  - 로그 기록(SLF4J 라이브러리 활용)
+    - 출결 모범 수강생 조회    
+    - 지각 3회 수강생 조회 
+    - 수강생 한명의 출석 정보 조회 
+    - 모든 출석 정보 조회 
        
 
-# Notion 링크
+# Presentation Notion 링크
 https://little-cushion-1cc.notion.site/8f5a6a6702da4e2b8d82dcb0d158fd25
 
